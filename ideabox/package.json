@@ -1,0 +1,19 @@
+{
+    "name": "ideabox",
+    "version": "1.0.0",
+    "description": "Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration.",
+    "main": "index.js",
+    "scripts": {
+        "test": "npm start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/QUDUSKUNLE/Ideabox.git"
+    },
+    "author": "Qudus YEKEEN",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/QUDUSKUNLE/Ideabox/issues"
+    },
+    "homepage": "https://github.com/QUDUSKUNLE/Ideabox#readme"
+}
