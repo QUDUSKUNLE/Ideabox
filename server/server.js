@@ -35,3 +35,5 @@ app.listen(port, (err) => {
     return (err, 'but stuff works');
   }
 });
+
+module.exports = app;

@@ -9,24 +9,23 @@ const validateRequest = (request) => {
     for (const key in request.body) {
       switch (key) {
         case 'username':
-          request.check('username', 'Username is required')
+          request.check('username', 'Username field cannot be empty')
             .trim()
             .notEmpty()
             .matches(/\w/);
-          request.check('username', 'Username should be at least 2 characters')
-            .trim()
+          request.check('username', 'Username must be more than 2 characters')
             .isLength(2, 50);
           break;
 
         case 'email':
-          request.check('email', 'User email is required')
+          request.check('email', 'Email address field cannot be empty')
             .trim()
             .notEmpty();
           request.check('email', 'Email is badly formatted').isEmail();
           break;
 
         case 'password':
-          request.check('password', 'Password is required')
+          request.check('password', 'Password field cannot be empty')
             .trim()
             .notEmpty();
           request.check(
@@ -49,7 +48,7 @@ const validateRequest = (request) => {
  * @function  validateRequestBody
  * @return { object } return object containing validation error message
  */
-const Validator = (req, res, next) => {
+const validator = (req, res, next) => {
   const errors = validateRequest(req);
   if (errors) {
     const message = errors[0].msg;
@@ -59,4 +58,4 @@ const Validator = (req, res, next) => {
   }
 };
 
-export default Validator;
+export default validator;

@@ -1,6 +1,6 @@
 import express from 'express';
 import UserController from '../controllers/UserController';
-import Validator from '../middlewares/Validator';
+import validator from '../middlewares/validator';
 import ValidateToken from '../middlewares/ValidateToken';
 
 
@@ -14,7 +14,7 @@ const Router = express.Router();
  */
 Router.post(
   '/api/v1/user/signup',
-  Validator,
+  validator,
   UserController.signUp
 );
 
@@ -23,7 +23,7 @@ Router.post(
  */
 Router.post(
   '/api/v1/user/signin',
-  Validator,
+  validator,
   UserController.signIn
 );
 

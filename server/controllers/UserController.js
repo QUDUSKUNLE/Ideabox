@@ -85,7 +85,7 @@ class UserController {
     if ((req.body.email === undefined) ||
       (req.body.password === undefined)) {
       res.status(400).send({
-        error: 'Either email or password is not provided',
+        error: 'Either email or password is required',
         success: false
       });
     } else {
@@ -102,12 +102,12 @@ class UserController {
           if (!response) {
             return res.status(404).send({
               success: false,
-              error: 'User not Found'
+              error: 'User does not exist'
             });
           }
           // compare passwords
           if (!bcrypt.compareSync(req.body.password, response.password)) {
-            return res.status(400).send({
+            return res.status(401).send({
               success: false,
               error: 'Email or password is incorrect'
             });
