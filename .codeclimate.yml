@@ -1,0 +1,17 @@
+engines:
+  eslint:
+    enabled: true
+    channel: "eslint-4"
+    checks:
+      linebreak-style:
+        enabled: false
+fixme:
+    enabled: true
+exclude_paths:
+- "coverage"
+- "node_modules"
+ratings:
+  paths:
+  - "**.js"
+  - "**.es6"
+  - "**.jsx"
