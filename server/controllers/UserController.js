@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import capitalize from 'capitalize';
 import bcrypt from 'bcrypt';
 import User from '../models/User';
-import GenerateToken from '../utils/GenerateToken';
+import createToken from '../utils/createToken';
 
 dotenv.config();
 
@@ -66,7 +66,7 @@ class UserController {
                     return res.status(201).send({
                       message: 'Sign up successful',
                       success: true,
-                      token: GenerateToken(newUser),
+                      token: createToken(newUser),
                       userDetails
                     });
                   });
@@ -119,7 +119,7 @@ class UserController {
           return res.status(200).send({
             message: 'Sign in successful',
             success: true,
-            token: GenerateToken(response),
+            token: createToken(response),
             userDetails
           });
         });

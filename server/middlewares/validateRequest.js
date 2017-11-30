@@ -4,7 +4,7 @@
  * @param  {object} request the form data to be validated
  * @return {object}  {} containing error and isValid
  */
-const validateRequest = (request) => {
+const validateRequestBody = (request) => {
   if (Object.hasOwnProperty.call(request, 'body')) {
     for (const key in request.body) {
       switch (key) {
@@ -45,11 +45,11 @@ const validateRequest = (request) => {
  * @param { object } req
  * @param { object } res
  * @param { function } next
- * @function  validateRequestBody
+ * @function  validateRequest
  * @return { object } return object containing validation error message
  */
-const validator = (req, res, next) => {
-  const errors = validateRequest(req);
+const validateRequest = (req, res, next) => {
+  const errors = validateRequestBody(req);
   if (errors) {
     const message = errors[0].msg;
     res.status(400).send({ error: message, success: false });
@@ -58,4 +58,4 @@ const validator = (req, res, next) => {
   }
 };
 
-export default validator;
+export default validateRequest;
