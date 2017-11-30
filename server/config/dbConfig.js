@@ -6,6 +6,8 @@ dotenv.config();
  * @description This is database mongoose database configuration
  */
 module.exports = {
-  urlDevelopment: process.env.mongoDBLOCAL,
-  urlProduction: process.env.mongoDBURL
+  ideaboxProduction: process.env.ideaboxProduction,
+  ideabox: process.env.ideabox,
+  ideaboxTest: process.env.ideaboxTest
 };
+
