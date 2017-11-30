@@ -1,7 +1,7 @@
 import express from 'express';
 import UserController from '../controllers/UserController';
-import Validator from '../middlewares/Validator';
-import ValidateToken from '../middlewares/ValidateToken';
+import validateRequest from '../middlewares/validateRequest';
+import verifyToken from '../middlewares/verifyToken';
 
 
 /**
@@ -14,7 +14,7 @@ const Router = express.Router();
  */
 Router.post(
   '/api/v1/user/signup',
-  Validator,
+  validateRequest,
   UserController.signUp
 );
 
@@ -23,7 +23,7 @@ Router.post(
  */
 Router.post(
   '/api/v1/user/signin',
-  Validator,
+  validateRequest,
   UserController.signIn
 );
 
@@ -32,7 +32,7 @@ Router.post(
  */
 Router.put(
   '/api/v1/user/updateprofile',
-  ValidateToken,
+  verifyToken,
   UserController.updateProfile
 );
 

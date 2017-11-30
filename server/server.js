@@ -12,9 +12,13 @@ import Router from './routes/index';
 dotenv.config();
 
 if (process.env.NODE_ENV !== 'production') {
-  mongoose.connect('mongodb://127.0.0.1:27017/ideabox');
+  if (process.env.NODE_ENV === 'test') {
+    mongoose.connect(dbConfig.ideaboxTest);
+  } else {
+    mongoose.connect(dbConfig.ideabox);
+  }
 } else {
-  mongoose.connect(dbConfig.urlProduction);
+  mongoose.connect(dbConfig.ideaboxProduction);
 }
 const port = parseInt(process.env.PORT, 10) || 3000;
 
@@ -35,3 +39,5 @@ app.listen(port, (err) => {
     return (err, 'but stuff works');
   }
 });
+
+module.exports = app;
