@@ -20,6 +20,7 @@
     "homepage": "https://github.com/QUDUSKUNLE/Ideabox#readme",
     "devDependencies": {
         "assert": "^1.4.1",
+        "cat": "^0.2.0",
         "chai": "^4.1.2",
         "chai-http": "^3.0.0",
         "coveralls": "^3.0.0",
