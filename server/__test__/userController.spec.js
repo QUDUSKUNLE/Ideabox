@@ -1,14 +1,27 @@
 import chai from 'chai';
 import assert from 'assert';
-import faker from 'faker';
 import chaiHttp from 'chai-http';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import server from '../server';
 import userData from '../__mockData__/userData';
 
+dotenv.config();
 chai.should();
 const { expect } = chai;
 chai.use(chaiHttp);
 
+before((done) => {
+  mongoose
+    .createConnection(
+      'mongodb://users:usersideabox@ds125016.mlab.com:25016/ideaboxtest',
+      () => {
+        mongoose.connection.db.dropDatabase(() => {
+          done();
+        });
+      }
+    );
+});
 // Test for UserControllers
 describe('User Controller Test', () => {
   const { user } = userData;
@@ -16,10 +29,11 @@ describe('User Controller Test', () => {
     it('should signup a new user', (done) => {
       chai.request(server)
         .post('/api/v1/user/signup')
+        .set('Content-Type', 'application/json')
         .send({
-          username: faker.name.findName(),
-          email: faker.internet.email(),
-          password: 'andelalagos',
+          username: user.username,
+          email: user.email,
+          password: user.password,
         })
         .end((err, res) => {
           res.should.have.status(201);
@@ -33,7 +47,7 @@ describe('User Controller Test', () => {
       (done) => {
         chai.request(server)
           .post('/api/v1/user/signup')
-          .type('form')
+          .set('Content-Type', 'application/json')
           .send({
             username: user.username,
             password: user.shortPassword,
@@ -53,7 +67,7 @@ describe('User Controller Test', () => {
       (done) => {
         chai.request(server)
           .post('/api/v1/user/signup')
-          .type('application/json')
+          .set('Content-Type', 'application/json')
           .send({
             username: user.username,
             email: user.email,
@@ -75,7 +89,7 @@ describe('User Controller Test', () => {
           .post('/api/v1/user/signup')
           .type('application/json')
           .send({
-            username: faker.name.findName(),
+            username: user.username,
             email: user.email
           })
           .end((err, res) => {
@@ -90,7 +104,7 @@ describe('User Controller Test', () => {
     it('should return status 400 if username is an empty string', (done) => {
       chai.request(server)
         .post('/api/v1/user/signup')
-        .type('form')
+        .set('Content-Type', 'application/json')
         .send({
           username: user.emptyString,
           email: user.email,
@@ -109,8 +123,8 @@ describe('User Controller Test', () => {
         .post('/api/v1/user/signup')
         .type('form')
         .send({
-          username: user.existUsername,
-          email: user.email,
+          username: user.username,
+          email: user.usedMail,
           password: user.password,
         })
         .end((err, res) => {
@@ -181,7 +195,7 @@ describe('User Controller Test', () => {
         .type('form')
         .send({
           username: user.username,
-          email: user.usedMail,
+          email: user.email,
           password: user.password,
         })
         .end((err, res) => {
@@ -216,7 +230,7 @@ describe('User Controller Test', () => {
         .post('/api/v1/user/signin')
         .type('application/json')
         .send({
-          username: faker.name.findName(),
+          username: user.username,
         })
         .end((err, res) => {
           res.should.have.status(400);
@@ -249,8 +263,8 @@ describe('User Controller Test', () => {
         .post('/api/v1/user/signin')
         .type('application/json')
         .send({
-          email: user.usedMail,
-          password: user.password,
+          email: user.email,
+          password: user.wrongPass,
         })
         .end((err, res) => {
           res.should.have.status(401);
@@ -266,15 +280,90 @@ describe('User Controller Test', () => {
         .post('/api/v1/user/signin')
         .type('application/json')
         .send({
-          email: user.userEmail,
-          password: user.userPassword,
+          email: user.email,
+          password: user.password,
         })
         .end((err, res) => {
           res.should.have.status(200);
           assert.equal(true, res.body.success);
-          assert.equal(res.body.userDetails.email, user.userEmail);
+          assert.equal(res.body.userDetails.email, user.email);
           res.body.should.have.property('message')
             .equals('Sign in successful');
+          done();
+        });
+    });
+  });
+
+  describe('User reset password route', () => {
+    it('should return status 400 if email is not defined', (done) => {
+      chai.request(server)
+        .post('/api/v1/user/resetpassword')
+        .type('application/json')
+        .send({})
+        .end((err, res) => {
+          res.should.have.status(400);
+          assert.equal(false, res.body.success);
+          res.body.should.have.property('error')
+            .equals('Email is required');
+          done();
+        });
+    });
+    it('should return status 404 if user email does not exist', (done) => {
+      chai.request(server)
+        .post('/api/v1/user/resetpassword')
+        .type('application/json')
+        .send({ email: user.userEmail })
+        .end((err, res) => {
+          res.should.have.status(404);
+          assert.equal(false, res.body.success);
+          res.body.should.have.property('error')
+            .equals('User does not exist');
+          done();
+        });
+    });
+    it('should return status 200 if reset password is successful', (done) => {
+      chai.request(server)
+        .post('/api/v1/user/resetpassword')
+        .type('application/json')
+        .send({ email: user.email })
+        .end((err, res) => {
+          res.should.have.status(200);
+          assert.equal(true, res.body.success);
+          res.body.should.have.property('message')
+            .equals('Reset password email sent successfully');
+          done();
+        });
+    });
+  });
+
+  describe('User update password route', () => {
+    it('should return status 400 when new password is not defined', (done) => {
+      chai.request(server)
+        .put('/api/v1/user/updatepassword/adekunelekkekkeke')
+        .type('application/json')
+        .send({})
+        .end((err, res) => {
+          res.should.have.status(400);
+          assert.equal(false, res.body.success);
+          res.body.should.have.property('error')
+            .equals('Either newPassword or confirmPassword is not provided');
+          done();
+        });
+    });
+
+    it('should return status 404 when does not exist', (done) => {
+      chai.request(server)
+        .put('/api/v1/user/updatepassword/adekunelekkekkeke')
+        .type('application/json')
+        .send({
+          newPassword: user.userEmail,
+          confirmPassword: user.userEmail
+        })
+        .end((err, res) => {
+          res.should.have.status(404);
+          assert.equal(false, res.body.success);
+          res.body.should.have.property('error')
+            .equals('User does not exist');
           done();
         });
     });

@@ -28,6 +28,24 @@ Router.post(
 );
 
 /**
+ * Route for users to reset password
+ */
+Router.post(
+  '/api/v1/user/resetpassword',
+  validateRequest,
+  UserController.sendResetPassword
+);
+
+/**
+ * Route for users to reset password
+ */
+Router.put(
+  '/api/v1/user/updatepassword/:hash',
+  validateRequest,
+  UserController.updatePassword
+);
+
+/**
  * Route for update users profile
  */
 Router.put(
