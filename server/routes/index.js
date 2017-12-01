@@ -1,7 +1,7 @@
 import express from 'express';
 import UserController from '../controllers/UserController';
-import Validator from '../middlewares/Validator';
-import ValidateToken from '../middlewares/ValidateToken';
+import validateRequest from '../middlewares/validateRequest';
+import verifyToken from '../middlewares/verifyToken';
 
 
 /**
@@ -14,7 +14,7 @@ const Router = express.Router();
  */
 Router.post(
   '/api/v1/user/signup',
-  Validator,
+  validateRequest,
   UserController.signUp
 );
 
@@ -23,8 +23,26 @@ Router.post(
  */
 Router.post(
   '/api/v1/user/signin',
-  Validator,
+  validateRequest,
   UserController.signIn
+);
+
+/**
+ * Route for users to reset password
+ */
+Router.post(
+  '/api/v1/user/resetpassword',
+  validateRequest,
+  UserController.sendResetPassword
+);
+
+/**
+ * Route for users to reset password
+ */
+Router.put(
+  '/api/v1/user/updatepassword/:hash',
+  validateRequest,
+  UserController.updatePassword
 );
 
 /**
@@ -32,7 +50,7 @@ Router.post(
  */
 Router.put(
   '/api/v1/user/updateprofile',
-  ValidateToken,
+  verifyToken,
   UserController.updateProfile
 );
 
