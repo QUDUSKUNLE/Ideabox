@@ -1,4 +1,3 @@
-/* eslint-disable */
 /**
  * validate - description
  * @param  {object} request the form data to be validated
@@ -14,6 +13,7 @@ const validateRequestBody = (request) => {
             .notEmpty()
             .matches(/\w/);
           request.check('username', 'Username must be more than 2 characters')
+            .trim()  
             .isLength(2, 50);
           break;
 
@@ -21,7 +21,10 @@ const validateRequestBody = (request) => {
           request.check('email', 'Email address field cannot be empty')
             .trim()
             .notEmpty();
-          request.check('email', 'Email is badly formatted').isEmail();
+
+          request.check('email', 'Email is badly formatted')
+            .trim()
+            .isEmail();
           break;
 
         case 'password':
@@ -31,7 +34,28 @@ const validateRequestBody = (request) => {
           request.check(
             'password',
             'Password length must be more than 6 characters'
-          ).isLength({ min: 7 }).matches(/\w/);
+          )
+          .trim()
+          .isLength({ min: 7 }).matches(/\w/);
+          break;
+
+        case 'newPassword':
+          request.check('newPassword', 'newPassword field cannot be empty')
+            .trim()
+            .notEmpty();
+          request.check(
+            'newPassword',
+            'newPassword length must be more than 6 characters'
+          )
+          .trim()
+          .isLength({ min: 7 }).matches(/\w/);
+          break;
+
+        case 'confirmPassword':
+          request.check('confirmPassword',
+            'confirmPassword field cannot be empty')
+            .trim()
+            .notEmpty();
           break;
         default:
       }

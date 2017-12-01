@@ -6,19 +6,18 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 
-import dbConfig from './config/dbConfig';
 import Router from './routes/index';
 
 dotenv.config();
 
 if (process.env.NODE_ENV !== 'production') {
   if (process.env.NODE_ENV === 'test') {
-    mongoose.connect(dbConfig.ideaboxTest);
+    mongoose.connect(process.env.MONGODB_URL);
   } else {
-    mongoose.connect(dbConfig.ideabox);
+    mongoose.connect(process.env.MONGODB_URL_DEV);
   }
 } else {
-  mongoose.connect(dbConfig.ideaboxProduction);
+  mongoose.connect(process.env.MONGODB_URL_PRO);
 }
 const port = parseInt(process.env.PORT, 10) || 3000;
 

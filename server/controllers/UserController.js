@@ -1,8 +1,10 @@
-import dotenv from 'dotenv';
-import capitalize from 'capitalize';
 import bcrypt from 'bcrypt';
-import User from '../models/User';
+import capitalize from 'capitalize';
+import crypto from 'crypto';
+import dotenv from 'dotenv';
 import createToken from '../utils/createToken';
+import sendMail from '../utils/sendEmail';
+import User from '../models/User';
 
 dotenv.config();
 
@@ -124,6 +126,126 @@ class UserController {
           });
         });
     }
+  }
+
+
+  /**
+   * Send Reset password email
+   * Routes: POST: /api/v1/user/resetpassword
+   * @param {object} req
+   * @param {object} res
+   * @returns {response} response object
+   */
+  static sendResetPassword(req, res) {
+    const hash = crypto.randomBytes(20).toString('hex');
+    const date = Date.now() + 3600000;
+    if (req.body.email === undefined) {
+      return res.status(400).send({
+        success: false,
+        error: 'Email is required'
+      });
+    }
+    User.findOne({
+      email: req.body.email
+    })
+      .exec((err, response) => {
+        if (err) {
+          return res.status(500).send({
+            success: false,
+            error: 'internal server error'
+          });
+        }
+        if (!response) {
+          return res.status(404).send({
+            success: false,
+            error: 'User does not exist'
+          });
+        }
+        response.hash = hash;
+        response.expiryTime = date;
+        response.save((error, updatedUser) => {
+          if (error) {
+            return res.status(400).send({
+              success: false,
+              message: error
+            });
+          }
+          // send mail to the user
+          sendMail(
+            updatedUser.email,
+            updatedUser.username,
+            hash, req.headers.host
+          );
+          return res.status(200).send({
+            success: true,
+            message: 'Reset password email sent successfully'
+          });
+        });
+      }).catch(error => res.status(500).send({ message: error.message }));
+  }
+
+  /**
+   * Update Password
+   * Route: POST: /api/v1/user/updatepassword/:hash
+   * @param {object} req
+   * @param {object} res
+   * @return {void}
+   */
+  static updatePassword(req, res) {
+    if ((req.body.newPassword === undefined) ||
+       (req.body.confirmPassword === undefined)) {
+      return res.status(400).send({
+        error: 'Either newPassword or confirmPassword is not provided',
+        success: false
+      });
+    }
+    return User.findOne({ hash: req.params.hash })
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send({
+            success: false,
+            error: 'User does not exist'
+          });
+        }
+        if (
+          req.body.newPassword &&
+          req.body.confirmPassword &&
+          req.body.newPassword === req.body.confirmPassword
+        ) {
+          const currentTime = Date.now();
+
+          if (currentTime > user.expiryTime) {
+            return res.status(410).send({
+              success: false,
+              error: 'Expired link'
+            });
+          }
+          user.password = req.body.newPassword;
+          user.save((err, updatedUser) => {
+            if (err) {
+              return res.status(400).send({
+                success: false,
+                error: err.message
+              });
+            }
+
+            res.status(201).send({
+              success: true,
+              message: 'Password has been updated',
+              updatedUser
+            });
+          });
+        } else {
+          return res.status(400).send({
+            success: false,
+            error: 'Please confirm password'
+          });
+        }
+      })
+      .catch(error => res.status(500).send({
+        success: false,
+        error: error.message
+      }));
   }
 
 
