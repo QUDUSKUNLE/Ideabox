@@ -12,15 +12,11 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 before((done) => {
-  mongoose
-    .createConnection(
-      'mongodb://users:usersideabox@ds125016.mlab.com:25016/ideaboxtest',
-      () => {
-        mongoose.connection.db.dropDatabase(() => {
-          done();
-        });
-      }
-    );
+  mongoose.createConnection(process.env.MONGODB_URL, () => {
+    mongoose.connection.db.dropDatabase(() => {
+      done();
+    });
+  });
 });
 // Test for UserControllers
 describe('User Controller Test', () => {
