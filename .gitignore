@@ -2,6 +2,10 @@ node_modules
 package-lock.json
 example.js
 .env
-coverage/*
+coverage
 .nyc_output
 client/**
+server/__test__/commentController.spec.js
+server/__test__/createToken.spec.js
+server/controllers/CommentController.js
+server/models/Comment.js
