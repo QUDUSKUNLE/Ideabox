@@ -4,13 +4,117 @@ export default {
     secondId: 3,
     thirdId: 4,
     wrongId: 8,
-    nonExistingId: 111,
-    username: 'Qudus YEKEEN',
-    usedMail: 'kunle@gmail.com',
+    email: 'quduskunle@gmail.com',
     password: 'password',
+    nonExistingId: 111,
+    newIdea: {
+      title: 'Agricultural',
+      description: 'Shonga Farm',
+      category: 'Agriculture',
+      access: 'public'
+    },
+    newDescription: 'Shonga Farm',
+    newCategory: 'Agriculture',
+    newAccess: 'public',
+    username: 'Qudus YEKEEN',
+    newComment: {
+      comment: 'Nice idea'
+    },
+    usedMail: 'kunle@gmail.com',
+    signIn: {
+      email: 'quduskunle@gmail.com',
+      password: 'password',
+    },
+    signUp: {
+      username: 'Qudus YEKEEN',
+      email: 'quduskunle@gmail.com',
+      password: 'password'
+    },
+    signUpErr: {
+      username: 'Qudus YEKEEN',
+      email: 'quduskunle@gmail.com',
+      password: 'pass'
+    },
+    signUpUndefinedPass: {
+      username: 'Qudus YEKEEN',
+      email: 'quduskunle@gmail.com',
+    },
+    signUpEmptyUsername: {
+      username: '',
+      email: 'quduskunle@gmail.com',
+      password: 'password'
+    },
+    existingUserName: {
+      username: 'Qudus YEKEEN',
+      email: 'qudus.kunle@gmail.com',
+      password: 'password'
+    },
+    shortUserName: {
+      username: 'a',
+      email: 'quduskunle@gmail.com',
+      password: 'password'
+    },
+    emptyEmail: {
+      username: 'Qudus YEKEEN',
+      email: '',
+      password: 'password'
+    },
+    invalidEmail: {
+      username: 'Qudus YEKEEN',
+      email: 'qudus.yekeenandela.com',
+      password: 'password'
+    },
+    existingEmail: {
+      username: 'Qudus YEKEEN',
+      email: 'quduskunle@gmail.com',
+      password: 'password'
+    },
+    emptyPassword: {
+      username: 'Qudus YEKEEN',
+      email: 'quduskunle@gmail.com',
+      password: ''
+    },
+    createIdea: {
+      title: 'In the Light of Truth',
+      description: 'The Grail Message',
+      category: 'AbdruShin',
+      access: 'public'
+    },
+    Idea1: {
+      title: 'Book of Grail',
+      description: 'The Grail Message',
+      category: 'AbdruShin',
+      access: 'public'
+    },
+    updateIdea: {
+      title: 'Best of Idea',
+      description: 'The Grail Message',
+      category: 'AbdruShin',
+      access: 'private'
+    },
+    incorrectAccess: {
+      title: 'In the Light of Truth',
+      description: 'The Grail Message',
+      category: 'AbdruShin',
+      access: 'access',
+    },
+    undefineTitle: {
+      description: 'The Grail Message',
+      category: 'AbdruShin',
+      access: 'public'
+    },
+    existingTitle: {
+      title: 'In the Light of Truth',
+      description: 'The Grail Message',
+      category: 'AbdruShin',
+      access: 'public',
+    },
     wrongPass: 'passwor',
-    email: 'qudus.yekeen@andela.com',
-    invalidEmail: 'qudus.yekeenandela.com',
+    title: 'In the Light of Truth',
+    description: 'The Grail Message',
+    category: 'AbdruShin',
+    access: 'public',
+    acces: 'access',
     shortPassword: 'pass',
     phoneText: '2347033err0448',
     emptyString: '',
@@ -26,11 +130,23 @@ export default {
     resetRequestType: 'reset',
     wrongRequestType: 'rejoin',
     wrongToken: 'wrong token',
-    demoUser: {
-      id: 4,
-      username: 'chuks',
-      email: 'chuks.opia@andela.com',
-      phone: '2347033130449'
+    Idea: {
+      title: 'Technology',
+      description: 'Latest technology',
+      category: 'technology',
+      access: 'public'
+    },
+    Idea2: {
+      title: 'Mathematics',
+      description: 'Latest technology',
+      category: 'technology',
+      access: 'public'
+    },
+    sendComment: {
+      comment: 'This is awesome'
+    },
+    editComment: {
+      comment: 'Nice Idea, keep it up'
     },
     demoUser2: {
       id: 2,
