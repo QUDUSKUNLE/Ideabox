@@ -19,24 +19,20 @@ if (process.env.NODE_ENV !== 'production') {
 } else {
   mongoose.connect(process.env.MONGODB_URL_PRO);
 }
-const port = parseInt(process.env.PORT, 10) || 3000;
 
+const port = parseInt(process.env.PORT, 10) || 3000;
 const app = express();
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
-app.use(Router);
+app.use('/api/v1/users/', Router);
+
 app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome to the beginning of nothingness.',
 }));
 
-
-app.listen(port, (err) => {
-  if (err) {
-    return (err, 'but stuff works');
-  }
-});
+app.listen(port);
 
 module.exports = app;

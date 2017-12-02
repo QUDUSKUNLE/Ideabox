@@ -76,7 +76,7 @@ export default (email, name, hash, headers) => {
                       color:#686f7a">
                       Please click the button below to change your password.
                   </p>
-              <a href="http://${headers}/api/v1/user/updatepassword/${hash}" 
+              <a href="http://${headers}/api/v1/users/passwords/${hash}" 
                     style="
                       display:inline-block;
                       font-size:15px;color:#ffffff;
