@@ -6,7 +6,7 @@
     "scripts": {
         "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha ./server/__test__ --timeout 40000 --exit --compilers js:babel-register && npm run coverage-report",
         "start": "nodemon --exec babel-node ./server/server.js",
-        "coverage-report": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+        "coverage-report": "cat ./coverage/lcov.info | coveralls"
     },
     "repository": {
         "type": "git",
@@ -54,7 +54,7 @@
         "http": "0.0.0",
         "jsonwebtoken": "^8.1.0",
         "lodash": "^4.17.4",
-        "mongoose": "^4.13.5",
+        "mongoose": "^4.10.8",
         "morgan": "^1.9.0",
         "nodemailer": "^4.4.0",
         "nodemon": "^1.12.1",

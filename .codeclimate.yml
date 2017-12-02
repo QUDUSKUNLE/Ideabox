@@ -1,17 +1,25 @@
-engines:
-  eslint:
-    enabled: true
-    channel: "eslint-4"
-    checks:
-      linebreak-style:
-        enabled: false
-fixme:
-    enabled: true
-exclude_paths:
-- "coverage"
-- "node_modules"
-ratings:
-  paths:
-  - "**.js"
-  - "**.es6"
-  - "**.jsx"
+version: "2"
+  checks:
+    argument-count:
+      enabled: false
+    duplication:
+      enabled: true
+    file-lines:
+      enabled: false
+    method-lines:
+      enabled: false
+    similar code:
+      enabled: false
+
+  plugins:
+    eslint:
+      enabled: true
+  exclude_patterns:
+    - "node_modules/"
+    - "coverage/"
+    - "server/__test__/"
+    - "server/__mockData__/"
+    - "client/src/__test__/*"
+    - "bundle.js"
+    - "dist/"
+    - "client/public/js/bundle.js"

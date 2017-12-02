@@ -6,13 +6,15 @@ import mongoose from 'mongoose';
 const ideaSchema = new mongoose.Schema({
   title: { type: String, require: true, unique: true },
   description: { type: String, require: true },
-  categories: { type: Array, required: true },
+  category: { type: Array, required: true },
+  access: { type: Array, required: true },
+  status: { type: String },
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'users'
     },
-    username: String
+    name: { type: String }
   },
   updatedAt: { type: Date, default: Date.now },
   createdAt: { type: Date, default: Date.now },

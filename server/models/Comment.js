@@ -12,8 +12,14 @@ const commentSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'users'
     },
-    username: String
+    name: String
   },
+  idea: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      refs: 'ideas'
+    }
+  }
 });
 
 const Comment = mongoose.model('comment', commentSchema);

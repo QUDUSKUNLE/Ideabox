@@ -57,6 +57,73 @@ const validateRequestBody = (request) => {
             .trim()
             .notEmpty();
           break;
+
+        case 'title':
+          request.check('title',
+            'Title field cannot be empty')
+            .trim()
+            .notEmpty();
+          request.check(
+            'title',
+            'Title must not be more than 50 characters')
+            .isLength({ max: 50 });
+          request.check(
+            'title',
+            'Title should contain only alphabets')
+            .trim()
+            .matches(/\w/);
+          break;
+
+        case 'description':
+          request.check('description',
+            'Description field cannot be empty')
+            .trim()
+            .notEmpty();
+          request.check(
+            'description',
+            'Description must not be more than 500 characters')
+            .isLength({ max: 500 });
+          request.check(
+            'description',
+            'Description should contain only alphabets')
+            .trim()
+            .matches(/\w/);
+          break;
+
+        case 'category':
+          request.check('category',
+            'Category field cannot be empty')
+            .trim()
+            .notEmpty();
+          request.check(
+            'category',
+            'Category must not be more than 50 characters')
+            .isLength({ max: 50 });
+          request.check(
+            'category',
+            'Category should contain only alphabets')
+            .trim()
+            .matches(/\w/);
+          break;
+
+        case 'access':
+          request.check('access',
+            'Access field cannot be empty')
+            .trim()
+            .notEmpty();
+          break;
+        
+        case 'comment':
+          request.check('comment',
+            'comment field cannot be empty')
+            .trim()
+            .notEmpty();
+          request.check(
+            'comment',
+            'Comment should contain only alphabets')
+            .trim()
+            .matches(/\w/);
+          break;
         default:
       }
     }
