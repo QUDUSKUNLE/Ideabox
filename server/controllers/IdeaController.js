@@ -160,30 +160,11 @@ class IdeaController {
         error: 'Invalid request'
       });
     }
-    // Implement Filter
+
+    // Filter by category
     if (req.query.category) {
       const { category } = req.query;
-      // Filter by category
       Idea.find({}).where({ category: { $eq: capitalize(category.trim()) } })
-        .exec((err, searchResponse) => {
-          if (err) {
-            return res.status(500).send({
-              success: false,
-              error: 'Internal server error',
-            });
-          }
-          // return new search response
-          return res.status(200).send({
-            success: true,
-            searchResponse
-          });
-        });
-    }
-    // Search
-    if (req.query.search) {
-      const { search } = req.query;
-      // Search by name
-      Idea.find({}).where({ category: { $eq: capitalize(search.trim()) } })
         .exec((err, searchResponse) => {
           if (err) {
             return res.status(500).send({
