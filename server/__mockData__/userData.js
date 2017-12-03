@@ -13,12 +13,36 @@ export default {
       category: 'Agriculture',
       access: 'public'
     },
+    newIdea1: {
+      title: 'Agricultural Mechanization',
+      description: 'In Nigeria',
+      category: 'Agriculture',
+      access: 'public'
+    },
+    newIdea2: {
+      title: '',
+      description: 'In Nigeria',
+      category: 'Agriculture',
+      access: 'public'
+    },
+    newIdea3: {
+      title: 'The Nigerian Constitution',
+      description: '',
+      category: 'Agriculture',
+      access: 'public'
+    },
     newDescription: 'Shonga Farm',
     newCategory: 'Agriculture',
     newAccess: 'public',
     username: 'Qudus YEKEEN',
     newComment: {
       comment: 'Nice idea'
+    },
+    newComment1: {
+      comment: 'Nice idea, keep it up'
+    },
+    newComment2: {
+      comment: ''
     },
     usedMail: 'kunle@gmail.com',
     signIn: {
@@ -185,10 +209,9 @@ export default {
       password: ''
     },
     demoUser8: {
-      id: 3,
-      username: 'user3',
+      username: '31233443',
       email: 'user3@gmail.com',
-      phone: '2348012345670'
+      password: '2348012345670'
     }
   }
 };
