@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
  * @description This is Idea model
  */
 const ideaSchema = new mongoose.Schema({
-  title: { type: String, require: true, unique: true },
-  description: { type: String, require: true },
+  title: { type: String, required: true, unique: true },
+  description: { type: String, required: true },
   category: { type: Array, required: true },
   access: { type: Array, required: true },
   status: { type: String },
