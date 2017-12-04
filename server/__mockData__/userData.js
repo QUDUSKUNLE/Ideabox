@@ -4,6 +4,7 @@ export default {
     secondId: 3,
     thirdId: 4,
     wrongId: 8,
+    hash: 'abcdef567487364784',
     email: 'quduskunle@gmail.com',
     password: 'password',
     nonExistingId: 111,

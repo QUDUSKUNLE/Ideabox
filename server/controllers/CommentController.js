@@ -12,14 +12,14 @@ class CommentController {
    * create comment
    * Routes: POST: /api/v1/users/comments
    * @param {any} req user request object
-   * @param {any} res servers response
+   * @param {any} res server response
    * @return {void} json server response
    * @memberOf CommentController
    */
   static writeComment(req, res) {
-    if (req.body.comment === undefined) {
+    if (!req.body.comment) {
       return res.status(400).send({
-        error: 'Comment is not provided',
+        error: 'Comment must not be empty',
         success: false
       });
     }
@@ -53,14 +53,14 @@ class CommentController {
   /**
    * Routes: PUT: /api/v1/users/comments/:commentId
    * @param {any} req user request object
-   * @param {any} res servers response
+   * @param {any} res server response
    * @return {void} json server response
    * @memberOf CommentController
    */
   static editComment(req, res) {
-    if ((req.body.comment === undefined)) {
+    if ((!req.body.comment)) {
       return res.status(400).send({
-        error: 'Comment is undefined',
+        error: 'Comment must not be empty',
         success: false
       });
     }
@@ -90,8 +90,8 @@ class CommentController {
 
   /**
    * Routes: DELETE: /api/v1/users/comments/:commentId
-   * @param {any} req
-   * @param {any} res
+   * @param {any} req user request object
+   * @param {any} res server response
    * @return {void}
    * @memberOf CommentController
    */

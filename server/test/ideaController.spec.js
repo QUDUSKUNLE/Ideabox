@@ -82,7 +82,7 @@ describe('Idea Controller Test:', () => {
             res.should.have.status(409);
             assert.equal(false, res.body.success);
             res.body.should.have.property('message')
-              .equals('Title must be unique');
+              .equals('Idea title must be unique');
             done();
           });
       });
@@ -201,7 +201,8 @@ describe('Idea Controller Test:', () => {
         .set('x-access-token', uToken)
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(202);
+          assert.equal(res.body.success, true);
           assert.equal('Idea deleted successfully', res.body.message);
           done();
         });

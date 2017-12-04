@@ -62,7 +62,7 @@ describe('Comment controller test:', () => {
         .end((err, res) => {
           res.should.have.status(400);
           assert.equal(false, res.body.success);
-          assert.equal('Comment is not provided', res.body.error);
+          assert.equal('Comment must not be empty', res.body.error);
           done();
         });
     });

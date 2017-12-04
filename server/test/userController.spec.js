@@ -79,7 +79,7 @@ describe('User Controller Test', () => {
             res.should.have.status(400);
             assert.equal(false, res.body.success);
             res.body.should.have.property('error')
-              .equals('Either email, password or username is not provided');
+              .equals('Either email, password or username must not be empty');
             done();
           });
       }
@@ -152,7 +152,7 @@ describe('User Controller Test', () => {
           done();
         });
     });
-    it('should return status 409 if email is already in use', (done) => {
+    it('should return status 409 if email already registered', (done) => {
       chai.request(server)
         .post('/api/v1/users/signup')
         .type('form')
@@ -161,7 +161,7 @@ describe('User Controller Test', () => {
           res.should.have.status(409);
           expect(res.body.success).to.eql(false);
           res.body.should.have.property('error')
-            .equals('Email is already in use');
+            .equals('Email is already registered');
           done();
         });
     });
@@ -190,7 +190,7 @@ describe('User Controller Test', () => {
           res.should.have.status(400);
           assert.equal(false, res.body.success);
           res.body.should.have.property('error')
-            .equals('Either email or password is required');
+            .equals('Email or password must not be empty');
           done();
         });
     });
@@ -256,7 +256,7 @@ describe('User Controller Test', () => {
           res.should.have.status(400);
           assert.equal(false, res.body.success);
           res.body.should.have.property('error')
-            .equals('Email is required');
+            .equals('Email must not be empty');
           done();
         });
     });
@@ -290,22 +290,24 @@ describe('User Controller Test', () => {
   // Test for update password route
   describe('User update password route', () => {
     it('should return status 400 when new password is not defined', (done) => {
+      const { hash } = { user };
       chai.request(server)
-        .put('/api/v1/users/passwords/adekunelekkekkeke')
+        .put(`/api/v1/users/passwords/${hash}`)
         .type('application/json')
         .send({})
         .end((err, res) => {
           res.should.have.status(400);
           assert.equal(false, res.body.success);
           res.body.should.have.property('error')
-            .equals('Either newPassword or confirmPassword is not provided');
+            .equals('NewPassword or confirmPassword must not be empty');
           done();
         });
     });
 
     it('should return status 404 when does not exist', (done) => {
+      const { hash } = { user };
       chai.request(server)
-        .put('/api/v1/users/passwords/adekunelekkekkeke')
+        .put(`/api/v1/users/passwords/${hash}`)
         .type('application/json')
         .send({
           newPassword: user.userEmail,
@@ -348,7 +350,7 @@ describe('User Controller Test', () => {
             res.should.have.status(400);
             assert.equal(false, res.body.success);
             res.body.should.have.property('error')
-              .equals('Either email or username is undefined');
+              .equals('Email or username must not be empty');
             done();
           });
       }

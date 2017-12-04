@@ -106,6 +106,16 @@ Router.post(
 );
 
 /**
+ * Route to search for ideas
+ */
+Router.post(
+  '/ideas/search',
+  verifyToken,
+  validateRequest,
+  IdeaController.filterIdeas
+);
+
+/**
  * Route to edit a comment
  */
 Router.put(
