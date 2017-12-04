@@ -3,15 +3,15 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const ExtractTextPluginConfig = new ExtractTextPlugin('main.css');
+const ExtractTextPluginConfig = new ExtractTextPlugin('bundle.css');
 const config = {
   entry: [
-    path.join(__dirname, 'client/src/index.js'),
-    path.join(__dirname, 'client/app/css/style.scss')
+    path.join(__dirname, 'client/src/app/index.jsx'),
+    path.join(__dirname, 'client/src/app/css/index.scss')
   ],
   devtool: 'source-map',
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'client/dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },

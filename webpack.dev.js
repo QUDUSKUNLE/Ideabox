@@ -6,19 +6,19 @@ const ExtractTextPluginConfig = new ExtractTextPlugin('main.css');
 
 const config = {
   entry: [
-    path.join(__dirname, 'client/src/index.js'),
-    path.join(__dirname, 'client/app/css/style.scss'),
+    path.join(__dirname, 'client/src/app/index.jsx'),
+    path.join(__dirname, 'client/src/app/css/index.scss'),
     'webpack/hot/dev-server',
     'webpack-hot-middleware/client'
   ],
   devtool: 'inline-source-map',
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'client/dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: 'client',
     inline: true,
     hot: true,
     historyApiFallback: true
