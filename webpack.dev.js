@@ -13,12 +13,12 @@ const config = {
   ],
   devtool: 'inline-source-map',
   output: {
-    path: path.join(__dirname, 'client/dist'),
+    path: path.join(__dirname, 'build'),
     publicPath: '/',
     filename: 'bundle.js',
   },
   devServer: {
-    contentBase: 'client',
+    contentBase: 'client/build',
     inline: true,
     hot: true,
     historyApiFallback: true
@@ -44,15 +44,6 @@ const config = {
           presets: ['es2015', 'react', 'stage-2']
         }
       },
-
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          loader: 'css-loader?importLoaders=1'
-        })
-      },
-
       {
         test: /\.scss$/,
         exclude: /node_modules/,

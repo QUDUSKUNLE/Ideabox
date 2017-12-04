@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+require('dotenv').config();
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
@@ -11,7 +12,7 @@ const config = {
   ],
   devtool: 'source-map',
   output: {
-    path: path.join(__dirname, 'client/dist'),
+    path: path.join(__dirname, 'build'),
     publicPath: '/',
     filename: 'bundle.js',
   },
@@ -31,15 +32,6 @@ const config = {
           presets: ['es2015', 'react', 'stage-2']
         }
       },
-
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          loader: 'css-loader?importLoaders=1'
-        })
-      },
-
       {
         test: /\.scss$/,
         exclude: /node_modules/,
@@ -67,6 +59,9 @@ const config = {
     new UglifyJsPlugin({
       sourceMap: true,
     }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    })
   ],
 
   resolve: {
