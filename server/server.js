@@ -12,6 +12,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 
 import Router from './routes/index';
 
+mongoose.Promise = global.Promise;
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 3000;
 const app = express();

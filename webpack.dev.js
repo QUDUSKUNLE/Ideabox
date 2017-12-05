@@ -2,8 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const ExtractTextPluginConfig = new ExtractTextPlugin('main.css');
-
 const config = {
   entry: [
     path.join(__dirname, 'client/src/app/index.jsx'),
@@ -52,7 +50,10 @@ const config = {
           use: ['css-loader', 'sass-loader']
         })
       },
-
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader']
+      },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
@@ -63,8 +64,9 @@ const config = {
     ]
   },
   plugins: [
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    ExtractTextPluginConfig
+    new ExtractTextPlugin('bundle.css')
   ],
 
   resolve: {
