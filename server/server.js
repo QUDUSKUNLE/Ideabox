@@ -26,6 +26,7 @@ if (process.env.NODE_ENV !== 'production') {
   if (process.env.NODE_ENV === 'test') {
     mongoose.connect(process.env.MONGODB_URL);
   } else {
+    // Development configuration
     mongoose.connect(process.env.MONGODB_URL_DEV);
     const config = require('../webpack.dev');
     // *** webpack compiler ***
@@ -43,10 +44,11 @@ if (process.env.NODE_ENV !== 'production') {
     });
   }
 } else {
+  // Production configuration
   mongoose.connect(process.env.MONGODB_URL_PRO);
-  app.get('*', (req, res) => res.status(200).send({
-    message: 'Welcome to the beginning of nothingness.',
-  }));
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  app.get('*', (req, res) =>
+    res.sendFile(`${process.cwd()}/client/build/index.html`));
 }
 
 

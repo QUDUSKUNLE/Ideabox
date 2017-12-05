@@ -1,5 +1,6 @@
 import capitalize from 'capitalize';
 import Idea from '../models/Idea';
+import pagination from '../helpers/pagination';
 
 /**
  * @class IdeaController
@@ -7,19 +8,17 @@ import Idea from '../models/Idea';
 class IdeaController {
   /**
    * Routes: POST: /api/v1/users/ideas/:id
-   * @param {any} req
-   * @param {any} res
+   * @param {any} req user request object
+   * @param {any} res server response
    * @return {void}
    * @memberOf IdeaController
    */
   static createIdea(req, res) {
-    if ((req.body.title === undefined) ||
-      (req.body.description === undefined) ||
-      (req.body.category === undefined) ||
-      (req.body.access === undefined)) {
+    if ((!req.body.title) || (!req.body.description) || (!req.body.category) ||
+      (!req.body.access)) {
       return res.status(400).send({
         success: false,
-        error: 'Either title, description, category or access is undefined'
+        error: 'Either Title, description, category or access must not be empty'
       });
     }
     if (((capitalize(req.body.access) !== 'Public') ||
@@ -38,7 +37,7 @@ class IdeaController {
           return res.status(409).send({
             success: false,
             error: 'existingTitle',
-            message: 'Title must be unique'
+            message: 'Idea title must be unique'
           });
         }
 
@@ -71,19 +70,17 @@ class IdeaController {
 
   /**
    * Routes: PUT: /api/v1/users/ideas/:ideaId
-   * @param {any} req
-   * @param {any} res
+   * @param {any} req user request object
+   * @param {any} res server response
    * @return {void}
    * @memberOf IdeaController
    */
   static editIdea(req, res) {
-    if ((req.body.title === undefined) ||
-      (req.body.description === undefined) ||
-      (req.body.category === undefined) ||
-      (req.body.access === undefined)) {
+    if ((!req.body.title) || (!req.body.description) || (!req.body.category) ||
+      (!req.body.access)) {
       return res.status(400).send({
         success: false,
-        error: 'Either title, description, category or access is undefined'
+        error: 'Either title, description, category or access must not be empty'
       });
     }
     if (((capitalize(req.body.access) !== 'Public') ||
@@ -129,35 +126,52 @@ class IdeaController {
 
   /**
    * Routes: DELETE: /api/v1/users/ideas/:ideaId
-   * @param {any} req
-   * @param {any} res
+   * @param {any} req user request object
+   * @param {any} res server response
    * @return {void}
    * @memberOf IdeaController
    */
   static deleteIdea(req, res) {
-    const { ideaId } = req.params;
-    // Find byId and delete
-    Idea.findByIdAndRemove(ideaId, (err) => {
-      if (err) {
-        res.send(err);
-      }
-      res.json({ message: 'Idea deleted successfully' });
-    });
+    Idea.findById({ _id: req.params.ideaId })
+      .exec()
+      .then((idea) => {
+        if (idea) {
+          Idea.remove({
+            _id: req.params.ideaId
+          }).then(() => res.status(202).send({
+            success: true,
+            message: 'Idea deleted successfully'
+          })).catch(error => res.status(500).send({
+            success: false,
+            error: error.message
+          }));
+        }
+        if (!idea) {
+          res.status(404).send({
+            success: false,
+            error: 'Idea does not exist'
+          });
+        }
+      }).catch(error => res.status(401).send({
+        success: false,
+        message: 'Unathorized, invalid idea identity',
+        error: error.message
+      }));
   }
 
   /**
    * Routes: GET: /api/v1/users/ideas
    * @description This search for ideas base on category
-   * @param {any} req
-   * @param {any} res
+   * @param {any} req user request object
+   * @param {any} res server response
    * @return {void}
    * @memberOf IdeaController
    */
   static searchIdea(req, res) {
-    if (req.query.category === undefined) {
+    if (!req.query.category) {
       return res.status(400).send({
         success: false,
-        error: 'Invalid request'
+        error: 'Search query must not be empty'
       });
     }
 
@@ -179,6 +193,43 @@ class IdeaController {
           });
         });
     }
+  }
+
+  /**
+   * Routes: POST: /api/v1/users/ideas/search?offset=A?limit=B
+   * @description This search for ideas base on category
+   * @param {any} req user request object
+   * @param {any} res server response
+   * @return {void}
+   * @memberOf IdeaController
+   */
+  static filterIdeas(req, res) {
+    if (!req.body.filterTerm) {
+      res.status(400).send({
+        success: false,
+        error: 'Please add filter term'
+      });
+    }
+    const offset = parseInt(req.query.offset, 10);
+    const limit = parseInt(req.query.limit, 10);
+    let count;
+    Idea.count({
+      $text: { $search: req.body.filterTerm.trim() },
+      category: capitalize(req.body.category)
+    }, (err, isCount) => {
+      count = isCount;
+    });
+    Idea.find({
+      $text: { $search: req.body.filterTerm.trim() },
+      category: capitalize(req.body.category)
+    })
+      .skip(offset)
+      .limit(limit)
+      .exec()
+      .then(ideas => res.status(200).send({
+        ideas,
+        pageInfo: pagination(count, limit, offset),
+      }));
   }
 }
 

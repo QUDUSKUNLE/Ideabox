@@ -13,21 +13,21 @@ describe('Idea Controller Test:', () => {
   const { user } = userData;
   // Test for create Idea route
   describe('Create idea route', () => {
-    let uToken = '';
+    let validToken = '';
     before((done) => {
       chai.request(server)
         .post('/api/v1/users/signin')
         .send(user.signIn)
         .end((err, res) => {
           if (err) return done(err);
-          uToken = res.body.token;
+          validToken = res.body.token;
           done();
         });
     });
     it('should return status 201 when new idea is created', (done) => {
       chai.request(server)
         .post('/api/v1/users/ideas')
-        .set('x-access-token', uToken)
+        .set('x-access-token', validToken)
         .set('Content-Type', 'application/json')
         .send(user.createIdea)
         .end((err, res) => {
@@ -43,7 +43,7 @@ describe('Idea Controller Test:', () => {
     it('should return status 400 when idea title is undefined', (done) => {
       chai.request(server)
         .post('/api/v1/users/ideas')
-        .set('x-access-token', uToken)
+        .set('x-access-token', validToken)
         .set('Content-Type', 'application/json')
         .send({
           description: user.description,
@@ -60,7 +60,7 @@ describe('Idea Controller Test:', () => {
     passes other acccess apart from public or private`, (done) => {
         chai.request(server)
           .post('/api/v1/users/ideas')
-          .set('x-access-token', uToken)
+          .set('x-access-token', validToken)
           .set('Content-Type', 'application/json')
           .send(user.incorrectAccess)
           .end((err, res) => {
@@ -75,34 +75,34 @@ describe('Idea Controller Test:', () => {
     user sends title that already exist`, (done) => {
         chai.request(server)
           .post('/api/v1/users/ideas')
-          .set('x-access-token', uToken)
+          .set('x-access-token', validToken)
           .set('Content-Type', 'application/json')
           .send(user.existingTitle)
           .end((err, res) => {
             res.should.have.status(409);
             assert.equal(false, res.body.success);
             res.body.should.have.property('message')
-              .equals('Title must be unique');
+              .equals('Idea title must be unique');
             done();
           });
       });
   });
   describe('Search idea route', () => {
-    let uToken = '';
+    let validToken = '';
     before((done) => {
       chai.request(server)
         .post('/api/v1/users/signin')
         .send(user.signIn)
         .end((err, res) => {
           if (err) return done(err);
-          uToken = res.body.token;
+          validToken = res.body.token;
           done();
         });
     });
-    it('should return 200 when filter ideas by category', (done) => {
+    it('should return 200 when search ideas by keywords', (done) => {
       chai.request(server)
         .get('/api/v1/users/ideas?category=AbdruShin')
-        .set('x-access-token', uToken)
+        .set('x-access-token', validToken)
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           res.should.have.status(200);
@@ -112,8 +112,47 @@ describe('Idea Controller Test:', () => {
     });
   });
 
+  describe('Filter for idea route', () => {
+    let validToken = '';
+    before((done) => {
+      chai.request(server)
+        .post('/api/v1/users/signin')
+        .send(user.signIn)
+        .end((err, res) => {
+          if (err) return done(err);
+          validToken = res.body.token;
+          done();
+        });
+    });
+    it('should return 400 if filterTerm is undefined', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/ideas/search?offset=0&limit=5')
+        .set('x-access-token', validToken)
+        .set('Content-Type', 'application/json')
+        .send({ category: 'AbdruShin' })
+        .end((err, res) => {
+          res.should.have.status(400);
+          assert.equal(res.body.success, false);
+          assert.equal(res.body.error, 'Please add filter term');
+          done();
+        });
+    });
+    it('should return 200 when filter ideas by category ', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/ideas/search?offset=0&limit=5')
+        .set('x-access-token', validToken)
+        .set('Content-Type', 'application/json')
+        .send({ filterTerm: 'The Book of Grail', category: 'AbdruShin' })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.have.property('ideas');
+          done();
+        });
+    });
+  });
+
   describe('Update idea route', () => {
-    let uToken = '';
+    let validToken = '';
     let ideaId = '';
     before((done) => {
       chai.request(server)
@@ -121,14 +160,14 @@ describe('Idea Controller Test:', () => {
         .send(user.signIn)
         .end((err, res) => {
           if (err) return done(err);
-          uToken = res.body.token;
+          validToken = res.body.token;
           done();
         });
     });
     before((done) => {
       chai.request(server)
         .post('/api/v1/users/ideas')
-        .set('x-access-token', uToken)
+        .set('x-access-token', validToken)
         .set('Content-Type', 'application/json')
         .send(user.Idea1)
         .end((err, res) => {
@@ -141,7 +180,7 @@ describe('Idea Controller Test:', () => {
     updated an idea successfully`, (done) => {
         chai.request(server)
           .put(`/api/v1/users/ideas/${ideaId}`)
-          .set('x-access-token', uToken)
+          .set('x-access-token', validToken)
           .set('Content-Type', 'application/json')
           .send(user.updateIdea)
           .end((err, res) => {
@@ -158,7 +197,7 @@ describe('Idea Controller Test:', () => {
         const wrongIdeaId = ideaId.slice(0, -1);
         chai.request(server)
           .put(`/api/v1/users/ideas/${wrongIdeaId}`)
-          .set('x-access-token', uToken)
+          .set('x-access-token', validToken)
           .set('Content-Type', 'application/json')
           .send(user.createIdea)
           .end((err, res) => {
@@ -171,7 +210,7 @@ describe('Idea Controller Test:', () => {
     it('should return status 400 when idea title is undefined', (done) => {
       chai.request(server)
         .put(`/api/v1/users/ideas/${ideaId}`)
-        .set('x-access-token', uToken)
+        .set('x-access-token', validToken)
         .set('Content-Type', 'application/json')
         .send(user.undefineTitle)
         .end((err, res) => {
@@ -184,7 +223,7 @@ describe('Idea Controller Test:', () => {
     passes other acccess apart from public or private`, (done) => {
         chai.request(server)
           .put(`/api/v1/users/ideas/${ideaId}`)
-          .set('x-access-token', uToken)
+          .set('x-access-token', validToken)
           .set('Content-Type', 'application/json')
           .send(user.incorrectAccess)
           .end((err, res) => {
@@ -195,13 +234,27 @@ describe('Idea Controller Test:', () => {
             done();
           });
       });
-    it('should return 200 when idea is deleted an idea', (done) => {
+    it('should return 401 when idea Id is invalid', (done) => {
+      const wrongIdeaId = ideaId.slice(0, -1);
       chai.request(server)
-        .delete(`/api/v1/users/ideas/${ideaId}`)
-        .set('x-access-token', uToken)
+        .delete(`/api/v1/users/ideas/${wrongIdeaId}`)
+        .set('x-access-token', validToken)
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(401);
+          assert.equal(res.body.success, false);
+          assert.equal('Unathorized, invalid idea identity', res.body.message);
+          done();
+        });
+    });
+    it('should return 202 when idea is deleted an idea', (done) => {
+      chai.request(server)
+        .delete(`/api/v1/users/ideas/${ideaId}`)
+        .set('x-access-token', validToken)
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          res.should.have.status(202);
+          assert.equal(res.body.success, true);
           assert.equal('Idea deleted successfully', res.body.message);
           done();
         });

@@ -16,15 +16,13 @@ class UserController {
    * signup a new user
    * Routes: POST: /api/v1/users/signup
    * @param {any} req user request object
-   * @param {any} res servers response
+   * @param {any} res server response
    * @return {void} json server response
    */
   static signUp(req, res) {
-    if ((req.body.username === undefined) ||
-      (req.body.email === undefined) ||
-      (req.body.password === undefined)) {
+    if ((!req.body.username) || (!req.body.email) || (!req.body.password)) {
       res.status(400).send({
-        error: 'Either email, password or username is not provided',
+        error: 'Either email, password or username must not be empty',
         success: false
       });
     } else {
@@ -35,7 +33,7 @@ class UserController {
         .then((email) => {
           if (email) {
             res.status(409).send({
-              error: 'Email is already in use',
+              error: 'Email is already registered',
               success: false
             });
           } else {
@@ -83,14 +81,13 @@ class UserController {
   /**
    * * Routes: POST: /api/v1/users/signin
    * @param {any} req user request object
-   * @param {any} res servers response
+   * @param {any} res server response
    * @return {void} json server response
    */
   static signIn(req, res) {
-    if ((req.body.email === undefined) ||
-      (req.body.password === undefined)) {
+    if ((!req.body.email) || (!req.body.password)) {
       res.status(400).send({
-        error: 'Either email or password is required',
+        error: 'Email or password must not be empty',
         success: false
       });
     } else {
@@ -136,15 +133,15 @@ class UserController {
   /**
    * Send Reset password email
    * Routes: POST: /api/v1/users/passwords
-   * @param {object} req
-   * @param {object} res
+   * @param {any} req user request object
+   * @param {any} res server response
    * @returns {response} response object
    */
   static resetPassword(req, res) {
-    if (req.body.email === undefined) {
+    if (!req.body.email) {
       return res.status(400).send({
         success: false,
-        error: 'Email is required'
+        error: 'Email must not be empty'
       });
     }
     const hash = crypto.randomBytes(20).toString('hex');
@@ -191,15 +188,14 @@ class UserController {
   /**
    * Update Password
    * Route: PUT: /api/v1/users/passwords/:hash
-   * @param {object} req
-   * @param {object} res
+   * @param {any} req user request object
+   * @param {any} res server response
    * @return {void}
    */
   static updatePassword(req, res) {
-    if ((req.body.newPassword === undefined) ||
-       (req.body.confirmPassword === undefined)) {
+    if ((!req.body.newPassword) || (!req.body.confirmPassword)) {
       return res.status(400).send({
-        error: 'Either newPassword or confirmPassword is not provided',
+        error: 'NewPassword or confirmPassword must not be empty',
         success: false
       });
     }
@@ -256,10 +252,9 @@ class UserController {
    */
   static updateProfile(req, res) {
     const { username } = req.body;
-    if ((req.body.username === undefined) ||
-      (req.body.email === undefined)) {
+    if ((!req.body.username) || (!req.body.email)) {
       return res.status(400).send({
-        error: 'Either email or username is undefined',
+        error: 'Email or username must not be empty',
         success: false
       });
     }

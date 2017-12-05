@@ -79,7 +79,7 @@ describe('User Controller Test', () => {
             res.should.have.status(400);
             assert.equal(false, res.body.success);
             res.body.should.have.property('error')
-              .equals('Either email, password or username is not provided');
+              .equals('Either email, password or username must not be empty');
             done();
           });
       }
@@ -152,7 +152,7 @@ describe('User Controller Test', () => {
           done();
         });
     });
-    it('should return status 409 if email is already in use', (done) => {
+    it('should return status 409 if email already registered', (done) => {
       chai.request(server)
         .post('/api/v1/users/signup')
         .type('form')
@@ -161,7 +161,7 @@ describe('User Controller Test', () => {
           res.should.have.status(409);
           expect(res.body.success).to.eql(false);
           res.body.should.have.property('error')
-            .equals('Email is already in use');
+            .equals('Email is already registered');
           done();
         });
     });
@@ -190,7 +190,7 @@ describe('User Controller Test', () => {
           res.should.have.status(400);
           assert.equal(false, res.body.success);
           res.body.should.have.property('error')
-            .equals('Either email or password is required');
+            .equals('Email or password must not be empty');
           done();
         });
     });
@@ -256,7 +256,7 @@ describe('User Controller Test', () => {
           res.should.have.status(400);
           assert.equal(false, res.body.success);
           res.body.should.have.property('error')
-            .equals('Email is required');
+            .equals('Email must not be empty');
           done();
         });
     });
@@ -290,22 +290,24 @@ describe('User Controller Test', () => {
   // Test for update password route
   describe('User update password route', () => {
     it('should return status 400 when new password is not defined', (done) => {
+      const { hash } = { user };
       chai.request(server)
-        .put('/api/v1/users/passwords/adekunelekkekkeke')
+        .put(`/api/v1/users/passwords/${hash}`)
         .type('application/json')
         .send({})
         .end((err, res) => {
           res.should.have.status(400);
           assert.equal(false, res.body.success);
           res.body.should.have.property('error')
-            .equals('Either newPassword or confirmPassword is not provided');
+            .equals('NewPassword or confirmPassword must not be empty');
           done();
         });
     });
 
     it('should return status 404 when does not exist', (done) => {
+      const { hash } = { user };
       chai.request(server)
-        .put('/api/v1/users/passwords/adekunelekkekkeke')
+        .put(`/api/v1/users/passwords/${hash}`)
         .type('application/json')
         .send({
           newPassword: user.userEmail,
@@ -323,7 +325,7 @@ describe('User Controller Test', () => {
 
   // Test for update profile route
   describe('User Update profile route', () => {
-    let uToken = '';
+    let validToken = '';
     let id = '';
     before((done) => {
       chai.request(server)
@@ -331,7 +333,7 @@ describe('User Controller Test', () => {
         .send(user.signIn)
         .end((err, res) => {
           if (err) return done(err);
-          uToken = res.body.token;
+          validToken = res.body.token;
           id = res.body.userDetails.userId;
           done();
         });
@@ -341,14 +343,14 @@ describe('User Controller Test', () => {
       (done) => {
         chai.request(server)
           .put(`/api/v1/users/profiles/${id}`)
-          .set('x-access-token', uToken)
+          .set('x-access-token', validToken)
           .type('application/json')
           .send({})
           .end((err, res) => {
             res.should.have.status(400);
             assert.equal(false, res.body.success);
             res.body.should.have.property('error')
-              .equals('Either email or username is undefined');
+              .equals('Email or username must not be empty');
             done();
           });
       }
@@ -359,7 +361,7 @@ describe('User Controller Test', () => {
       (done) => {
         chai.request(server)
           .put(`/api/v1/users/profiles/${id}`)
-          .set('x-access-token', uToken)
+          .set('x-access-token', validToken)
           .type('application/json')
           .send({
             email: user.email,
@@ -381,7 +383,7 @@ describe('User Controller Test', () => {
       const wrongId = id.slice(0, -1);
       chai.request(server)
         .put(`/api/v1/users/profiles/${wrongId}`)
-        .set('x-access-token', uToken)
+        .set('x-access-token', validToken)
         .type('application/json')
         .send({
           email: user.email,
@@ -395,7 +397,7 @@ describe('User Controller Test', () => {
     });
     it(`should return status code 401 when user try to update profile
     with invalid token`, (done) => {
-        const invalid = uToken.slice(0, -1);
+        const invalid = validToken.slice(0, -1);
         chai.request(server)
           .put(`/api/v1/users/profiles/${id}`)
           .set('x-access-token', invalid)

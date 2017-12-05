@@ -1,9 +1,13 @@
 export default {
   user: {
+    count: 5,
+    limit: 10,
+    offset: 0,
     id: 1,
     secondId: 3,
     thirdId: 4,
     wrongId: 8,
+    hash: 'abcdef567487364784',
     email: 'quduskunle@gmail.com',
     password: 'password',
     nonExistingId: 111,
