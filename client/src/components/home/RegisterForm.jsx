@@ -70,7 +70,7 @@ class RegisterForm extends React.Component {
    * @return {void}
    */
   handleResponse() {
-    console.log(AppStore.registerUserPayload);
+    const server = AppStore.registerUserPayload;
   }
   /**
   * @method handleRegister
@@ -106,7 +106,6 @@ class RegisterForm extends React.Component {
           className="center-align"
         >Register
         </h5>
-        <hr />
         <form
           className="col s12"
           onSubmit={this.handleRegister}
