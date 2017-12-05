@@ -4,7 +4,6 @@ require('dotenv').config();
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const ExtractTextPluginConfig = new ExtractTextPlugin('bundle.css');
 const config = {
   entry: [
     path.join(__dirname, 'client/src/app/index.jsx'),
@@ -40,7 +39,10 @@ const config = {
           use: ['css-loader', 'sass-loader']
         })
       },
-
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader']
+      },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
@@ -51,17 +53,13 @@ const config = {
     ]
   },
   plugins: [
-    ExtractTextPluginConfig,
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.LoaderOptionsPlugin({
-      debug: false
-    }),
-    new UglifyJsPlugin({
-      sourceMap: true,
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
-    })
+    }),
+    new ExtractTextPlugin('bundle.css'),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.LoaderOptionsPlugin({ debug: false }),
+    new UglifyJsPlugin({ sourceMap: true })
   ],
 
   resolve: {

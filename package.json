@@ -6,7 +6,8 @@
     "scripts": {
         "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha server/test --timeout 40000 --exit --compilers js:babel-register && npm run coverage-report",
         "start:dev": "nodemon --exec babel-node ./server/server.js",
-        "start": "nodemon --exec babel-node ./server/server.js",
+        "start": "NODE_ENV=production nodemon --exec babel-node ./server/server.js",
+        "heroku-postbuild": "webpack --config ./webpack.prod.js",
         "start:prod": "npm run heroku-postbuild && npm start",
         "coverage-report": "cat ./coverage/lcov.info | coveralls"
     },
