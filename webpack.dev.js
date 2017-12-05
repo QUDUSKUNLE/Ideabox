@@ -64,6 +64,7 @@ const config = {
     ]
   },
   plugins: [
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('bundle.css')
   ],

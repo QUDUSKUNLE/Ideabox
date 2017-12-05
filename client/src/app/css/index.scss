@@ -11,9 +11,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 65vh;
 }
 
 .margin-top {
     margin-top: 1rem;
+}
+
+#register {
+    width: 60vh;
+}
+
+.display {
+    min-height: 35px;
+    width: 100%;
+    color: white;
+    border-radius: 3px;
+    text-align: center;
+    padding-top: 7px;
+    font-size: 12px;
+    opacity: 0.9;
 }
