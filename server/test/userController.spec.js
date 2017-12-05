@@ -325,7 +325,7 @@ describe('User Controller Test', () => {
 
   // Test for update profile route
   describe('User Update profile route', () => {
-    let uToken = '';
+    let validToken = '';
     let id = '';
     before((done) => {
       chai.request(server)
@@ -333,7 +333,7 @@ describe('User Controller Test', () => {
         .send(user.signIn)
         .end((err, res) => {
           if (err) return done(err);
-          uToken = res.body.token;
+          validToken = res.body.token;
           id = res.body.userDetails.userId;
           done();
         });
@@ -343,7 +343,7 @@ describe('User Controller Test', () => {
       (done) => {
         chai.request(server)
           .put(`/api/v1/users/profiles/${id}`)
-          .set('x-access-token', uToken)
+          .set('x-access-token', validToken)
           .type('application/json')
           .send({})
           .end((err, res) => {
@@ -361,7 +361,7 @@ describe('User Controller Test', () => {
       (done) => {
         chai.request(server)
           .put(`/api/v1/users/profiles/${id}`)
-          .set('x-access-token', uToken)
+          .set('x-access-token', validToken)
           .type('application/json')
           .send({
             email: user.email,
@@ -383,7 +383,7 @@ describe('User Controller Test', () => {
       const wrongId = id.slice(0, -1);
       chai.request(server)
         .put(`/api/v1/users/profiles/${wrongId}`)
-        .set('x-access-token', uToken)
+        .set('x-access-token', validToken)
         .type('application/json')
         .send({
           email: user.email,
@@ -397,7 +397,7 @@ describe('User Controller Test', () => {
     });
     it(`should return status code 401 when user try to update profile
     with invalid token`, (done) => {
-        const invalid = uToken.slice(0, -1);
+        const invalid = validToken.slice(0, -1);
         chai.request(server)
           .put(`/api/v1/users/profiles/${id}`)
           .set('x-access-token', invalid)

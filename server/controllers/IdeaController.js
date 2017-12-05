@@ -152,7 +152,11 @@ class IdeaController {
             error: 'Idea does not exist'
           });
         }
-      });
+      }).catch(error => res.status(401).send({
+        success: false,
+        message: 'Unathorized, invalid idea identity',
+        error: error.message
+      }));
   }
 
   /**
@@ -202,7 +206,8 @@ class IdeaController {
   static filterIdeas(req, res) {
     if (!req.body.filterTerm) {
       res.status(400).send({
-        message: 'please add filter term'
+        success: false,
+        error: 'Please add filter term'
       });
     }
     const offset = parseInt(req.query.offset, 10);
