@@ -205,18 +205,18 @@ class IdeaController {
         message: 'please add filter term'
       });
     }
-    const offset = Number(req.query.offset);
-    const limit = Number(req.query.limit);
+    const offset = parseInt(req.query.offset, 10);
+    const limit = parseInt(req.query.limit, 10);
     let count;
     Idea.count({
       $text: { $search: req.body.filterTerm.trim() },
-      category: req.body.category
+      category: capitalize(req.body.category)
     }, (err, isCount) => {
       count = isCount;
     });
     Idea.find({
       $text: { $search: req.body.filterTerm.trim() },
-      category: req.body.category
+      category: capitalize(req.body.category)
     })
       .skip(offset)
       .limit(limit)
