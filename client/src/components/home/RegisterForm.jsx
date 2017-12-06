@@ -2,14 +2,14 @@ import React from 'react';
 import AppActions from '../../actions/AppActions';
 import AppStore from '../../store/AppStore';
 import AppConstants from '../../contants/AppConstants';
-import catchError from '../catchError';
+import customAlert from '../customAlert';
 
 /**
  * @description - renders RegisterForm Component
  * @class RegisterForm
  * @extends {React.Component}
  */
-class RegisterForm extends React.Component {
+export default class RegisterForm extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -70,7 +70,7 @@ class RegisterForm extends React.Component {
    * @return {void}
    */
   handleResponse() {
-    const server = AppStore.registerUserPayload;
+    // console.log(AppStore.registerUserPayload());
   }
   /**
   * @method handleRegister
@@ -95,94 +95,105 @@ class RegisterForm extends React.Component {
         }
       });
   }
+
   /**
   * @description - render method, React lifecycle method
   * @returns {Object} RegisterForm component
   */
   render() {
     return (
-      <div className="container">
-        <h5
-          className="center-align"
-        >Register
-        </h5>
-        <form
-          className="col s12"
-          onSubmit={this.handleRegister}
-        >
-          <div className="row">
-            <div className="input-field col s12">
-              <input
-                value={this.state.username}
-                onChange={this.onChange}
-                name="username"
-                type="text"
-                id="username"
-                className="validate"
-                required
-              />
-              <label
-                htmlFor="username"
-              >Username
-              </label>
-            </div>
+      <div id="register" className="modal" >
+        <div className="modal-content">
+          <div className="container">
+            <h5
+              className="center-align header"
+            >Register
+            </h5>
+            <form
+              className="col s12"
+              onSubmit={this.handleRegister}
+            >
+              <div className="row">
+                <div>
+                  {this.state.show
+                    ? customAlert.errorMessage(this.state.signUpError)
+                    : (<span />)}
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input
+                    value={this.state.username}
+                    onChange={this.onChange}
+                    name="username"
+                    type="text"
+                    id="username"
+                    className="validate header"
+                    required
+                  />
+                  <label
+                    htmlFor="username"
+                  >Username
+                  </label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input
+                    value={this.state.email}
+                    onChange={this.onChange}
+                    name="email"
+                    id="email"
+                    type="email"
+                    className="validate header"
+                    required
+                  />
+                  <label
+                    htmlFor="email"
+                  >Email
+                  </label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input
+                    value={this.state.password}
+                    onChange={this.onChange}
+                    name="password"
+                    id="password"
+                    type="password"
+                    className="validate header"
+                    required
+                  />
+                  <label
+                    htmlFor="password"
+                  >Password
+                  </label>
+                </div>
+              </div>
+              <div className="row">
+                <button
+                  className="btn waves-effect deep-purple darken-4 col s12"
+                  type="submit"
+                >REGISTER
+                </button>
+                <br />
+                <br />
+                <p
+                  className="center-align header"
+                >Already have an account?{' '}
+                  <a
+                    id="btnTest"
+                    className="modal-trigger modal-close"
+                    href="#login"
+                  >LOG IN
+                  </a>
+                </p>
+              </div>
+            </form>
           </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <input
-                value={this.state.email}
-                onChange={this.onChange}
-                name="email"
-                id="email"
-                type="email"
-                className="validate"
-                required
-              />
-              <label
-                htmlFor="email"
-              >Email
-              </label>
-            </div>
-          </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <input
-                value={this.state.password}
-                onChange={this.onChange}
-                name="password"
-                id="password"
-                type="password"
-                className="validate"
-                required
-              />
-              <label
-                htmlFor="password"
-              >Password
-              </label>
-            </div>
-          </div>
-          <div className="row">
-            <div>
-              {this.state.show ?
-                catchError(this.state.signUpError) : (<span />)}
-            </div>
-          </div>
-          <div className="row">
-            <button
-              className="btn waves-effect deep-purple darken-4 col s12"
-              type="submit"
-            >REGISTER
-            </button>
-            <br />
-            <br />
-            <p
-              className="center-align"
-            >Already have an account? <a href="#!">LOG IN</a>
-            </p>
-          </div>
-        </form>
+        </div>
       </div>
     );
   }
 }
-export default RegisterForm;

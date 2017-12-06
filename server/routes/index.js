@@ -30,6 +30,15 @@ Router.post(
 );
 
 /**
+ * Route for users to request for password reset
+ */
+Router.post(
+  '/passwords',
+  validateRequest,
+  UserController.resetPassword
+);
+
+/**
  * Route for users to update profile
  */
 Router.put(
@@ -38,14 +47,6 @@ Router.put(
   UserController.updateProfile
 );
 
-/**
- * Route for users to request for password reset
- */
-Router.post(
-  '/passwords',
-  validateRequest,
-  UserController.resetPassword
-);
 
 /**
  * Route for users to update password
