@@ -5,28 +5,27 @@ import AppConstants from '../../contants/AppConstants';
 import customAlert from '../customAlert';
 
 /**
- * @description - renders RegisterForm Component
- * @class RegisterForm
+ * @description - renders LogInForm Component
+ * @class LogInForm
  * @extends {React.Component}
  */
-export default class RegisterForm extends React.Component {
+export default class LogInForm extends React.Component {
   /**
    * Create a constructor
    * @constructor
    * @param {object} props
-   * @memberof RegisterForm
+   * @memberof LogInForm
    */
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
       email: '',
       password: '',
-      signUpError: '',
+      logInError: '',
       show: false
     };
     this.onChange = this.onChange.bind(this);
-    this.handleRegister = this.handleRegister.bind(this);
+    this.handleLogIn = this.handleLogIn.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
   }
 
@@ -34,20 +33,20 @@ export default class RegisterForm extends React.Component {
   * @method componentDidMount
   * @description This listening to event in the AppStore
   * @return {void}
-  * @memberof RegisterForm
+  * @memberof LogInForm
   */
   componentDidMount() {
-    AppStore.on(AppConstants.SIGN_UP, this.handleResponse);
+    AppStore.on(AppConstants.LOG_IN, this.handleResponse);
   }
 
   /**
   * @method componentWillUnmount
   * @description Removes listener from AppStore
   * @return {void}
-  * @memberof RegisterForm
+  * @memberof LogInForm
   */
   componentWillUnmount() {
-    AppStore.removeListener(AppConstants.SIGN_UP, this.handleResponse);
+    AppStore.removeListener(AppConstants.LOG_IN, this.handleResponse);
   }
 
   /**
@@ -73,69 +72,49 @@ export default class RegisterForm extends React.Component {
     // console.log(AppStore.registerUserPayload());
   }
   /**
-  * @method handleRegister
+  * @method handleLogIn
   * @description class method that makes an action call to sign up a user
   * @return {void}
-  * @param {signUpEvent} signUpEvent
+  * @param {logInEvent} logInEvent
   */
-  handleRegister(signUpEvent) {
-    signUpEvent.preventDefault();
-    const userDetails = {
-      username: this.state.username,
+  handleLogIn(logInEvent) {
+    logInEvent.preventDefault();
+    const userDetail = {
       email: this.state.email,
       password: this.state.password
     };
-    AppActions.signUpUser(userDetails)
+    AppActions.logInUser(userDetail)
       .catch(({ response }) => {
         if (response) {
           this.setState({
-            signUpError: response.data.error,
+            logInError: response.data.error,
             show: true
           });
         }
       });
   }
-
   /**
   * @description - render method, React lifecycle method
-  * @returns {Object} RegisterForm component
+  * @returns {Object} LogInForm component
   */
   render() {
     return (
-      <div id="register" className="modal" >
+      <div id="login" className="modal">
         <div className="modal-content">
           <div className="container">
             <h5
               className="center-align header"
-            >Register
+            >Log in
             </h5>
             <form
               className="col s12"
-              onSubmit={this.handleRegister}
+              onSubmit={this.handleLogIn}
             >
               <div className="row">
-                <div>
-                  {this.state.show
-                    ? customAlert.errorMessage(this.state.signUpError)
-                    : (<span />)}
-                </div>
-              </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <input
-                    value={this.state.username}
-                    onChange={this.onChange}
-                    name="username"
-                    type="text"
-                    id="username"
-                    className="validate header"
-                    required
-                  />
-                  <label
-                    htmlFor="username"
-                  >Username
-                  </label>
-                </div>
+                {this.state.show
+                  ? customAlert.errorMessage(this.state.logInError)
+                  : (<span />)
+                }
               </div>
               <div className="row">
                 <div className="input-field col s12">
@@ -162,7 +141,7 @@ export default class RegisterForm extends React.Component {
                     name="password"
                     id="password"
                     type="password"
-                    className="validate header"
+                    className="validate"
                     required
                   />
                   <label
@@ -175,20 +154,21 @@ export default class RegisterForm extends React.Component {
                 <button
                   className="btn waves-effect deep-purple darken-4 col s12"
                   type="submit"
-                >REGISTER
+                >LOG IN
                 </button>
                 <br />
                 <br />
-                <p
-                  className="center-align header"
-                >Already have an account?{' '}
-                  <a
-                    id="btnTest"
-                    className="modal-trigger modal-close"
-                    href="#login"
-                  >LOG IN
-                  </a>
-                </p>
+                <br />
+                <a
+                  className="modal-trigger modal-close"
+                  href="#register"
+                >REGISTER
+                </a>
+                <a
+                  className="modal-trigger modal-close link"
+                  href="#forgotpassword"
+                >Forgot password?
+                </a>
               </div>
             </form>
           </div>

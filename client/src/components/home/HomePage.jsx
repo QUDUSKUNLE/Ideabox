@@ -1,9 +1,13 @@
 import React from 'react';
-import RegisterModal from './RegisterModal';
+import LogInForm from './LogInForm';
+import RegisterForm from './RegisterForm';
+import ForgotPasswordForm from './ForgotPasswordForm';
 
-const HomePage = () => (
+export default () => (
   <div>
-    <RegisterModal />
+    <RegisterForm />
+    <LogInForm />
+    <ForgotPasswordForm />
     <div className="container">
       <div className="logo">
         <h4>IdeaBox</h4>
@@ -14,13 +18,14 @@ const HomePage = () => (
           <div className="container">
             <button
               data-target="register"
-              className="btn modal-trigger waves-effect deep-purple darken-4 margin-top s6"
+              className="btn modal-trigger deep-purple darken-4 margin-top s6"
               type="submit"
               name="action"
             >Register
             </button>
             <button
-              className="btn modal-trigger waves-effect deep-purple darken-4 margin-top s6"
+              data-target="login"
+              className="btn modal-trigger deep-purple darken-4 margin-top s6"
               type="submit"
               name="action"
             >LOG IN
@@ -32,5 +37,3 @@ const HomePage = () => (
   </div>
 );
 
-
-export default HomePage;

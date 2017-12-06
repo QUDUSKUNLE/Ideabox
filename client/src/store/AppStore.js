@@ -13,17 +13,19 @@ class AppStore extends EventEmitter {
   constructor() {
     super();
     this.registerUserPayload = {};
+    this.resetPasswordPayload = {};
     this.currentUser = false;
 
     this.setCurrentUser = this.setCurrentUser.bind(this);
     this.registeredUser = this.handleActions.bind(this);
+    this.resetPassword = this.resetPassword.bind(this);
     this.handleActions = this.handleActions.bind(this);
   }
 
   /**
   * @description describes a function that setCurrentUser to true or false
   * @method setCurrentUser
-  * @returns { bool} returns currentUser state { true or false }
+  * @returns {bool} returns currentUser state { true or false }
   */
   setCurrentUser() {
     return this.currentUser;
@@ -32,10 +34,19 @@ class AppStore extends EventEmitter {
   /**
   * @description describes a function that returns registerUserPayload
   * @method registerUser
-  * @returns { Object } returns registerUser payload
+  * @return {Object} returns registerUser payload
   */
   registeredUser() {
     return this.registerUserPayload;
+  }
+
+  /**
+  * @description describes a function that returns resetPasswordPayload
+  * @method resetPassword
+  * @return {Object} returns resetPassword payload
+  */
+  resetPassword() {
+    return this.resetPasswordPayload;
   }
 
 
@@ -43,7 +54,7 @@ class AppStore extends EventEmitter {
    * Receives actions and update the stores accordingly
    * @method handleActions
    * @param {object} action - Action payload
-   * @return {*} -
+   * @return {void}
    */
   handleActions(action) {
     switch (action.type) {
@@ -51,6 +62,15 @@ class AppStore extends EventEmitter {
         this.registerUserPayload = action.response.data;
         this.currentUser = true;
         this.emit(AppConstants.SIGN_UP);
+        break;
+      case AppConstants.LOG_IN:
+        this.registerUserPayload = action.response.data;
+        this.currentUser = true;
+        this.emit(AppConstants.LOG_IN);
+        break;
+      case AppConstants.RESET_PASSWORD:
+        this.resetPasswordPayload = action.response.data;
+        this.emit(AppConstants.RESET_PASSWORD);
         break;
 
       default:
