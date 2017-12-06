@@ -4,6 +4,7 @@
     "description": "Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration.",
     "main": "index.js",
     "scripts": {
+        "heroku-prebuild": "npm install --only=dev",
         "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha server/test --timeout 40000 --exit --compilers js:babel-register && npm run coverage-report",
         "start:dev": "nodemon --exec babel-node ./server/server.js",
         "start": "NODE_ENV=production nodemon --exec babel-node ./server/server.js",
