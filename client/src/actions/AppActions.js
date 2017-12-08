@@ -14,9 +14,10 @@ export default {
   signUpUser(userDetail) {
     return axios.post('/api/v1/users/signup', userDetail)
       .then((response) => {
+        localStorage.setItem('token', JSON.stringify((response.data.token)));
+        setToken((JSON.parse(localStorage.getItem('token'))));
+        localStorage.setItem('isAuthenticated', JSON.stringify(true));
         AppDispatcher.dispatch({ type: AppConstants.SIGN_UP, response });
-        localStorage.setItem('token', JSON.stringify(response.data.token));
-        setToken(JSON.parse(localStorage.getItem('token')));
       });
   },
 
@@ -30,9 +31,10 @@ export default {
   logInUser(userDetail) {
     return axios.post('/api/v1/users/signin', userDetail)
       .then((response) => {
+        localStorage.setItem('token', JSON.stringify((response.data.token)));
+        setToken((JSON.parse(localStorage.getItem('token'))));
+        localStorage.setItem('isAuthenticated', JSON.stringify(true));
         AppDispatcher.dispatch({ type: AppConstants.LOG_IN, response });
-        localStorage.setItem('token', JSON.stringify(response.data.token));
-        setToken(JSON.parse(localStorage.getItem('token')));
       });
   },
 
