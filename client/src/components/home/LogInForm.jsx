@@ -68,7 +68,7 @@ export default class LogInForm extends React.Component {
    * @return {void}
    */
   handleResponse() {
-    Materialize.toast('Sign in successful', 2000, 'rounded');
+    Materialize.toast('Sign in successful', 2000, 'rounded green');
     $('#login').modal('close');
     this.props.history.push('/dashboard');
   }

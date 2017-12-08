@@ -12,23 +12,24 @@ class AppStore extends EventEmitter {
    */
   constructor() {
     super();
+    this.currentUser = false;
+    this.createIdeaPayload = {};
     this.registerUserPayload = {};
     this.resetPasswordPayload = {};
-    this.currentUser = false;
 
-    this.setCurrentUser = this.setCurrentUser.bind(this);
-    this.registeredUser = this.registeredUser.bind(this);
-    this.resetPassword = this.resetPassword.bind(this);
     this.handleActions = this.handleActions.bind(this);
+    this.registerUser = this.registerUser.bind(this);
+    this.resetPassword = this.resetPassword.bind(this);
+    this.setCurrentUser = this.setCurrentUser.bind(this);
   }
 
   /**
-  * @description describes a function that setCurrentUser to true or false
-  * @method setCurrentUser
-  * @returns {bool} returns currentUser state { true or false }
+  * @description describes a function that returns createIdeaPayload
+  * @method createIdea
+  * @return {Object} returns createIdea payload
   */
-  setCurrentUser() {
-    return this.currentUser;
+  createIdea() {
+    return this.createIdeaPayload;
   }
 
   /**
@@ -36,7 +37,7 @@ class AppStore extends EventEmitter {
   * @method registerUser
   * @return {Object} returns registerUser payload
   */
-  registeredUser() {
+  registerUser() {
     return this.registerUserPayload;
   }
 
@@ -49,6 +50,14 @@ class AppStore extends EventEmitter {
     return this.resetPasswordPayload;
   }
 
+  /**
+  * @description describes a function that setCurrentUser to true or false
+  * @method setCurrentUser
+  * @returns {bool} returns currentUser state { true or false }
+  */
+  setCurrentUser() {
+    return this.currentUser;
+  }
 
   /**
    * Receives actions and update the stores accordingly
@@ -63,14 +72,21 @@ class AppStore extends EventEmitter {
         this.currentUser = true;
         this.emit(AppConstants.SIGN_UP);
         break;
+
       case AppConstants.LOG_IN:
         this.registerUserPayload = action.response.data;
         this.currentUser = true;
         this.emit(AppConstants.LOG_IN);
         break;
+
       case AppConstants.RESET_PASSWORD:
         this.resetPasswordPayload = action.response.data;
         this.emit(AppConstants.RESET_PASSWORD);
+        break;
+
+      case AppConstants.CREATE_IDEA:
+        this.createIdeaPayload = action.response.data;
+        this.emit(AppConstants.CREATE_IDEA);
         break;
 
       default:
