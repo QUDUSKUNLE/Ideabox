@@ -49,6 +49,10 @@ const config = {
           'url-loader?limit=10000',
           'img-loader'
         ]
+      },
+      {
+        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loaders: 'file-loader?name=fonts/[name].[ext]'
       }
     ]
   },
