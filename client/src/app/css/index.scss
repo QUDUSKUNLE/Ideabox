@@ -1,12 +1,12 @@
-// @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 html,
 body {
     height: 100%;
     margin: 0px;
     padding: 0px;
     border: 0px;
-    overflow: hidden;
-    background-color: #000;
+    // overflow: hidden;
+    background-color: #2196F3;
     color: #FAFAFA
 }
 
@@ -51,4 +51,30 @@ body {
 
 .link {
     float: right;
+}
+
+header,
+main,
+footer {
+    padding-left: 300px;
+}
+
+@media only screen and (max-width: 992px) {
+    header,
+    main,
+    footer {
+        padding-left: 0;
+    }
+}
+
+.idea {
+    margin: 0 10px;
+}
+
+.status {
+    padding-left: 20px;
+}
+
+.icon_menu {
+    padding: 40px 0 0 20px;
 }

@@ -1,8 +1,11 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import AppActions from '../../actions/AppActions';
 import AppStore from '../../store/AppStore';
 import AppConstants from '../../contants/AppConstants';
 import customAlert from '../customAlert';
+
 
 /**
  * @description - renders LogInForm Component
@@ -56,12 +59,8 @@ export default class LogInForm extends React.Component {
   * @param {event} event
   */
   onChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-    this.setState({
-      show: false
-    });
+    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ show: false });
   }
   /**
    * @method handleResponse
@@ -69,7 +68,9 @@ export default class LogInForm extends React.Component {
    * @return {void}
    */
   handleResponse() {
-    // console.log(AppStore.registerUserPayload());
+    Materialize.toast('Sign in successful', 2000, 'rounded');
+    $('#login').modal('close');
+    this.props.history.push('/dashboard');
   }
   /**
   * @method handleLogIn
@@ -98,6 +99,12 @@ export default class LogInForm extends React.Component {
   * @returns {Object} LogInForm component
   */
   render() {
+    const isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated'));
+    if (isAuthenticated) {
+      return (
+        <Redirect to="/dashboard" />
+      );
+    }
     return (
       <div id="login" className="modal">
         <div className="modal-content">
@@ -177,3 +184,6 @@ export default class LogInForm extends React.Component {
     );
   }
 }
+LogInForm.propTypes = {
+  history: PropTypes.object.isRequired
+};
