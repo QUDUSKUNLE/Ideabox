@@ -17,7 +17,7 @@ class AppStore extends EventEmitter {
     this.currentUser = false;
 
     this.setCurrentUser = this.setCurrentUser.bind(this);
-    this.registeredUser = this.handleActions.bind(this);
+    this.registeredUser = this.registeredUser.bind(this);
     this.resetPassword = this.resetPassword.bind(this);
     this.handleActions = this.handleActions.bind(this);
   }

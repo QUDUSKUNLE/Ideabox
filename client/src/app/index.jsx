@@ -1,12 +1,16 @@
 import React from 'react';
-import $ from 'jquery';
 import ReactDOM from 'react-dom';
-import HomePage from '../components/home/HomePage';
+// import 'materialize-css';
+import setToken from '../helper/setToken';
+import Routes from '../components/routes/Routes';
 import './css/index.scss';
 
-window.jQuery = $;
-window.$ = $;
+/**
+ * Contains Routes to all my components
+ */
 
+if (localStorage.token) {
+  setToken(JSON.parse(localStorage.getItem('token')));
+}
 
-ReactDOM.render(<HomePage />, document.getElementById('app'));
-
+ReactDOM.render(<Routes />, document.getElementById('app'));

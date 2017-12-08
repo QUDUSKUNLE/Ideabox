@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AppActions from '../../actions/AppActions';
 import AppStore from '../../store/AppStore';
 import AppConstants from '../../contants/AppConstants';
@@ -70,7 +71,9 @@ export default class RegisterForm extends React.Component {
    * @return {void}
    */
   handleResponse() {
-    // console.log(AppStore.registerUserPayload());
+    Materialize.toast('Sign up successful', 2000, 'rounded');
+    $('#register').modal('close');
+    this.props.history.push('/dashboard');
   }
   /**
   * @method handleRegister
@@ -197,3 +200,7 @@ export default class RegisterForm extends React.Component {
     );
   }
 }
+
+RegisterForm.propTypes = {
+  history: PropTypes.object.isRequired
+};
