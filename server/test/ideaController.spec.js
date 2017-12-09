@@ -7,7 +7,7 @@ import userData from '../__mockData__/userData';
 
 chai.should();
 chai.use(chaiHttp);
-
+const { expect } = chai;
 // Test for IdeaController
 describe('Idea Controller Test:', () => {
   const { user } = userData;
@@ -247,7 +247,103 @@ describe('Idea Controller Test:', () => {
           done();
         });
     });
-    it('should return 202 when idea is deleted an idea', (done) => {
+  });
+
+  describe('Public idea route', () => {
+    let validToken = '';
+    before((done) => {
+      chai.request(server)
+        .post('/api/v1/users/signin')
+        .send(user.signIn)
+        .end((err, res) => {
+          if (err) return done(err);
+          validToken = res.body.token;
+          done();
+        });
+    });
+    it('should return 200 when fetch all public ideas', (done) => {
+      chai.request(server)
+        .get('/api/v1/users/ideas/public')
+        .set('x-access-token', validToken)
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          res.should.have.status(200);
+          assert.equal(res.body.success, true);
+          done();
+        });
+    });
+  });
+  describe('User ideas route', () => {
+    let validToken = '';
+    let ideaId = '';
+    before((done) => {
+      chai.request(server)
+        .post('/api/v1/users/signin')
+        .send(user.signIn)
+        .end((err, res) => {
+          if (err) return done(err);
+          validToken = res.body.token;
+          done();
+        });
+    });
+    before((done) => {
+      chai.request(server)
+        .post('/api/v1/users/ideas')
+        .set('x-access-token', validToken)
+        .set('Content-Type', 'application/json')
+        .send(user.Idea1)
+        .end((err, res) => {
+          if (err) return done(err);
+          ideaId = res.body.createdIdea._id;
+          done();
+        });
+    });
+
+    it(`should return 200 when user/ideas is call and return
+     all ideas by the user`, (done) => {
+        chai.request(server)
+          .get('/api/v1/users/ideas/user/ideas')
+          .set('x-access-token', validToken)
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            res.should.have.status(200);
+            assert.equal(res.body.success, true);
+            done();
+          });
+      });
+    it(
+      'should return 200 when an idea is fetched succesffuly and the idea id',
+      (done) => {
+        chai.request(server)
+          .get(`/api/v1/users/ideas/${ideaId}`)
+          .set('x-access-token', validToken)
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            res.should.have.status(200);
+            assert.equal(res.body.success, true);
+            expect(res.body.idea._id).to.eql(ideaId);
+            done();
+          });
+      }
+    );
+    it(
+      'should return 401 when an idea to be fetched is invalid',
+      (done) => {
+        const invalidIdeaId = ideaId.slice(0, -1);
+        chai.request(server)
+          .get(`/api/v1/users/ideas/${invalidIdeaId}`)
+          .set('x-access-token', validToken)
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            res.should.have.status(401);
+            assert.equal(res.body.success, false);
+            expect(res.body.message)
+              .to.eql('Unathorized, invalid idea identity');
+            done();
+          });
+      }
+    );
+    it('should return 202 when an idea is deleted successfully', (done) => {
       chai.request(server)
         .delete(`/api/v1/users/ideas/${ideaId}`)
         .set('x-access-token', validToken)

@@ -59,9 +59,7 @@ export default class RegisterForm extends React.Component {
   */
   onChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
-    });
-    this.setState({
+      [event.target.name]: event.target.value,
       show: false
     });
   }
@@ -71,8 +69,7 @@ export default class RegisterForm extends React.Component {
    * @return {void}
    */
   handleResponse() {
-    Materialize.toast('Sign up successful', 2000, 'rounded');
-    $('#register').modal('close');
+    Materialize.toast('Sign up successful', 2000, 'rounded green');
     this.props.history.push('/dashboard');
   }
   /**
@@ -123,56 +120,50 @@ export default class RegisterForm extends React.Component {
                     : (<span />)}
                 </div>
               </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <input
-                    value={this.state.username}
-                    onChange={this.onChange}
-                    name="username"
-                    type="text"
-                    id="username"
-                    className="validate header"
-                    required
-                  />
-                  <label
-                    htmlFor="username"
-                  >Username
-                  </label>
-                </div>
+              <div className="input-field col s12">
+                <input
+                  value={this.state.username}
+                  onChange={this.onChange}
+                  name="username"
+                  type="text"
+                  id="username"
+                  className="validate header"
+                  required
+                />
+                <label
+                  htmlFor="username"
+                >Username
+                </label>
               </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <input
-                    value={this.state.email}
-                    onChange={this.onChange}
-                    name="email"
-                    id="email"
-                    type="email"
-                    className="validate header"
-                    required
-                  />
-                  <label
-                    htmlFor="email"
-                  >Email
-                  </label>
-                </div>
+              <div className="input-field col s12">
+                <input
+                  value={this.state.email}
+                  onChange={this.onChange}
+                  name="email"
+                  id="email"
+                  type="email"
+                  className="validate header"
+                  required
+                />
+                <label
+                  htmlFor="email"
+                >Email
+                </label>
               </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <input
-                    value={this.state.password}
-                    onChange={this.onChange}
-                    name="password"
-                    id="password"
-                    type="password"
-                    className="validate header"
-                    required
-                  />
-                  <label
-                    htmlFor="password"
-                  >Password
-                  </label>
-                </div>
+              <div className="input-field col s12">
+                <input
+                  value={this.state.password}
+                  onChange={this.onChange}
+                  name="password"
+                  id="password"
+                  type="password"
+                  className="validate header"
+                  required
+                />
+                <label
+                  htmlFor="password"
+                >Password
+                </label>
               </div>
               <div className="row">
                 <button
@@ -186,7 +177,6 @@ export default class RegisterForm extends React.Component {
                   className="center-align header"
                 >Already have an account?{' '}
                   <a
-                    id="btnTest"
                     className="modal-trigger modal-close"
                     href="#login"
                   >LOG IN

@@ -99,7 +99,7 @@ export default class ForgotPasswordForm extends React.Component {
   */
   render() {
     return (
-      <div id="forgotpassword" className="modal" >
+      <div id="forgotpassword" className="modal">
         <div className="modal-content">
           <div className="container">
             <h5
@@ -125,22 +125,20 @@ export default class ForgotPasswordForm extends React.Component {
                   : (<span />)
                 }
               </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <input
-                    value={this.state.email}
-                    onChange={this.onChange}
-                    name="email"
-                    id="email"
-                    type="email"
-                    className="validate header"
-                    required
-                  />
-                  <label
-                    htmlFor="email"
-                  >Email
-                  </label>
-                </div>
+              <div className="input-field col s12">
+                <input
+                  value={this.state.email}
+                  onChange={this.onChange}
+                  name="email"
+                  id="email"
+                  type="email"
+                  className="validate header"
+                  required
+                />
+                <label
+                  htmlFor="email"
+                >Email
+                </label>
               </div>
               <div className="row">
                 <button

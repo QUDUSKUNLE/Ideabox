@@ -39,16 +39,6 @@ Router.post(
 );
 
 /**
- * Route for users to update profile
- */
-Router.put(
-  '/profiles/:userId',
-  verifyToken,
-  UserController.updateProfile
-);
-
-
-/**
  * Route for users to update password
  */
 Router.put(
@@ -58,7 +48,16 @@ Router.put(
 );
 
 /**
- * Route to create ideas
+ * Route for users to update profile
+ */
+Router.put(
+  '/profiles/:userId',
+  verifyToken,
+  UserController.updateProfile
+);
+
+/**
+ * Create ideas endpoint
  */
 Router.post(
   '/ideas',
@@ -68,7 +67,8 @@ Router.post(
 );
 
 /**
- * Route to Edit ideas
+ * Edit idea endpoint
+ * Edit idead by its id
  */
 Router.put(
   '/ideas/:ideaId',
@@ -79,11 +79,21 @@ Router.put(
 
 /**
  * Route to Delete ideas
+ * Delete idea by id
  */
 Router.delete(
   '/ideas/:ideaId',
   verifyToken,
   IdeaController.deleteIdea
+);
+
+/**
+ * Fetch all public ideas endpoint
+ */
+Router.get(
+  '/ideas/public',
+  verifyToken,
+  IdeaController.publicIdea
 );
 
 /**
@@ -94,6 +104,27 @@ Router.get(
   '/ideas',
   verifyToken,
   IdeaController.searchIdea
+);
+
+/**
+ * Fetch an idea endpoint
+ * Fetch Idea by Id
+ */
+Router.get(
+  '/ideas/:ideaId',
+  verifyToken,
+  IdeaController.fetchIdea
+);
+
+
+/**
+ * Fetch user`s Ideas endpoint
+ * Fetch by user Id
+ */
+Router.get(
+  '/ideas/user/ideas',
+  verifyToken,
+  IdeaController.userIdeas
 );
 
 /**

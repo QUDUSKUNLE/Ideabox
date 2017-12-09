@@ -21,7 +21,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
-app.use('/api/v1/users/', Router);
+app.use('/api/v1/users', Router);
 
 if (process.env.NODE_ENV !== 'production') {
   if (process.env.NODE_ENV === 'test') {

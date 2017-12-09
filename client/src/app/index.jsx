@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import 'materialize-css';
 import setToken from '../helper/setToken';
 import Routes from '../components/routes/Routes';
 import './css/index.scss';

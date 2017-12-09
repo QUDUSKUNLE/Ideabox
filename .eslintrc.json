@@ -8,8 +8,13 @@
         "browser": true
     },
     "globals": {
+        "window": true,
+        "document": true,
+        "this": true,
+        "$": true,
+        "localStorage": true,
         "Materialize": true,
-        "$": true
+        "should": true
     },
     "rules": {
         "one-var-declaration-per-line": 0,

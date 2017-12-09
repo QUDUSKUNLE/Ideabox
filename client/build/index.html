@@ -11,10 +11,9 @@
 
 <body>
     <div id="app"></div>
-    <script src="/bundle.js"></script>
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
     <script>
         $(document).ready(function() {
             $('.modal').modal();
@@ -23,12 +22,13 @@
         });
         $('.button-collapse').sideNav({
             menuWidth: 300, // Default is 300
-            closeOnClick: true,
+            closeOnClick: false,
             draggable: true
         });
+        $('.collapsible').collapsible();
         $(".button-collapse").sideNav();
     </script>
-
+    <script src="/bundle.js"></script>
 </body>
 
 </html>
