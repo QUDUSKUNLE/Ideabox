@@ -66,5 +66,17 @@ export default {
       .then((response) => {
         AppDispatcher.dispatch({ type: AppConstants.CREATE_IDEA, response });
       });
+  },
+
+  /**
+  * @function getPublicIdeas
+  * @description async action that handles all public ideas
+  * @return {promise} returns server response
+  */
+  getPublicIdeas() {
+    return axios.get('/api/v1/users/ideas/public')
+      .then((response) => {
+        AppDispatcher.dispatch({ type: AppConstants.PUBLIC_IDEAS, response });
+      });
   }
 };

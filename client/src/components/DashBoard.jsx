@@ -1,15 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CreateIdeaModal from './idea/CreatIdeaModal';
 import Idea from './idea/Idea';
 import Pagination from './container/Pagination';
 import SideNav from './container/SideNav';
+import AppActions from '../actions/AppActions';
+import AppConstants from '../contants/AppConstants';
+import AppStore from '../store/AppStore';
+
 
 /**
  * @description the Dashboard component
  * @function Dashboard
  * @returns {object} DashBoard component
  */
-export default class Dashboard extends React.Component {
+export default class DashBoard extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -18,21 +23,54 @@ export default class Dashboard extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = { createIdea: false };
-    this.handleCreateIdea = this.handleCreateIdea.bind(this);
+    this.state = {
+      publicIdeas: []
+    };
+    // this.handleCreateIdea = this.handleCreateIdea.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
+    this.handlePublicIdeas = this.handlePublicIdeas.bind(this);
   }
 
   /**
-  * @method handleCreateIdea
-  * @description class method that listen to
-  * OnClick of createIdea in the SideNav component
+  * @method componentDidMount
+  * @description This listening to event in the AppStore
   * @return {void}
-  * @param {event} event
+  * @memberof DashBoard
   */
-  handleCreateIdea() {
+  componentDidMount() {
+    AppActions.getPublicIdeas();
+    AppStore.on(AppConstants.PUBLIC_IDEAS, this.handlePublicIdeas);
+  }
+
+  /**
+  * @method componentWillUnmount
+  * @description Removes listener from AppStore
+  * @return {void}
+  * @memberof DashBoard
+  */
+  componentWillUnmount() {
+    AppStore.removeListener(AppConstants.PUBLIC_IDEAS, this.handlePublicIdeas);
+  }
+
+  /**
+   * @method handleResponse
+   * @description class method that handles register Response
+   * @return {void}
+   */
+  handlePublicIdeas() {
     this.setState({
-      createIdea: !this.state.createIdea
+      publicIdeas: AppStore.publicIdea()
     });
+  }
+
+  /**
+   * @method handleResponse
+   * @description class method that handles register Response
+   * @return {void}
+   */
+  handleLogOut() {
+    localStorage.clear();
+    this.props.history.push('/');
   }
 
   /**
@@ -42,14 +80,12 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        { /* SideNav */}
-        <SideNav />
+        <SideNav logOut={this.handleLogOut} />
         <main>
           <CreateIdeaModal />
           <div>
-            { /* Idea */}
-            <Idea />
-            {/* Pagiantion */}
+            <Idea publicIdea={this.state.publicIdeas} />
+
             <Pagination />
           </div>
         </main>
@@ -57,3 +93,6 @@ export default class Dashboard extends React.Component {
     );
   }
 }
+DashBoard.propTypes = {
+  history: PropTypes.object.isRequired
+};
