@@ -7,7 +7,7 @@ import pagination from '../helpers/pagination';
  */
 class IdeaController {
   /**
-   * Routes: POST: /api/v1/users/ideas/:id
+   * Routes: POST: /api/v1/users/ideas
    * @param {any} req user request object
    * @param {any} res server response
    * @return {void}
@@ -160,7 +160,103 @@ class IdeaController {
   }
 
   /**
-   * Routes: GET: /api/v1/users/ideas
+   * Routes: GET: /api/v1/users/ideas/public
+   * @description This fetch all public ideas
+   * @param {any} req user request object
+   * @param {any} res server response
+   * @return {void}
+   * @memberOf IdeaController
+   */
+  static publicIdea(req, res) {
+    Idea.find({})
+      .where({ access: { $eq: 'Public' } })
+      .exec((err, searchResponse) => {
+        if (err) {
+          return res.status(500).send({
+            success: false,
+            error: 'Internal server error',
+          });
+        }
+        // return all Public ideas respoonse
+        return res.status(200).send({
+          success: true,
+          searchResponse
+        });
+      });
+  }
+
+  /**
+   * Routes: GET: /api/v1/users/ideas/user/ideas
+   * @description This fetch all ideas created by a user
+   * @param {any} req user request object
+   * @param {any} res server response
+   * @return {void}
+   * @memberOf IdeaController
+   */
+  static userIdeas(req, res) {
+    Idea.find({})
+      .where({
+        'author.name': req.decoded.token.user.username,
+        'author.id': req.decoded.token.user._id
+      })
+      .exec((err, searchResponse) => {
+        if (err) {
+          return res.status(500).send({
+            success: false,
+            error: 'Internal server error',
+          });
+        }
+        // return new search response
+        return res.status(200).send({
+          success: true,
+          searchResponse
+        });
+      });
+  }
+
+
+  /**
+   * Routes: GET: /api/v1/users/ideas/:ideaId
+   * @description This fetch idea by IdeaId
+   * @param {any} req user request object
+   * @param {any} res server response
+   * @return {void}
+   * @memberOf IdeaController
+   */
+  static fetchIdea(req, res) {
+    if (!req.params.ideaId) {
+      return res.status(400).send({
+        success: false,
+        error: 'Search query must be defined'
+      });
+    }
+
+    // Get all Public
+    Idea.findById({ _id: req.params.ideaId })
+      .exec()
+      .then((idea) => {
+        if (idea) {
+          return res.status(200).send({
+            success: true,
+            idea
+          });
+        }
+        if (!idea) {
+          return res.status(404).send({
+            success: false,
+            error: 'Idea does not exist'
+          });
+        }
+      }).catch(error =>
+        res.status(401).send({
+          success: false,
+          message: 'Unathorized, invalid idea identity',
+          error: error.message
+        }));
+  }
+
+  /**
+   * Routes: GET: /api/v1/users/query?ideas
    * @description This search for ideas base on category
    * @param {any} req user request object
    * @param {any} res server response
