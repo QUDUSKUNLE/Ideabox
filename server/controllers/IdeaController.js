@@ -160,7 +160,7 @@ class IdeaController {
   }
 
   /**
-   * Routes: GET: /api/v1/users/ideas/public
+   * Routes: GET: /api/v1/users/ideas/public?offset=A?limit=B
    * @description This fetch all public ideas
    * @param {any} req user request object
    * @param {any} res server response
@@ -168,21 +168,23 @@ class IdeaController {
    * @memberOf IdeaController
    */
   static publicIdea(req, res) {
-    Idea.find({})
-      .where({ access: { $eq: 'Public' } })
-      .exec((err, searchResponse) => {
-        if (err) {
-          return res.status(500).send({
-            success: false,
-            error: 'Internal server error',
-          });
-        }
-        // return all Public ideas respoonse
-        return res.status(200).send({
-          success: true,
-          searchResponse
-        });
-      });
+    const offset = parseInt(req.query.offset, 10);
+    const limit = parseInt(req.query.limit, 10);
+    let count;
+    Idea.count({
+      access: { $eq: 'Public' }
+    }, (err, isCount) => {
+      count = isCount;
+      Idea.find({})
+        .where({ access: { $eq: 'Public' } })
+        .skip(offset)
+        .limit(limit)
+        .exec()
+        .then(ideas => res.status(200).send({
+          ideas,
+          pageInfo: pagination(count, limit, offset)
+        }));
+    });
   }
 
   /**
@@ -256,39 +258,40 @@ class IdeaController {
   }
 
   /**
-   * Routes: GET: /api/v1/users/query?ideas
+   * Routes: GET:
+   * /api/v1/users/ideas?category=category&offset=offset&limit=ideaLimit}
    * @description This search for ideas base on category
    * @param {any} req user request object
    * @param {any} res server response
    * @return {void}
    * @memberOf IdeaController
    */
-  static searchIdea(req, res) {
-    if (!req.query.category) {
+  static filterIdeas(req, res) {
+    if (!req.query.category || (req.query.category.trim() === '')) {
       return res.status(400).send({
         success: false,
-        error: 'Search query must not be empty'
+        error: 'Filter query must not be empty'
       });
     }
-
     // Filter by category
-    if (req.query.category) {
-      const { category } = req.query;
-      Idea.find({}).where({ category: { $eq: capitalize(category.trim()) } })
-        .exec((err, searchResponse) => {
-          if (err) {
-            return res.status(500).send({
-              success: false,
-              error: 'Internal server error',
-            });
-          }
-          // return new search response
-          return res.status(200).send({
-            success: true,
-            searchResponse
-          });
-        });
-    }
+    const { category } = req.query;
+    const offset = parseInt(req.query.offset, 10);
+    const limit = parseInt(req.query.limit, 10);
+    let count;
+    Idea.count({
+      category: { $eq: capitalize(category.trim()) }
+    }, (err, isCount) => {
+      count = isCount;
+      Idea.find({})
+        .where({ category: { $eq: capitalize(category.trim()) } })
+        .skip(offset)
+        .limit(limit)
+        .exec()
+        .then(ideas => res.status(200).send({
+          ideas,
+          pageInfo: pagination(count, limit, offset)
+        }));
+    });
   }
 
   /**
@@ -299,8 +302,8 @@ class IdeaController {
    * @return {void}
    * @memberOf IdeaController
    */
-  static filterIdeas(req, res) {
-    if (!req.body.filterTerm) {
+  static searchIdeas(req, res) {
+    if (!req.body.searchTerm) {
       res.status(400).send({
         success: false,
         error: 'Please add filter term'
@@ -310,22 +313,22 @@ class IdeaController {
     const limit = parseInt(req.query.limit, 10);
     let count;
     Idea.count({
-      $text: { $search: req.body.filterTerm.trim() },
-      category: capitalize(req.body.category)
+      $text: { $search: req.body.searchTerm.trim() },
+      description: capitalize(req.body.searchTerm.trim())
     }, (err, isCount) => {
       count = isCount;
+      Idea.find({
+        $text: { $search: req.body.searchTerm.trim() },
+        description: capitalize(req.body.searchTerm)
+      })
+        .skip(offset)
+        .limit(limit)
+        .exec()
+        .then(ideas => res.status(200).send({
+          ideas,
+          pageInfo: pagination(count, limit, offset),
+        }));
     });
-    Idea.find({
-      $text: { $search: req.body.filterTerm.trim() },
-      category: capitalize(req.body.category)
-    })
-      .skip(offset)
-      .limit(limit)
-      .exec()
-      .then(ideas => res.status(200).send({
-        ideas,
-        pageInfo: pagination(count, limit, offset),
-      }));
   }
 }
 
