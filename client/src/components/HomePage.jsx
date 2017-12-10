@@ -18,21 +18,29 @@ export default class HomePage extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-    };
-    // this.openRegister = this.openRegister.bind(this);
+    this.state = {};
+    this.openRegister = this.openRegister.bind(this);
+  }
+  /**
+  * @method componentDidMount
+  * @description This listening to event in the AppStore
+  * @return {void}
+  * @memberof LogInForm
+  */
+  componentDidMount() {
+    $('.modal').modal();
   }
 
-  // /**
-  // * @method openRegister
-  // * @description class method that makes an action call to sign up a user
-  // * @return {void}
-  // * @param {event} event
-  // */
-  // openRegister(event) {
-  //   event.preventDefault();
-  //   $('#register').modal('open');
-  // }
+  /**
+  * @method openRegister
+  * @description class method that makes an action call to sign up a user
+  * @return {void}
+  * @param {event} event
+  */
+  openRegister(event) {
+    event.preventDefault();
+    $('#register').modal('open');
+  }
   /**
   * @description - render method, React lifecycle method
   * @returns {Object} LogInForm component
@@ -52,17 +60,11 @@ export default class HomePage extends React.Component {
               <h3>Let Your Ideas Rule The World</h3>
               <div className="container">
                 <a
-                  data-target="register"
-                  className="btn modal-trigger deep-purple darken-4 margin-top s6"
-                >Register
-                </a>
-                {/* <a
                   href="##"
                   onClick={this.openRegister}
-                  // data-target="register"
                   className="btn deep-purple darken-4 margin-top s6"
                 >Register
-                </a> */}
+                </a>
                 <button
                   data-target="login"
                   className="btn modal-trigger deep-purple darken-4 margin-top s6"
