@@ -12,12 +12,14 @@ class AppStore extends EventEmitter {
    */
   constructor() {
     super();
+    this.categoryIdeaPayload = {};
     this.currentUser = false;
     this.createIdeaPayload = {};
-    this.publicIdeaPayload = [];
+    this.publicIdeaPayload = {};
     this.registerUserPayload = {};
     this.resetPasswordPayload = {};
 
+    this.categoryIdea = this.categoryIdea.bind(this);
     this.handleActions = this.handleActions.bind(this);
     this.publicIdea = this.publicIdea.bind(this);
     this.registerUser = this.registerUser.bind(this);
@@ -25,6 +27,14 @@ class AppStore extends EventEmitter {
     this.setCurrentUser = this.setCurrentUser.bind(this);
   }
 
+  /**
+  * @description describes a function that returns categoryIdeaPayload
+  * @method category
+  * @return {Object} returns category payload
+  */
+  categoryIdea() {
+    return this.categoryIdeaPayload;
+  }
   /**
   * @description describes a function that returns createIdeaPayload
   * @method createIdea
@@ -100,10 +110,14 @@ class AppStore extends EventEmitter {
         break;
 
       case AppConstants.PUBLIC_IDEAS:
-        this.publicIdeaPayload = action.response.data.searchResponse;
+        this.publicIdeaPayload = action.response.data;
         this.emit(AppConstants.PUBLIC_IDEAS);
         break;
 
+      case AppConstants.CATEGORY:
+        this.categoryIdeaPayload = action.response.data;
+        this.emit(AppConstants.CATEGORY);
+        break;
       default:
     }
   }

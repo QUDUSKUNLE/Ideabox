@@ -17,6 +17,11 @@ export default {
       category: 'Agriculture',
       access: 'public'
     },
+    filterMockData: {
+      category: 'Agriculture',
+      offset: 0,
+      limit: 5
+    },
     newIdea1: {
       title: 'Agricultural Mechanization',
       description: 'In Nigeria',

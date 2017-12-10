@@ -12,4 +12,4 @@ if (localStorage.token) {
   setToken(JSON.parse(localStorage.getItem('token')));
 }
 
-ReactDOM.render(<Routes />, document.getElementById('app'));
+ReactDOM.render(<Routes />, document.getElementById('root'));

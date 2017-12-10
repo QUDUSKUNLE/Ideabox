@@ -97,17 +97,26 @@ Router.get(
 );
 
 /**
- * Route to Search for ideas by category &
- * Filter ideas
+ * Route to Filter ideas by category
  */
 Router.get(
   '/ideas',
   verifyToken,
-  IdeaController.searchIdea
+  IdeaController.filterIdeas
 );
 
 /**
- * Fetch an idea endpoint
+ * Route to search for ideas
+ */
+Router.post(
+  '/ideas/search',
+  verifyToken,
+  // validateRequest,
+  IdeaController.searchIdeas
+);
+
+/**
+ * Route to fetch an idea
  * Fetch Idea by Id
  */
 Router.get(
@@ -118,8 +127,9 @@ Router.get(
 
 
 /**
- * Fetch user`s Ideas endpoint
+ * Route to fetch user Ideas
  * Fetch by user Id
+ * user Id is gotten from verifyToken
  */
 Router.get(
   '/ideas/user/ideas',
@@ -135,16 +145,6 @@ Router.post(
   verifyToken,
   validateRequest,
   CommentController.writeComment
-);
-
-/**
- * Route to search for ideas
- */
-Router.post(
-  '/ideas/search',
-  verifyToken,
-  validateRequest,
-  IdeaController.filterIdeas
 );
 
 /**

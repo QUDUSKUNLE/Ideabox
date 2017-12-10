@@ -71,12 +71,36 @@ export default {
   /**
   * @function getPublicIdeas
   * @description async action that handles all public ideas
+  * @param {string} ideaLimit string containing ideaLimit
+  * @param {num} offset query offset
   * @return {promise} returns server response
   */
-  getPublicIdeas() {
-    return axios.get('/api/v1/users/ideas/public')
-      .then((response) => {
-        AppDispatcher.dispatch({ type: AppConstants.PUBLIC_IDEAS, response });
-      });
+  getPublicIdeas(ideaLimit, offset = 0) {
+    return (
+      axios
+        .get(`/api/v1/users/ideas/public?offset=${offset}&limit=${ideaLimit}`)
+        .then((response) => {
+          AppDispatcher.dispatch({ type: AppConstants.PUBLIC_IDEAS, response });
+        })
+    );
+  },
+
+  /**
+  * @function fetchByCategory
+  * @description async action that handles ideas by category
+  * @param {string} category string containing idea category
+  * @param {string} ideaLimit string containing ideaLimit
+  * @param {string} offset string containing offset
+  * @return {promise} returns server response
+  */
+  fetchByCategory(category, ideaLimit, offset = 0) {
+    return (
+      axios
+        .get(`/api/v1/users/ideas?category=${category}
+          &offset=${offset}&limit=${ideaLimit}`)
+        .then((response) => {
+          AppDispatcher.dispatch({ type: AppConstants.CATEGORY, response });
+        })
+    );
   }
 };

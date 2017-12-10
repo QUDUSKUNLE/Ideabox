@@ -1,6 +1,5 @@
 import React from 'react';
 import jwt from 'jsonwebtoken';
-import toastr from 'toastr';
 import PropTypes from 'prop-types';
 
 export default (Component) => {
@@ -39,7 +38,10 @@ export default (Component) => {
         if (this.isTokenExpired() === true) {
           this.setState({ expiredToken: true });
           this.props.history.push('/');
-          toastr.error('Your session has expired. Please, log in');
+          Materialize.toast(
+            'Your session has expired. Please, log in',
+            2000, 'rounded red'
+          );
           localStorage.clear();
         }
       }

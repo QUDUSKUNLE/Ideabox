@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-// require('webpack-jquery-ui');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
@@ -69,12 +69,7 @@ const config = {
     ]
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      Hammer: 'hammerjs/hammer'
-    }),
+    new CleanWebpackPlugin(['build']),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('bundle.css')

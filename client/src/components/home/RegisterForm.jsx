@@ -70,6 +70,7 @@ export default class RegisterForm extends React.Component {
    */
   handleResponse() {
     Materialize.toast('Sign up successful', 2000, 'rounded green');
+    $('#register').modal('close');
     this.props.history.push('/dashboard');
   }
   /**
