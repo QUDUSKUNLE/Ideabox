@@ -87,30 +87,30 @@ describe('Idea Controller Test:', () => {
           });
       });
   });
-  describe('Search idea route', () => {
-    let validToken = '';
-    before((done) => {
-      chai.request(server)
-        .post('/api/v1/users/signin')
-        .send(user.signIn)
-        .end((err, res) => {
-          if (err) return done(err);
-          validToken = res.body.token;
-          done();
-        });
-    });
-    it('should return 200 when search ideas by keywords', (done) => {
-      chai.request(server)
-        .get('/api/v1/users/ideas?category=AbdruShin')
-        .set('x-access-token', validToken)
-        .set('Content-Type', 'application/json')
-        .end((err, res) => {
-          res.should.have.status(200);
-          assert.equal(true, res.body.success);
-          done();
-        });
-    });
-  });
+  // describe('Search idea route', () => {
+  //   // let validToken = '';
+  //   before((done) => {
+  //     chai.request(server)
+  //       .post('/api/v1/users/signin')
+  //       .send(user.signIn)
+  //       .end((err, res) => {
+  //         if (err) return done(err);
+  //         validToken = res.body.token;
+  //         done();
+  //       });
+  //   });
+  //   // it('should return 200 when search ideas by keywords', (done) => {
+  //   //   chai.request(server)
+  //   //     .get('/api/v1/users/ideas?category=AbdruShin')
+  //   //     .set('x-access-token', validToken)
+  //   //     .set('Content-Type', 'application/json')
+  //   //     .end((err, res) => {
+  //   //       res.should.have.status(200);
+  //   //       assert.equal(true, res.body.success);
+  //   //       done();
+  //   //     });
+  //   // });
+  // });
 
   describe('Filter for idea route', () => {
     let validToken = '';
@@ -124,28 +124,18 @@ describe('Idea Controller Test:', () => {
           done();
         });
     });
-    it('should return 400 if filterTerm is undefined', (done) => {
+    it('should return 200 when filter query returns match idea', (done) => {
       chai.request(server)
-        .post('/api/v1/users/ideas/search?offset=0&limit=5')
+        .get(`/api/v1/users/ideas?category=
+        ${user.filterMockData.category}&offset=
+        ${user.filterMockData.offset}&limit=
+        ${user.filterMockData.limit}`)
         .set('x-access-token', validToken)
         .set('Content-Type', 'application/json')
         .send({ category: 'AbdruShin' })
         .end((err, res) => {
-          res.should.have.status(400);
-          assert.equal(res.body.success, false);
-          assert.equal(res.body.error, 'Please add filter term');
-          done();
-        });
-    });
-    it('should return 200 when filter ideas by category ', (done) => {
-      chai.request(server)
-        .post('/api/v1/users/ideas/search?offset=0&limit=5')
-        .set('x-access-token', validToken)
-        .set('Content-Type', 'application/json')
-        .send({ filterTerm: 'The Book of Grail', category: 'AbdruShin' })
-        .end((err, res) => {
           res.should.have.status(200);
-          res.body.should.have.property('ideas');
+          res.body.should.have.property('pageInfo');
           done();
         });
     });
@@ -263,12 +253,12 @@ describe('Idea Controller Test:', () => {
     });
     it('should return 200 when fetch all public ideas', (done) => {
       chai.request(server)
-        .get('/api/v1/users/ideas/public')
+        .get('/api/v1/users/ideas/public?offset=0&limit=5')
         .set('x-access-token', validToken)
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           res.should.have.status(200);
-          assert.equal(res.body.success, true);
+          res.body.should.have.property('pageInfo');
           done();
         });
     });

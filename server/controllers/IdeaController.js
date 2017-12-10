@@ -160,7 +160,7 @@ class IdeaController {
   }
 
   /**
-   * Routes: GET: /api/v1/users/ideas/public?offset=A?limit=B
+   * Routes: GET: /api/v1/users/ideas/public?offset=A&limit=B
    * @description This fetch all public ideas
    * @param {any} req user request object
    * @param {any} res server response

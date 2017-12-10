@@ -4,11 +4,10 @@ example.js
 .env
 coverage
 .nyc_output
-server/middlewares/validateBody.js
+server/middlewares/validatePath.js
 htm.html
 client/src/app/index.jsx
 client/src/components/container/**
 client/src/components/home/UpdatePassword.jsx
 client/src/components/home/UpdateProfileForm.jsx
-client/src/components/Idea/**
 client/src/components/UserIdeas.jsx
