@@ -132,9 +132,8 @@ export default class CreateIdea extends React.Component {
                 <select
                   className="browser-default black-text"
                   name="category"
-                  value={this.state.category}
                   onChange={this.handleChange}
-                  required
+                  value={this.state.category}
                 >
                   <option value="">Choose your category</option>
                   <option value="Agriculture">Agriculture</option>
