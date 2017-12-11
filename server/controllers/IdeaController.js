@@ -306,23 +306,23 @@ class IdeaController {
    * @memberOf IdeaController
    */
   static searchIdeas(req, res) {
-    // if (!req.body.searchTerm) {
-    //   res.status(400).send({
-    //     success: false,
-    //     error: 'Please add filter term'
-    //   });
-    // }
+    if (!req.query.search) {
+      res.status(400).send({
+        success: false,
+        error: 'Search keywords is not provided'
+      });
+    }
     const offset = parseInt(req.query.offset, 10);
     const limit = parseInt(req.query.limit, 10);
     let count;
     Idea.count({
       $text: { $search: req.query.search.trim() },
-      description: req.query.search.trim()
+      access: 'Public'
     }, (err, isCount) => {
       count = isCount;
       Idea.find({
         $text: { $search: req.query.search.trim() },
-        description: req.query.search.trim()
+        access: 'Public'
       })
         .skip(offset)
         .limit(limit)
