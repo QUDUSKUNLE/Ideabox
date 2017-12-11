@@ -188,7 +188,7 @@ class IdeaController {
   }
 
   /**
-   * Routes: GET: /api/v1/users/ideas/user/ideas
+   * Routes: GET: /api/v1/users/ideas/user?offset=A&limit=B
    * @description This fetch all ideas created by a user
    * @param {any} req user request object
    * @param {any} res server response
@@ -196,24 +196,27 @@ class IdeaController {
    * @memberOf IdeaController
    */
   static userIdeas(req, res) {
-    Idea.find({})
-      .where({
-        'author.name': req.decoded.token.user.username,
-        'author.id': req.decoded.token.user._id
-      })
-      .exec((err, searchResponse) => {
-        if (err) {
-          return res.status(500).send({
-            success: false,
-            error: 'Internal server error',
-          });
-        }
-        // return new search response
-        return res.status(200).send({
-          success: true,
-          searchResponse
-        });
-      });
+    const offset = parseInt(req.query.offset, 10);
+    const limit = parseInt(req.query.limit, 10);
+    let count;
+    Idea.count({
+      'author.name': { $eq: req.decoded.token.user.username },
+      'author.id': { $eq: req.decoded.token.user._id }
+    }, (err, isCount) => {
+      count = isCount;
+      Idea.find({})
+        .where({
+          'author.name': req.decoded.token.user.username,
+          'author.id': req.decoded.token.user._id
+        })
+        .skip(offset)
+        .limit(limit)
+        .exec()
+        .then(ideas => res.status(200).send({
+          ideas,
+          pageInfo: pagination(count, limit, offset)
+        }));
+    });
   }
 
 

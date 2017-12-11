@@ -1,87 +1,109 @@
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-html,
-body {
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
-    background-color: #141D26;
-    color: #FAFAFA
-}
-
-.btn {
-    margin: 0 1vh;
-}
-
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-}
-
-#login {
-    width: 60vh;
-}
-
-.margin-top {
-    margin-top: 1rem;
-    width: 125px;
-}
-
-#register {
-    width: 60vh;
-}
-
-.display {
-    min-height: 35px;
-    width: 100%;
-    color: white;
-    border-radius: 3px;
-    text-align: center;
-    padding-top: 7px;
-    font-size: 12px;
-    opacity: 0.9;
-}
-
-.header {
-    color: black
-}
-
-.link {
-    float: right;
-}
-
-header,
-main,
-footer {
-    padding-left: 300px;
-}
-
-@media only screen and (max-width: 992px) {
+    @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+    html,
+    body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        background-color: #141D26;
+        color: #FAFAFA
+    }
+    
+    .btn {
+        margin: 0 1vh;
+    }
+    
+    .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+    
+    #login {
+        width: 60vh;
+    }
+    
+    .margin-top {
+        margin-top: 1rem;
+        width: 125px;
+    }
+    
+    #register {
+        width: 60vh;
+    }
+    
+    .display {
+        min-height: 35px;
+        width: 100%;
+        color: white;
+        border-radius: 3px;
+        text-align: center;
+        padding-top: 7px;
+        font-size: 12px;
+        opacity: 0.9;
+    }
+    
+    .header {
+        color: black
+    }
+    
+    .link {
+        float: right;
+    }
+    
     header,
     main,
     footer {
-        padding-left: 0;
+        padding-left: 300px;
     }
-}
-
-.idea {
-    margin: 0 10px;
-}
-
-.status {
-    padding-left: 20px;
-}
-
-.icon_menu {
-    padding: 40px 0 0 20px;
-}
-
-.create_idea {
-    margin-top: 20px;
-}
-
-#slide-out {
-    background: #253546 !important
-}
+    
+    @media only screen and (max-width: 992px) {
+        header,
+        main,
+        footer {
+            padding-left: 0;
+        }
+    }
+    
+    .idea {
+        margin: 0 10px;
+    }
+    
+    .status {
+        padding-left: 20px;
+    }
+    
+    .icon_menu {
+        padding: 40px 0 0 20px;
+    }
+    
+    .create_idea {
+        margin-top: 20px;
+    }
+    
+    #slide-out {
+        background: #253546 !important
+    }
+    
+    .view {
+        margin-left: 100px
+    }
+    
+    .myidea {
+        height: 200px
+    }
+    
+    .delete_tag {
+        margin-left: 130px
+    }
+    
+    i.removable {
+        cursor: pointer;
+        float: right;
+        line-height: 32px;
+    }
+    
+    i.edit {
+        cursor: pointer;
+    }
