@@ -292,12 +292,12 @@ describe('Idea Controller Test:', () => {
     it(`should return 200 when user/ideas is call and return
      all ideas by the user`, (done) => {
         chai.request(server)
-          .get('/api/v1/users/ideas/user/ideas')
+          .get('/api/v1/users/ideas/user/ideas?offset=0&limit=6')
           .set('x-access-token', validToken)
           .set('Content-Type', 'application/json')
           .end((err, res) => {
             res.should.have.status(200);
-            assert.equal(res.body.success, true);
+            res.body.should.have.property('pageInfo');
             done();
           });
       });

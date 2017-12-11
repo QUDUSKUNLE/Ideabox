@@ -15,16 +15,22 @@ class AppStore extends EventEmitter {
     this.categoryIdeaPayload = {};
     this.currentUser = false;
     this.createIdeaPayload = {};
+    this.deletePayload = {};
+    this.myIdeaPayload = {};
     this.publicIdeaPayload = {};
     this.registerUserPayload = {};
     this.resetPasswordPayload = {};
+    this.updatePayload = {};
 
     this.categoryIdea = this.categoryIdea.bind(this);
+    this.deleteIdea = this.deleteIdea.bind(this);
     this.handleActions = this.handleActions.bind(this);
+    this.myIdea = this.myIdea.bind(this);
     this.publicIdea = this.publicIdea.bind(this);
     this.registerUser = this.registerUser.bind(this);
     this.resetPassword = this.resetPassword.bind(this);
     this.setCurrentUser = this.setCurrentUser.bind(this);
+    this.updateIdea = this.updateIdea.bind(this);
   }
 
   /**
@@ -35,6 +41,7 @@ class AppStore extends EventEmitter {
   categoryIdea() {
     return this.categoryIdeaPayload;
   }
+
   /**
   * @description describes a function that returns createIdeaPayload
   * @method createIdea
@@ -45,6 +52,24 @@ class AppStore extends EventEmitter {
   }
 
   /**
+  * @description describes a function that returns deletePayload
+  * @method createIdea
+  * @return {Object} returns deleted Idea payload
+  */
+  deleteIdea() {
+    return this.cdeletePayload;
+  }
+
+  /**
+  * @description describes a function that returns a user ideas
+  * @method myIdea
+  * @return {Object} returns myIdea payload
+  */
+  myIdea() {
+    return this.myIdeaPayload;
+  }
+
+  /**
   * @description describes a function that returns registerUserPayload
   * @method registerUser
   * @return {Object} returns registerUser payload
@@ -52,6 +77,7 @@ class AppStore extends EventEmitter {
   publicIdea() {
     return this.publicIdeaPayload;
   }
+
   /**
   * @description describes a function that returns registerUserPayload
   * @method registerUser
@@ -77,6 +103,15 @@ class AppStore extends EventEmitter {
   */
   setCurrentUser() {
     return this.currentUser;
+  }
+
+  /**
+  * @description describes a function that update idea
+  * @method setCurrentUser
+  * @returns {object} returns updated idea payLoad
+  */
+  updateIdea() {
+    return this.updatePayload;
   }
 
   /**
@@ -118,6 +153,22 @@ class AppStore extends EventEmitter {
         this.categoryIdeaPayload = action.response.data;
         this.emit(AppConstants.CATEGORY);
         break;
+
+      case AppConstants.MY_IDEAS:
+        this.myIdeaPayload = action.response.data;
+        this.emit(AppConstants.MY_IDEAS);
+        break;
+
+      case AppConstants.DELETE_IDEA:
+        this.deletePayload = action.response.data;
+        this.emit(AppConstants.DELETE_IDEA);
+        break;
+
+      case AppConstants.UPDATE_IDEA:
+        this.updatePayload = action.response.data;
+        this.emit(AppConstants.UPDATE_IDEA);
+        break;
+
       default:
     }
   }

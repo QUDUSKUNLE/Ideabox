@@ -38,7 +38,19 @@ const Idea = ({ publicIdea }) =>
                 </div>
                 <div className="card-action">
                   <span className="black-text">{idea.category[0]}</span>
-                  <i className="material-icons black-text right">
+                  <i
+                    href="#edit_idea"
+                    role="button"
+                    tabIndex="0"
+                    className="material-icons black-text delete_tag edit modal-trigger"
+                  >
+                  more
+                  </i>
+                  <i
+                    role="button"
+                    tabIndex="0"
+                    className="material-icons black-text removable"
+                  >
                     share
                   </i>
                 </div>

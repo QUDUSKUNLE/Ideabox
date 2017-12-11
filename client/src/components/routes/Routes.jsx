@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePage from '../HomePage';
 import DashBoard from '../DashBoard';
-import UserIdeas from '../UserIdeas';
+import MyIdeas from '../MyIdeas';
 import authenticateRoute from '../authentication/authenticateRoute';
 
 /**
@@ -16,7 +16,7 @@ export default () =>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/dashboard" component={authenticateRoute(DashBoard)} />
-        <Route path="/myideas" component={UserIdeas} />
+        <Route path="/myideas" component={authenticateRoute(MyIdeas)} />
       </Switch>
     </Router>
   );

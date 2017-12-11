@@ -11,3 +11,5 @@ client/src/components/container/**
 client/src/components/home/UpdatePassword.jsx
 client/src/components/home/UpdateProfileForm.jsx
 client/src/components/UserIdeas.jsx
+client/src/components/idea/EditIdea.jsx
+client/src/components/idea/EditIdeaModal.jsx
