@@ -303,23 +303,23 @@ class IdeaController {
    * @memberOf IdeaController
    */
   static searchIdeas(req, res) {
-    if (!req.body.searchTerm) {
-      res.status(400).send({
-        success: false,
-        error: 'Please add filter term'
-      });
-    }
+    // if (!req.body.searchTerm) {
+    //   res.status(400).send({
+    //     success: false,
+    //     error: 'Please add filter term'
+    //   });
+    // }
     const offset = parseInt(req.query.offset, 10);
     const limit = parseInt(req.query.limit, 10);
     let count;
     Idea.count({
-      $text: { $search: req.body.searchTerm.trim() },
-      description: capitalize(req.body.searchTerm.trim())
+      $text: { $search: req.query.search.trim() },
+      description: req.query.search.trim()
     }, (err, isCount) => {
       count = isCount;
       Idea.find({
-        $text: { $search: req.body.searchTerm.trim() },
-        description: capitalize(req.body.searchTerm)
+        $text: { $search: req.query.search.trim() },
+        description: req.query.search.trim()
       })
         .skip(offset)
         .limit(limit)
