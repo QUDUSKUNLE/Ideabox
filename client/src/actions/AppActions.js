@@ -96,10 +96,58 @@ export default {
   fetchByCategory(category, ideaLimit, offset = 0) {
     return (
       axios
-        .get(`/api/v1/users/ideas?category=${category}
-          &offset=${offset}&limit=${ideaLimit}`)
+        .get(`/api/v1/users/ideas?category=${category}&offset=${offset}&limit=${ideaLimit}`)
         .then((response) => {
           AppDispatcher.dispatch({ type: AppConstants.CATEGORY, response });
+        })
+    );
+  },
+
+  /**
+  * @function myIdeas
+  * @description async action that handles all ideas created by a user
+  * @param {string} ideaLimit string containing ideaLimit
+  * @param {string} offset string containing offset
+  * @return {promise} returns server response
+  */
+  myIdeas(ideaLimit, offset = 0) {
+    return (
+      axios
+        .get(`/api/v1/users/ideas/user/ideas?offset=${offset}&limit=${ideaLimit}`)
+        .then((response) => {
+          AppDispatcher.dispatch({ type: AppConstants.MY_IDEAS, response });
+        })
+    );
+  },
+
+  /**
+  * @function deleteIdea
+  * @description async action that handles delete of an idea
+  * @param {string} ideaId string containing ideaLimit
+  * @return {promise} returns server response
+  */
+  deleteIdea(ideaId) {
+    return (
+      axios
+        .delete(`/api/v1/users/ideas/${ideaId}`)
+        .then((response) => {
+          AppDispatcher.dispatch({ type: AppConstants.DELETE_IDEA, response });
+        })
+    );
+  },
+
+  /**
+  * @function updateIdea
+  * @description async action that handles idea update
+  * @param {object} ideaDetails object containing ideaDetails
+  * @return {promise} returns server response
+  */
+  updateIdea(ideaDetails) {
+    return (
+      axios
+        .put(`/api/v1/users/ideas/${ideaDetails.ideaId}`, ideaDetails)
+        .then((response) => {
+          AppDispatcher.dispatch({ type: AppConstants.UPDATE_IDEA, response });
         })
     );
   }

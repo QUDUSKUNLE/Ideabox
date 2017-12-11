@@ -30,7 +30,6 @@ export default class DashBoard extends React.Component {
       category: '',
       categoryIsClicked: false
     };
-    // this.handleCreateIdea = this.handleCreateIdea.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
     this.handlePublicIdeas = this.handlePublicIdeas.bind(this);
     this.handleCategoryResponse = this.handleCategoryResponse.bind(this);
