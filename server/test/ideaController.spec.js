@@ -87,30 +87,30 @@ describe('Idea Controller Test:', () => {
           });
       });
   });
-  // describe('Search idea route', () => {
-  //   // let validToken = '';
-  //   before((done) => {
-  //     chai.request(server)
-  //       .post('/api/v1/users/signin')
-  //       .send(user.signIn)
-  //       .end((err, res) => {
-  //         if (err) return done(err);
-  //         validToken = res.body.token;
-  //         done();
-  //       });
-  //   });
-  //   // it('should return 200 when search ideas by keywords', (done) => {
-  //   //   chai.request(server)
-  //   //     .get('/api/v1/users/ideas?category=AbdruShin')
-  //   //     .set('x-access-token', validToken)
-  //   //     .set('Content-Type', 'application/json')
-  //   //     .end((err, res) => {
-  //   //       res.should.have.status(200);
-  //   //       assert.equal(true, res.body.success);
-  //   //       done();
-  //   //     });
-  //   // });
-  // });
+  describe('Search idea route', () => {
+    let validToken = '';
+    before((done) => {
+      chai.request(server)
+        .post('/api/v1/users/signin')
+        .send(user.signIn)
+        .end((err, res) => {
+          if (err) return done(err);
+          validToken = res.body.token;
+          done();
+        });
+    });
+    it('should return 200 when search ideas by keywords', (done) => {
+      chai.request(server)
+        .get('/api/v1/users/ideas/search?search=AbdruShin&offset=0&limlit=6')
+        .set('x-access-token', validToken)
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.have.property('pageInfo');
+          done();
+        });
+    });
+  });
 
   describe('Filter for idea route', () => {
     let validToken = '';

@@ -20,6 +20,7 @@ class AppStore extends EventEmitter {
     this.publicIdeaPayload = {};
     this.registerUserPayload = {};
     this.resetPasswordPayload = {};
+    this.searchIdeaPayload = {};
     this.updatePayload = {};
 
     this.categoryIdea = this.categoryIdea.bind(this);
@@ -29,6 +30,7 @@ class AppStore extends EventEmitter {
     this.publicIdea = this.publicIdea.bind(this);
     this.registerUser = this.registerUser.bind(this);
     this.resetPassword = this.resetPassword.bind(this);
+    this.searchIdea = this.searchIdea.bind(this);
     this.setCurrentUser = this.setCurrentUser.bind(this);
     this.updateIdea = this.updateIdea.bind(this);
   }
@@ -57,7 +59,7 @@ class AppStore extends EventEmitter {
   * @return {Object} returns deleted Idea payload
   */
   deleteIdea() {
-    return this.cdeletePayload;
+    return this.deletePayload;
   }
 
   /**
@@ -94,6 +96,15 @@ class AppStore extends EventEmitter {
   */
   resetPassword() {
     return this.resetPasswordPayload;
+  }
+
+  /**
+  * @description describes a function that handles search for Ideas
+  * @method setCurrentUser
+  * @returns {object} returns search Ideas payload
+  */
+  searchIdea() {
+    return this.searchIdeaPayload;
   }
 
   /**
@@ -167,6 +178,11 @@ class AppStore extends EventEmitter {
       case AppConstants.UPDATE_IDEA:
         this.updatePayload = action.response.data;
         this.emit(AppConstants.UPDATE_IDEA);
+        break;
+
+      case AppConstants.SEARCH_IDEA:
+        this.searchIdeaPayload = action.response.data;
+        this.emit(AppConstants.SEARCH_IDEA);
         break;
 
       default:

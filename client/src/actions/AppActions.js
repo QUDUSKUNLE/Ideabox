@@ -150,5 +150,22 @@ export default {
           AppDispatcher.dispatch({ type: AppConstants.UPDATE_IDEA, response });
         })
     );
+  },
+
+
+  /**
+  * @function searchIdea
+  * @description async action that handles search for ideas
+  * @param {object} searchWord object containing ideaDetails
+  * @return {promise} returns server response
+  */
+  searchIdea(searchWord) {
+    return (
+      axios
+        .get(`/api/v1/users/ideas/search?search=${searchWord}&offset=0&limit=6`)
+        .then((response) => {
+          AppDispatcher.dispatch({ type: AppConstants.SEARCH_IDEA, response });
+        })
+    );
   }
 };
