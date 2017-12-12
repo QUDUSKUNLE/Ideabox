@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
  * @description This is Comment model
  */
 const commentSchema = new mongoose.Schema({
-  comment: { type: String, require: true },
+  comment: { type: String, required: true },
   updatedAt: { type: Date, default: Date.now },
   createdAt: { type: Date, default: Date.now },
   author: {
@@ -12,8 +12,14 @@ const commentSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'users'
     },
-    username: String
+    name: String
   },
+  idea: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      refs: 'ideas'
+    }
+  }
 });
 
 const Comment = mongoose.model('comment', commentSchema);

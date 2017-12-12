@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ideabox</title>
+    <!-- Compiled and minified CSS -->
+    <Link rel="stylesheet" href="/bundle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div id="root"></div>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('input#input_text, textarea#textarea1').characterCounter();
+            $('select').material_select();
+        });
+        $(".button-collapse").sideNav();
+    </script>
+    <script type="text/javascript" src="/bundle.js"></script>
+</body>
+
+</html>

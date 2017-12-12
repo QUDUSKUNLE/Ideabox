@@ -2,10 +2,10 @@ node_modules
 package-lock.json
 example.js
 .env
-./server/config/*
-./server/controllers/*
-./server/helpers/*
-./server/middlewares/*
-./server/models/*
-./server/utils/*
-./client/*
+coverage
+.nyc_output
+server/middlewares/validatePath.js
+htm.html
+client/src/components/home/UpdatePassword.jsx
+client/src/components/idea/EditIdea.jsx
+client/src/components/idea/EditIdeaModal.jsx

@@ -11,5 +11,8 @@ before_install:
 cache:
   - node_modules
 
+env:
+  CODECLIMATE_REPO_TOKEN: b5b282159f566c28bf9be9dd5302371e7c3fe8be3e048fe905f56aa0dc95935d
+
 script:
   - npm test
