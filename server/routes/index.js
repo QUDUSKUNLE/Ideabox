@@ -51,7 +51,7 @@ Router.put(
  * Route for users to update profile
  */
 Router.put(
-  '/profiles/:userId',
+  '/profiles',
   verifyToken,
   UserController.updateProfile
 );

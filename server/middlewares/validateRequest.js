@@ -152,11 +152,11 @@ const validateRequestBody = (request) => {
 
 /**
  * @description This validates all request inputs
- * @param { object } req
- * @param { object } res
- * @param { function } next
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
  * @function  validateRequest
- * @return { object } return object containing validation error message
+ * @return {object} return object containing validation error message
  */
 const validateRequest = (req, res, next) => {
   const errors = validateRequestBody(req);

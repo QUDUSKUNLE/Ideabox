@@ -2,6 +2,7 @@ import axios from 'axios';
 import AppConstants from '../contants/AppConstants';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import setToken from '../helper/setToken';
+import setStorage from '../helper/setStorage';
 
 export default {
 /**
@@ -14,9 +15,8 @@ export default {
   signUpUser(userDetail) {
     return axios.post('/api/v1/users/signup', userDetail)
       .then((response) => {
-        localStorage.setItem('token', JSON.stringify((response.data.token)));
+        setStorage(response);
         setToken((JSON.parse(localStorage.getItem('token'))));
-        localStorage.setItem('isAuthenticated', JSON.stringify(true));
         AppDispatcher.dispatch({ type: AppConstants.SIGN_UP, response });
       });
   },
@@ -31,13 +31,8 @@ export default {
   logInUser(userDetail) {
     return axios.post('/api/v1/users/signin', userDetail)
       .then((response) => {
-        localStorage.setItem('token', JSON.stringify((response.data.token)));
-        localStorage.setItem(
-          'username',
-          JSON.stringify(response.data.userDetails.username)
-        );
+        setStorage(response);
         setToken((JSON.parse(localStorage.getItem('token'))));
-        localStorage.setItem('isAuthenticated', JSON.stringify(true));
         AppDispatcher.dispatch({ type: AppConstants.LOG_IN, response });
       });
   },
@@ -71,7 +66,7 @@ export default {
   /**
   * @function getPublicIdeas
   * @description async action that handles all public ideas
-  * @param {string} ideaLimit string containing ideaLimit
+  * @param {num} ideaLimit string containing ideaLimit
   * @param {num} offset query offset
   * @return {promise} returns server response
   */
@@ -88,15 +83,15 @@ export default {
   /**
   * @function fetchByCategory
   * @description async action that handles ideas by category
-  * @param {string} category string containing idea category
-  * @param {string} ideaLimit string containing ideaLimit
-  * @param {string} offset string containing offset
+  * @param {string} cat string containing idea category
+  * @param {num} limit string containing ideaLimit
+  * @param {num} off string containing offset
   * @return {promise} returns server response
   */
-  fetchByCategory(category, ideaLimit, offset = 0) {
+  fetchByCategory(cat, limit, off = 0) {
     return (
       axios
-        .get(`/api/v1/users/ideas?category=${category}&offset=${offset}&limit=${ideaLimit}`)
+        .get(`/api/v1/users/ideas?category=${cat}&offset=${off}&limit=${limit}`)
         .then((response) => {
           AppDispatcher.dispatch({ type: AppConstants.CATEGORY, response });
         })
@@ -106,14 +101,14 @@ export default {
   /**
   * @function myIdeas
   * @description async action that handles all ideas created by a user
-  * @param {string} ideaLimit string containing ideaLimit
-  * @param {string} offset string containing offset
+  * @param {num} limit string containing ideaLimit
+  * @param {num} offset string containing offset
   * @return {promise} returns server response
   */
-  myIdeas(ideaLimit, offset = 0) {
+  myIdeas(limit, offset = 0) {
     return (
       axios
-        .get(`/api/v1/users/ideas/user/ideas?offset=${offset}&limit=${ideaLimit}`)
+        .get(`/api/v1/users/ideas/user/ideas?offset=${offset}&limit=${limit}`)
         .then((response) => {
           AppDispatcher.dispatch({ type: AppConstants.MY_IDEAS, response });
         })
@@ -152,19 +147,36 @@ export default {
     );
   },
 
-
   /**
   * @function searchIdea
   * @description async action that handles search for ideas
-  * @param {object} searchWord object containing ideaDetails
+  * @param {string} search search keyword
   * @return {promise} returns server response
   */
-  searchIdea(searchWord) {
+  searchIdea(search) {
     return (
       axios
-        .get(`/api/v1/users/ideas/search?search=${searchWord}&offset=0&limit=6`)
+        .get(`/api/v1/users/ideas/search?search=${search}&offset=0&limit=6`)
         .then((response) => {
           AppDispatcher.dispatch({ type: AppConstants.SEARCH_IDEA, response });
+        })
+    );
+  },
+
+  /**
+  * @function updateProfile
+  * @description async action that handles updateProfile of users
+  * @param {string} userDetails userDetails
+  * @return {promise} returns server response
+  */
+  updateProfile(userDetails) {
+    return (
+      axios
+        .put('/api/v1/users/profiles', userDetails)
+        .then((response) => {
+          AppDispatcher.dispatch({
+            type: AppConstants.UPDATE_PROFILE, response
+          });
         })
     );
   }

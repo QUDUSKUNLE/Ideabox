@@ -251,7 +251,7 @@ class UserController {
    * @return {void} json server response
    */
   static updateProfile(req, res) {
-    const { username } = req.body;
+    const { username, email } = req.body;
     if ((!req.body.username) || (!req.body.email)) {
       return res.status(400).send({
         error: 'Email or username must not be empty',
@@ -259,11 +259,11 @@ class UserController {
       });
     }
     User.findByIdAndUpdate(
-      { _id: req.params.userId },
+      { _id: req.decoded.token.user._id },
       {
         $set: {
           username: capitalize(username.trim()),
-          email: req.body.email.trim()
+          email: email.trim()
         },
       },
       { new: true }
