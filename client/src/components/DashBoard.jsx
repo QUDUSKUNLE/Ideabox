@@ -35,6 +35,7 @@ export default class DashBoard extends React.Component {
     this.handleCategoryResponse = this.handleCategoryResponse.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
     this.handleClickCategory = this.handleClickCategory.bind(this);
+    this.handleSearchResponse = this.handleSearchResponse.bind(this);
   }
 
   /**
@@ -54,6 +55,7 @@ export default class DashBoard extends React.Component {
     AppStore.on(AppConstants.PUBLIC_IDEAS, this.handlePublicIdeas);
     AppStore.on(AppConstants.CREATE_IDEA, this.handlePublicIdeas);
     AppStore.on(AppConstants.CATEGORY, this.handleCategoryResponse);
+    AppStore.on(AppConstants.SEARCH_IDEA, this.handleSearchResponse);
   }
 
   /**
@@ -66,11 +68,15 @@ export default class DashBoard extends React.Component {
     AppStore.removeListener(AppConstants.PUBLIC_IDEAS, this.handlePublicIdeas);
     AppStore.removeListener(AppConstants.CREATE_IDEA, this.handlePublicIdeas);
     AppStore.removeListener(AppConstants.CATEGORY, this.handleCategoryResponse);
+    AppStore.removeListener(
+      AppConstants.SEARCH_IDEA,
+      this.handleSearchResponse
+    );
   }
 
   /**
-   * @method handleResponse
-   * @description class method that handles register Response
+   * @method handlePublicIdeas
+   * @description class method that handles public Ideas response
    * @return {void}
    */
   handlePublicIdeas() {
@@ -82,7 +88,7 @@ export default class DashBoard extends React.Component {
 
   /**
    * @method  handlePageClick
-   * @description class method that handles idea page
+   * @description class method that listen to pagination click
    * @param {string} ideaPages
    * @return {void}
    */
@@ -91,7 +97,11 @@ export default class DashBoard extends React.Component {
     const offset = Math.ceil(selected * this.state.ideaLimit);
     if (this.state.categoryIsClicked === true) {
       AppActions
-        .fetchByCategory(this.state.category, this.state.ideaLimit, offset);
+        .fetchByCategory(
+          this.state.category,
+          this.state.ideaLimit,
+          offset
+        );
     } else {
       AppActions.getPublicIdeas(this.state.ideaLimit, offset);
     }
@@ -99,7 +109,7 @@ export default class DashBoard extends React.Component {
 
   /**
    * @method handleResponse
-   * @description class method that handles register Response
+   * @description class method that handles log out action
    * @return {void}
    */
   handleLogOut() {
@@ -118,18 +128,33 @@ export default class DashBoard extends React.Component {
       category: clickCategory,
       categoryIsClicked: true
     });
-    AppActions.fetchByCategory(clickCategory, this.state.ideaLimit);
+    AppActions.fetchByCategory(
+      clickCategory,
+      this.state.ideaLimit
+    );
   }
 
   /**
    * @method handleCategoryResponse
-   * @description class method that handles register Response
+   * @description class method that handles Filter by Category Response
    * @return {void}
    */
   handleCategoryResponse() {
     this.setState({
       publicIdeas: AppStore.categoryIdea().ideas,
       pageInfo: AppStore.categoryIdea().pageInfo
+    });
+  }
+
+  /**
+   * @method handleSearchResponse
+   * @description class method that handles Search Response
+   * @return {void}
+   */
+  handleSearchResponse() {
+    this.setState({
+      publicIdeas: AppStore.searchIdea().ideas,
+      pageInfo: AppStore.searchIdea().pageInfo
     });
   }
 

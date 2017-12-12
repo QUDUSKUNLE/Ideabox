@@ -108,10 +108,9 @@ Router.get(
 /**
  * Route to search for ideas
  */
-Router.post(
+Router.get(
   '/ideas/search',
   verifyToken,
-  // validateRequest,
   IdeaController.searchIdeas
 );
 
