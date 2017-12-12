@@ -22,6 +22,7 @@ class AppStore extends EventEmitter {
     this.resetPasswordPayload = {};
     this.searchIdeaPayload = {};
     this.updatePayload = {};
+    this.updateProfilePayload = {};
 
     this.categoryIdea = this.categoryIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
@@ -33,6 +34,7 @@ class AppStore extends EventEmitter {
     this.searchIdea = this.searchIdea.bind(this);
     this.setCurrentUser = this.setCurrentUser.bind(this);
     this.updateIdea = this.updateIdea.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
   }
 
   /**
@@ -118,11 +120,20 @@ class AppStore extends EventEmitter {
 
   /**
   * @description describes a function that update idea
-  * @method setCurrentUser
+  * @method updateIdea
   * @returns {object} returns updated idea payLoad
   */
   updateIdea() {
     return this.updatePayload;
+  }
+
+  /**
+  * @description describes a function that update user Profile
+  * @method updateProfile
+  * @returns {object} returns user updated profile payLoad
+  */
+  updateProfile() {
+    return this.updateProfilePayload;
   }
 
   /**
@@ -183,6 +194,11 @@ class AppStore extends EventEmitter {
       case AppConstants.SEARCH_IDEA:
         this.searchIdeaPayload = action.response.data;
         this.emit(AppConstants.SEARCH_IDEA);
+        break;
+
+      case AppConstants.UPDATE_PROFILE:
+        this.updateProfilePayload = action.response.data;
+        this.emit(AppConstants.UPDATE_PROFILE);
         break;
 
       default:

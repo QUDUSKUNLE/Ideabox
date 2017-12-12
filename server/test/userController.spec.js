@@ -342,7 +342,7 @@ describe('User Controller Test', () => {
       'should return status 400 when username or email is not defined',
       (done) => {
         chai.request(server)
-          .put(`/api/v1/users/profiles/${id}`)
+          .put('/api/v1/users/profiles')
           .set('x-access-token', validToken)
           .type('application/json')
           .send({})
@@ -360,7 +360,7 @@ describe('User Controller Test', () => {
       new username and email to update`,
       (done) => {
         chai.request(server)
-          .put(`/api/v1/users/profiles/${id}`)
+          .put('/api/v1/users/profiles')
           .set('x-access-token', validToken)
           .type('application/json')
           .send({
@@ -379,27 +379,11 @@ describe('User Controller Test', () => {
       }
     );
 
-    it('should return user not found when passes in userId invalid', (done) => {
-      const wrongId = id.slice(0, -1);
-      chai.request(server)
-        .put(`/api/v1/users/profiles/${wrongId}`)
-        .set('x-access-token', validToken)
-        .type('application/json')
-        .send({
-          email: user.email,
-          username: user.username
-        })
-        .end((err, res) => {
-          assert.equal(false, res.body.success);
-          assert.equal('User not Found', res.body.error);
-          done();
-        });
-    });
     it(`should return status code 401 when user try to update profile
     with invalid token`, (done) => {
         const invalid = validToken.slice(0, -1);
         chai.request(server)
-          .put(`/api/v1/users/profiles/${id}`)
+          .put('/api/v1/users/profiles')
           .set('x-access-token', invalid)
           .type('application/json')
           .send({
