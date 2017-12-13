@@ -15,7 +15,10 @@ class AppStore extends EventEmitter {
     this.categoryIdeaPayload = {};
     this.currentUser = false;
     this.createIdeaPayload = {};
+    this.createCommentPayload = {};
     this.deletePayload = {};
+    this.fetchIdeaPayload = {};
+    this.fetchCommentPayload = {};
     this.myIdeaPayload = {};
     this.publicIdeaPayload = {};
     this.registerUserPayload = {};
@@ -25,7 +28,10 @@ class AppStore extends EventEmitter {
     this.updateProfilePayload = {};
 
     this.categoryIdea = this.categoryIdea.bind(this);
+    this.createComment = this.createComment.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
+    this.fetchIdea = this.fetchIdea.bind(this);
+    this.fetchComment = this.fetchComment.bind(this);
     this.handleActions = this.handleActions.bind(this);
     this.myIdea = this.myIdea.bind(this);
     this.publicIdea = this.publicIdea.bind(this);
@@ -39,11 +45,20 @@ class AppStore extends EventEmitter {
 
   /**
   * @description describes a function that returns categoryIdeaPayload
-  * @method category
+  * @method categoryIdea
   * @return {Object} returns category payload
   */
   categoryIdea() {
     return this.categoryIdeaPayload;
+  }
+
+  /**
+  * @description describes a function that returns createCommentPayload
+  * @method createComment
+  * @return {Object} returns createIdea payload
+  */
+  createComment() {
+    return this.createCommentPayload;
   }
 
   /**
@@ -57,11 +72,29 @@ class AppStore extends EventEmitter {
 
   /**
   * @description describes a function that returns deletePayload
-  * @method createIdea
+  * @method deleteIdea
   * @return {Object} returns deleted Idea payload
   */
   deleteIdea() {
     return this.deletePayload;
+  }
+
+  /**
+  * @description describes a function that returns fetchIdeaPayload
+  * @method fetchIdea
+  * @return {Object} returns fetchIdea payload
+  */
+  fetchIdea() {
+    return this.fetchIdeaPayload;
+  }
+
+  /**
+  * @description describes a function that returns fetchCommentPayload
+  * @method fetchComment
+  * @return {Object} returns fetchComment payload
+  */
+  fetchComment() {
+    return this.fetchCommentPayload;
   }
 
   /**
@@ -74,9 +107,9 @@ class AppStore extends EventEmitter {
   }
 
   /**
-  * @description describes a function that returns registerUserPayload
-  * @method registerUser
-  * @return {Object} returns registerUser payload
+  * @description describes a function that returns publicIdeaPayload
+  * @method publicIdea
+  * @return {Object} returns publicIdeaPayload payload
   */
   publicIdea() {
     return this.publicIdeaPayload;
@@ -199,6 +232,21 @@ class AppStore extends EventEmitter {
       case AppConstants.UPDATE_PROFILE:
         this.updateProfilePayload = action.response.data;
         this.emit(AppConstants.UPDATE_PROFILE);
+        break;
+
+      case AppConstants.FETCH_IDEA:
+        this.fetchIdeaPayload = action.response.data;
+        this.emit(AppConstants.FETCH_IDEA);
+        break;
+
+      case AppConstants.CREATE_COMMENT:
+        this.createCommentPayload = action.response.data;
+        this.emit(AppConstants.CREATE_COMMENT);
+        break;
+
+      case AppConstants.FETCH_COMMENT:
+        this.fetchCommentPayload = action.response.data;
+        this.emit(AppConstants.FETCH_COMMENT);
         break;
 
       default:

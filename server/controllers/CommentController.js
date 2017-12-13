@@ -89,6 +89,26 @@ class CommentController {
   }
 
   /**
+   * Routes: GET: /api/v1/users/comments/:ideaId
+   * @param {any} req user request object
+   * @param {any} res server response
+   * @return {void}
+   * @memberOf CommentController
+   */
+  static fetchComment(req, res) {
+    const { ideaId } = req.params;
+    Comment.find({})
+      .where({ 'idea.id': ideaId })
+      .exec()
+      .then(comments => res.status(200).send({
+        comments
+      }))
+      .catch(error => res.status(500).send({
+        error: error.message
+      }));
+  }
+
+  /**
    * Routes: DELETE: /api/v1/users/comments/:commentId
    * @param {any} req user request object
    * @param {any} res server response
