@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import AppActions from '../actions/AppActions';
 import AppConstants from '../contants/AppConstants';
 import AppStore from '../store/AppStore';
-import EditIdeaModal from './idea/EditIdeaModal';
+import EditIdeaModal from './container/modal/EditIdeaModal';
 import UserIdeasSideNav from './container/UserIdeasSideNav';
 import UserIdeas from './container/UserIdeas';
 import Pagination from './container/Pagination';
+
 /**
  * @description - renders MyIdeas Component
  * @class MyIdeas
@@ -49,6 +50,7 @@ export default class MyIdeas extends React.Component {
       closeOnClick: false,
       draggable: true
     });
+    $('.modal').modal();
   }
 
   /**
@@ -67,7 +69,7 @@ export default class MyIdeas extends React.Component {
 
   /**
    * @method handleResponse
-   * @description class method that handles register Response
+   * @description class method that handles myIdeas Response
    * @return {void}
    */
   handleMyIdeasResponse() {
@@ -79,16 +81,17 @@ export default class MyIdeas extends React.Component {
 
   /**
    * @method handleResponse
-   * @description class method that handles register Response
+   * @description class method that handles edit idea Response
    * @return {void}
    */
   handleEditIdeaResponse() {
-    console.log(AppStore.updateIdea());
+    Materialize.toast(AppStore.updateIdea().message, 2000, 'rounded green');
+    $('#edit_idea').modal('close');
   }
 
   /**
    * @method handleDelete
-   * @description class method that handles register Response
+   * @description class method that handles delete idea Response
    * @param {string} ideaId - Identity of the idea to be deleted
    * @return {void}
    */
@@ -121,8 +124,8 @@ export default class MyIdeas extends React.Component {
   }
 
   /**
-   * @method handleResponse
-   * @description class method that handles register Response
+   * @method handleLogOut
+   * @description class method that handles log out event
    * @return {void}
    */
   handleLogOut() {

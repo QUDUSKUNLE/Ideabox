@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import UpdateProfileModal from '../home/UpdateProfileModal';
+import UpdateProfileModal from './modal/UpdateProfileModal';
 import AppActions from '../../actions/AppActions';
 
 /**
