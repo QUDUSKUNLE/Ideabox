@@ -233,5 +233,24 @@ export default {
           });
         })
     );
+  },
+
+  /**
+  * @function updatePassword
+  * @description async action that update user`s password
+  * @param {object} userDetails contains newPassword and confirmPassword
+  * @param {string} hash reset password token
+  * @return {promise} returns server response
+  */
+  updatePassword(userDetails, hash) {
+    return (
+      axios
+        .put(`/api/v1/users/passwords/${hash}`, userDetails)
+        .then((response) => {
+          AppDispatcher.dispatch({
+            type: AppConstants.UPDATE_PASSWORD, response
+          });
+        })
+    );
   }
 };

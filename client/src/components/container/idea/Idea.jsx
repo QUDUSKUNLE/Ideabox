@@ -75,23 +75,30 @@ export default class Idea extends React.Component {
                       </p>
                     </div>
                     <div className="card-action">
-                      <span className="black-text">{idea.category[0]}</span>
-                      <Link to={`/dashboard/${idea._id}`}>
+                      <div className="row ideacard">
+                        <span className="black-text col s4 m4">
+                          {idea.category[0]}
+                        </span>
+                        <Link
+                          to={`/dashboard/${idea._id}`}
+                          className="col s4 m4"
+                        >
+                          <i
+                            href=""
+                            role="button"
+                            tabIndex="0"
+                            className="material-icons black-text"
+                          >more
+                          </i>
+                        </Link>
                         <i
-                          href=""
                           role="button"
                           tabIndex="0"
-                          className="material-icons black-text delete_tag edit"
-                        >more
+                          className="material-icons black-text edit"
+                        >
+                          share
                         </i>
-                      </Link>
-                      <i
-                        role="button"
-                        tabIndex="0"
-                        className="material-icons black-text removable"
-                      >
-                        share
-                      </i>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -107,4 +114,3 @@ export default class Idea extends React.Component {
 Idea.propTypes = {
   publicIdea: PropTypes.array.isRequired
 };
-
