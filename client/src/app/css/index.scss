@@ -112,3 +112,60 @@ i.edit {
 ul.pagination li {
     cursor: pointer;
 }
+
+#sidenav-overlay {
+    z-index: 0;
+    background: none;
+}
+
+.comment {
+    height: 350px;
+    background-color: white;
+    overflow: scroll;
+}
+
+.comment_header {
+    height: 100px;
+}
+
+$break-small: 320px;
+$break-medium: 640px;
+$break-large: 1200px;
+.commentForm {
+    position: fixed !important;
+    top: 70vh;
+}
+
+@media screen and (max-width: $break-small) {
+    .commentForm {
+        position: fixed !important;
+        top: 90vh;
+    }
+    #comment {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: $break-medium) {
+    .commentForm {
+        position: fixed !important;
+        top: 75vh;
+    }
+    #comment {
+        width: 80vw;
+    }
+}
+
+@media screen and (min-width: $break-large) {
+    .commentForm {
+        position: fixed !important;
+        top: 65vh;
+    }
+    #comment {
+        width: 50vw;
+    }
+}
+
+// .messageBody {
+//     overflow-y: scroll;
+// }
