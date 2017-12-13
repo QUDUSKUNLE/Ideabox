@@ -26,9 +26,9 @@ export default (email, name, hash, headers) => {
 
   // setup email data with unicode symbols
   const mailOptions = {
-    from: '"Ideabox" <ideabox.idea@gmail.com>', // sender address
+    from: '"IdeaBox" <ideabox.idea@gmail.com>', // sender address
     to: email,
-    subject: 'Reset Your Password', // Subject line
+    subject: 'Reset password', // Subject line
     html: `<body><div>
             <div style="background-color:#f2f3f5;padding:20px">
               <div style="max-width:600px;margin:0 auto">
@@ -37,10 +37,7 @@ export default (email, name, hash, headers) => {
                   background:#fff;
                   font:14px sans-serif;
                   color:#686f7a;
-                  border-top:4px solid #e57373;
-                  border-bottom:4px solid #e57373;
-                  border-right:4px solid #e57373;   
-                  border-left:4px solid #e57373;
+                  border:2px solid #7AB6FB;
                   margin-bottom:20px">
                 <div 
                   style="
@@ -53,40 +50,46 @@ export default (email, name, hash, headers) => {
                       padding-left:20px; 
                       margin:0; 
                       font-size:30px;">
-                      <img height="40px"
-                        style="margin-left: 2%"
-                        src="http://78.media.tumblr.com/007242ca2e10d514ee815770428a8343/tumblr_oa2moo9w1A1qinh1vo1_1280.jpg">
-                      Idea-Box</h4>
+                      IdeaBox</h4>
                 </div>
                 <div style="padding:30px 20px;line-height:1.5em;color:#686f7a">
                   <p style="color:#737373">Hi ${name},</p>
                   <p 
                     style="
-                      border-bottom:1px solid #f2f3f5;
                       padding-bottom:20px;
-                      margin-bottom:20px;
+                      margin:40px 0;
                       color:#686f7a">
-                     A password reset for your account was requested.
+                     You have requested to reset your password for IdeaBox account. Please click on the button below to reset your password.
                   </p>
-                  <p 
-                    style="
-                      border-bottom:1px solid #f2f3f5;
-                      padding-bottom:20px;
-                      margin-bottom:20px;
-                      color:#686f7a">
-                      Please click the button below to change your password.
-                  </p>
-              <a href="http://${headers}/api/v1/users/passwords/${hash}" 
+              <p
+                 style="position: absolute;left: 50%;
+    transform: translate(-50%, -50%)"><a href="http://${headers}/api/v1/users/passwords/${hash}" 
                     style="
                       display:inline-block;
                       font-size:15px;color:#ffffff;
                       padding:10px 15px;
                       text-decoration:none;
-                      background-color:#e57373;
+                      background-color:#7AB6FB;
                       border-radius:3px" 
                       target="_blank">
-                      Change Your Password
+                      Reset Password
                   </a>
+                  </p>
+                  <p 
+                    style="
+                      padding-bottom:20px;
+                      margin-top:100px;
+                      color:#686f7a">
+                      If you haven't made this request please ignore this message.
+                  </p>
+                  <p 
+                    style="padding-bottom:10px;
+                      margin-top:40px;
+                      color:#686f7a">
+                      Best regards, <br>
+                      IdeaBox Team.<br>
+                    <a href="https://ideaboxng.herokuapp.com" style="color: #7AB6FB">ideaboxng.herokuapp.com</>
+                  </p>
                 </div>
              </div>
             </div>

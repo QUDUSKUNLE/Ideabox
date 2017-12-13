@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @function UserIdeas
+ * @description the UserIdeas component.
+ * @param {object} props
+ * @returns {string} The HTML markup for the UserIdeas component
+ */
 const UserIdeas = props =>
   (
     <div className="idea">
@@ -58,9 +64,7 @@ const UserIdeas = props =>
     </div>
   );
 
-
 UserIdeas.propTypes = {
   myIdeas: PropTypes.array.isRequired
 };
 export default UserIdeas;
-

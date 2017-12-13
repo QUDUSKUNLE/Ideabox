@@ -200,13 +200,11 @@ class IdeaController {
     const limit = parseInt(req.query.limit, 10);
     let count;
     Idea.count({
-      'author.name': { $eq: req.decoded.token.user.username },
       'author.id': { $eq: req.decoded.token.user._id }
     }, (err, isCount) => {
       count = isCount;
       Idea.find({})
         .where({
-          'author.name': req.decoded.token.user.username,
           'author.id': req.decoded.token.user._id
         })
         .skip(offset)

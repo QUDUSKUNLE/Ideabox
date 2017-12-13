@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppActions from '../../actions/AppActions';
+import AppActions from '../../../actions/AppActions';
 
 /**
  * @description the EditIdea component
  * @function EditIdea
  * @returns {object} EditIdea component
  */
-class EditIdea extends React.Component {
+export default class EditIdea extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -85,7 +85,7 @@ class EditIdea extends React.Component {
       }
 
       return (
-        <div className="modal=content">
+        <div className="modal-content">
           <div className="container">
             <h5 className="center-align header create_idea">
               Edit Idea
@@ -164,7 +164,8 @@ class EditIdea extends React.Component {
                       id="test2"
                     />
                     <label htmlFor="test2">Public</label>
-                    <p className="black-text">Public ideas are visible to everyone
+                    <p className="black-text">
+                      Public ideas are visible to everyone
                     </p>
                   </div>
                 </div>
@@ -172,7 +173,7 @@ class EditIdea extends React.Component {
                   <button
                     className="btn deep-purple darken-4 margin-top s6"
                     type="submit"
-                  >UPDATE
+                  >SAVE CHANGES
                   </button>
                 </div>
               </form>
@@ -184,8 +185,8 @@ class EditIdea extends React.Component {
     return (editModal());
   }
 }
+
 EditIdea.propTypes = {
   selectedIdea: PropTypes.array.isRequired
 };
-export default EditIdea;
 

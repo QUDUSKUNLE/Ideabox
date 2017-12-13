@@ -147,6 +147,15 @@ Router.post(
 );
 
 /**
+ * Route to fetch comments of a particular idea
+ */
+Router.get(
+  '/comments/:ideaId',
+  verifyToken,
+  CommentController.fetchComment
+);
+
+/**
  * Route to edit a comment
  */
 Router.put(

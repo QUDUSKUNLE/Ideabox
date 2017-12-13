@@ -179,5 +179,59 @@ export default {
           });
         })
     );
+  },
+
+  /**
+  * @function fetchIdea
+  * @description async action that handles updateProfile of users
+  * @param {string} ideaId Idea Identity
+  * @return {promise} returns server response
+  */
+  fetchIdea(ideaId) {
+    return (
+      axios
+        .get(`/api/v1/users/ideas/${ideaId}`)
+        .then((response) => {
+          AppDispatcher.dispatch({
+            type: AppConstants.FETCH_IDEA, response
+          });
+        })
+    );
+  },
+
+  /**
+  * @function sendComment
+  * @description async action that handles send comment
+  * @param {string} comment comment
+  * @return {promise} returns server response
+  */
+  sendComment(comment) {
+    return (
+      axios
+        .post(`/api/v1/users/comments/${comment.ideaId}`, comment)
+        .then((response) => {
+          AppDispatcher.dispatch({
+            type: AppConstants.CREATE_COMMENT, response
+          });
+        })
+    );
+  },
+
+  /**
+  * @function fetchComment
+  * @description async action that fetch comments of idea
+  * @param {string} ideaId comment
+  * @return {promise} returns server response
+  */
+  fetchComment(ideaId) {
+    return (
+      axios
+        .get(`/api/v1/users/comments/${ideaId}`)
+        .then((response) => {
+          AppDispatcher.dispatch({
+            type: AppConstants.FETCH_COMMENT, response
+          });
+        })
+    );
   }
 };

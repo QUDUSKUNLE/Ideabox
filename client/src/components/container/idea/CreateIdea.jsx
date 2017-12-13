@@ -1,7 +1,7 @@
 import React from 'react';
-import AppActions from '../../actions/AppActions';
-import AppConstants from '../../contants/AppConstants';
-import AppStore from '../../store/AppStore';
+import AppActions from '../../../actions/AppActions';
+import AppConstants from '../../../contants/AppConstants';
+import AppStore from '../../../store/AppStore';
 
 /**
  * @description - renders CreateIdea Component
@@ -33,6 +33,7 @@ export default class CreateIdea extends React.Component {
   */
   componentDidMount() {
     AppStore.on(AppConstants.CREATE_IDEA, this.handleResponse);
+    $('.modal').modal();
   }
 
   /**
@@ -62,6 +63,7 @@ export default class CreateIdea extends React.Component {
   handleResponse() {
     Materialize.toast(AppStore.createIdea().message, 2000, 'rounded green');
     AppActions.getPublicIdeas(this.state.ideaLimit);
+    $('#create_idea').modal('close');
   }
 
   /**
@@ -86,7 +88,7 @@ export default class CreateIdea extends React.Component {
   */
   render() {
     return (
-      <div className="modal=content">
+      <div className="modal-content">
         <div className="container">
           <h5 className="center-align header create_idea">
             Create Idea

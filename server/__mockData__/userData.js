@@ -17,6 +17,12 @@ export default {
       category: 'Agriculture',
       access: 'public'
     },
+    newIdea7: {
+      title: 'At Abuja',
+      description: 'Shonga Farm',
+      category: 'Agriculture',
+      access: 'public'
+    },
     filterMockData: {
       category: 'Agriculture',
       offset: 0,
@@ -30,6 +36,12 @@ export default {
     },
     newIdea2: {
       title: '',
+      description: 'In Nigeria',
+      category: 'Agriculture',
+      access: 'public'
+    },
+    newIdea4: {
+      title: 'Whao Nice',
       description: 'In Nigeria',
       category: 'Agriculture',
       access: 'public'
@@ -52,6 +64,9 @@ export default {
     },
     newComment2: {
       comment: ''
+    },
+    newComment4: {
+      comment: 'Keep it moving'
     },
     usedMail: 'kunle@gmail.com',
     signIn: {

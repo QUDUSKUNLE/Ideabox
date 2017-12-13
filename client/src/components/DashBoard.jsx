@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import AppActions from '../actions/AppActions';
 import AppConstants from '../contants/AppConstants';
 import AppStore from '../store/AppStore';
-import CreateIdeaModal from './idea/CreatIdeaModal';
-import Idea from './idea/Idea';
+import CreateIdeaModal from './container/modal/CreatIdeaModal';
+import Idea from './container/idea/Idea';
 import Pagination from './container/Pagination';
 import SideNav from './container/SideNav';
 
@@ -186,6 +186,7 @@ export default class DashBoard extends React.Component {
     );
   }
 }
+
 DashBoard.propTypes = {
   history: PropTypes.object.isRequired
 };

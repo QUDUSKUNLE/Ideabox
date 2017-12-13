@@ -41,9 +41,10 @@ export default class HomePage extends React.Component {
     event.preventDefault();
     $('#register').modal('open');
   }
+
   /**
   * @description - render method, React lifecycle method
-  * @returns {Object} LogInForm component
+  * @returns {object} LogInForm component
   */
   render() {
     return (
