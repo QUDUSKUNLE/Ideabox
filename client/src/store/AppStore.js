@@ -26,6 +26,7 @@ class AppStore extends EventEmitter {
     this.searchIdeaPayload = {};
     this.updatePayload = {};
     this.updateProfilePayload = {};
+    this.updatePasswordPayload = {};
 
     this.categoryIdea = this.categoryIdea.bind(this);
     this.createComment = this.createComment.bind(this);
@@ -41,6 +42,7 @@ class AppStore extends EventEmitter {
     this.setCurrentUser = this.setCurrentUser.bind(this);
     this.updateIdea = this.updateIdea.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
+    this.updatePassword = this.updatePassword.bind(this);
   }
 
   /**
@@ -170,6 +172,16 @@ class AppStore extends EventEmitter {
   }
 
   /**
+  * @description describes a function that update user`s password
+  * @method updatePassword
+  * @returns {object} returns user updated password payLoad
+  */
+  updatePassword() {
+    return this.updatePasswordPayload;
+  }
+
+
+  /**
    * Receives actions and update the stores accordingly
    * @method handleActions
    * @param {object} action - Action payload
@@ -247,6 +259,11 @@ class AppStore extends EventEmitter {
       case AppConstants.FETCH_COMMENT:
         this.fetchCommentPayload = action.response.data;
         this.emit(AppConstants.FETCH_COMMENT);
+        break;
+
+      case AppConstants.UPDATE_PASSWORD:
+        this.updatePasswordPayload = action.response.data;
+        this.emit(AppConstants.UPDATE_PASSWORD);
         break;
 
       default:

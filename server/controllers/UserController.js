@@ -78,6 +78,7 @@ class UserController {
         });
     }
   }
+
   /**
    * * Routes: POST: /api/v1/users/signin
    * @param {any} req user request object
@@ -128,7 +129,6 @@ class UserController {
         });
     }
   }
-
 
   /**
    * Send Reset password email
@@ -223,7 +223,6 @@ class UserController {
                 error: err.message
               });
             }
-
             res.status(200).send({
               success: true,
               message: 'Password has been updated',
@@ -242,7 +241,6 @@ class UserController {
         error: error.message
       }));
   }
-
 
   /**
    * Routes: PUT: /api/v1/users/profiles/:userId
