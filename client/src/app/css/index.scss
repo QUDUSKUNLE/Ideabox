@@ -104,11 +104,13 @@ footer {
 i.removable {
     cursor: pointer;
     float: right;
-    line-height: 32px;
+    // line-height: 32px;
+    font-size: 16px;
 }
 
 i.edit {
     cursor: pointer;
+    font-size: 16px;
 }
 
 ul.pagination li {
@@ -187,5 +189,14 @@ $break-large: 1200px;
     padding: 24px;
     border-radius: 2%;
     margin: auto;
-    margin-top: 10%
+    margin-top: 10%;
+}
+
+.author {
+    font-size: 12px;
+    color: #737373;
+}
+
+.category {
+    font-size: 12px
 }

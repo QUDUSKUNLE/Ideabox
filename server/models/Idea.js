@@ -8,7 +8,7 @@ const ideaSchema = new mongoose.Schema({
   description: { type: String, required: true },
   category: { type: Array, required: true },
   access: { type: Array, required: true },
-  status: { type: String },
+  status: { type: Boolean, default: false },
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,

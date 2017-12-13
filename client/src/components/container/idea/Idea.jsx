@@ -68,15 +68,15 @@ export default class Idea extends React.Component {
                         </i>
                       </span>
                       <p>{idea.description}.</p>
-                      <p>Author:{' '}
-                        <span className="deep-purple-text">
+                      <p className="author">Author:{' '}
+                        <span>
                           {idea.author.name}
                         </span>
                       </p>
                     </div>
                     <div className="card-action">
                       <div className="row ideacard">
-                        <span className="black-text col s4 m4">
+                        <span className="black-text col s4 m4 category">
                           {idea.category[0]}
                         </span>
                         <Link
@@ -84,17 +84,22 @@ export default class Idea extends React.Component {
                           className="col s4 m4"
                         >
                           <i
-                            href=""
                             role="button"
                             tabIndex="0"
-                            className="material-icons black-text"
-                          >more
+                            className="material-icons black-text tooltipped edit"
+                            data-position="top"
+                            data-delay="50"
+                            data-tooltip="Comment"
+                          >comment
                           </i>
                         </Link>
                         <i
                           role="button"
                           tabIndex="0"
-                          className="material-icons black-text edit"
+                          className="material-icons black-text edit tooltipped"
+                          data-position="top"
+                          data-delay="50"
+                          data-tooltip="Share"
                         >
                           share
                         </i>

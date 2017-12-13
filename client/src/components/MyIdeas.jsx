@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert2';
 import AppActions from '../actions/AppActions';
 import AppConstants from '../contants/AppConstants';
 import AppStore from '../store/AppStore';
@@ -18,7 +19,7 @@ export default class MyIdeas extends React.Component {
    * Create a constructor
    * @constructor
    * @param {object} props
-   * @memberof UserIdeas
+   * @memberof MyIdeas
    */
   constructor(props) {
     super(props);
@@ -31,6 +32,7 @@ export default class MyIdeas extends React.Component {
     };
     this.handleEdit = this.handleEdit.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
+    this.handleDeleteResponse = this.handleDeleteResponse.bind(this);
     this.handleMyIdeasResponse = this.handleMyIdeasResponse.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
   }
@@ -45,6 +47,8 @@ export default class MyIdeas extends React.Component {
     AppActions.myIdeas(this.state.ideaLimit);
     AppStore.on(AppConstants.MY_IDEAS, this.handleMyIdeasResponse);
     AppStore.on(AppConstants.UPDATE_IDEA, this.handleEditIdeaResponse);
+    AppStore.on(AppConstants.DELETE_IDEA, this.handleDeleteResponse);
+    $('.tooltipped').tooltip({ delay: 50 });
     $('.collapsible').collapsible();
     $('.button-collapse').sideNav({
       closeOnClick: false,
@@ -64,6 +68,10 @@ export default class MyIdeas extends React.Component {
     AppStore.removeListener(
       AppConstants.UPDATE_IDEA,
       this.handleEditIdeaResponse
+    );
+    AppStore.removeListener(
+      AppConstants.DELETE_IDEA,
+      this.handleDeleteResponse
     );
   }
 
@@ -96,7 +104,35 @@ export default class MyIdeas extends React.Component {
    * @return {void}
    */
   handleDelete(ideaId) {
-    AppActions.deleteIdea(ideaId);
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert the idea",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#32228F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        AppActions.deleteIdea(ideaId);
+        swal(
+          'Deleted!',
+          'Idea deleted successfully.',
+          'success'
+        );
+      } else if (result.dismiss === 'cancel') {
+        swal(
+          'Cancelled',
+          'Your idea is intact :)',
+          'error'
+        );
+      }
+    });
   }
 
   /**
@@ -121,6 +157,16 @@ export default class MyIdeas extends React.Component {
     const { selected } = ideaPages;
     const offset = Math.ceil(selected * this.state.ideaLimit);
     AppActions.myIdeas(this.state.ideaLimit, offset);
+  }
+
+  /**
+   * @method  handleDeleteResponse
+   * @description class method that handles idea page
+   * @return {void}
+   */
+  handleDeleteResponse() {
+    console.log(AppStore.deleteIdea());
+    AppActions.myIdeas(this.state.ideaLimit);
   }
 
   /**

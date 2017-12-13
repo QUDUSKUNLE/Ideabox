@@ -151,7 +151,7 @@ export default class LogInForm extends React.Component {
                     name="password"
                     id="password"
                     type="password"
-                    className="validate"
+                    className="validate header"
                     required
                   />
                   <label

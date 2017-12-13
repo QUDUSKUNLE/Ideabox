@@ -51,6 +51,7 @@ export default class DashBoard extends React.Component {
       closeOnClick: false,
       draggable: true
     });
+    $('.tooltipped').tooltip({ delay: 50 });
     AppActions.getPublicIdeas(this.state.ideaLimit);
     AppStore.on(AppConstants.PUBLIC_IDEAS, this.handlePublicIdeas);
     AppStore.on(AppConstants.CREATE_IDEA, this.handlePublicIdeas);
