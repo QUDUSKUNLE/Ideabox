@@ -12,7 +12,7 @@ const Comment = ({ fetchComment }) => {
             <div className="card-action">
               <div><small>{comment.author.name}</small>
                 <small className="right">
-                  {moment(comment.createdAt).format('llll')}
+                  {moment(comment.createdAt).startOf().fromNow()}
                 </small>
               </div>
               <p>{comment.comment}</p>

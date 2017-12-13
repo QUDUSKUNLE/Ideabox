@@ -62,6 +62,7 @@ export default class LogInForm extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
     this.setState({ show: false });
   }
+
   /**
    * @method handleResponse
    * @description class method that handles register Response
@@ -72,6 +73,7 @@ export default class LogInForm extends React.Component {
     $('#login').modal('close');
     this.props.history.push('/dashboard');
   }
+
   /**
   * @method handleLogIn
   * @description class method that makes an action call to sign up a user
@@ -94,6 +96,7 @@ export default class LogInForm extends React.Component {
         }
       });
   }
+
   /**
   * @description - render method, React lifecycle method
   * @returns {Object} LogInForm component

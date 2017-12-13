@@ -63,6 +63,7 @@ export default class ForgotPasswordForm extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
     this.setState({ show: false, success: false });
   }
+
   /**
    * @method handleResponse
    * @description class method that handles register Response
@@ -74,6 +75,7 @@ export default class ForgotPasswordForm extends React.Component {
       forgotPasswordSuccess: (AppStore.resetPassword()).message
     });
   }
+
   /**
   * @method handleResetPassword
   * @description class method that makes an action call to sign up a user
@@ -93,6 +95,7 @@ export default class ForgotPasswordForm extends React.Component {
         }
       });
   }
+
   /**
   * @description - render method, React lifecycle method
   * @returns {Object} ForgotPasswordForm component
@@ -113,18 +116,18 @@ export default class ForgotPasswordForm extends React.Component {
               className="col s12"
               onSubmit={this.handleResetPassword}
             >
-              <div className="row">
+              <span className="row">
                 {this.state.show
                   ? customAlert.errorMessage(this.state.forgotPasswordError)
                   : (<span />)
                 }
-              </div>
-              <div className="row">
+              </span>
+              <span className="row">
                 {this.state.success
                   ? customAlert.successMessage(this.state.forgotPasswordSuccess)
                   : (<span />)
                 }
-              </div>
+              </span>
               <div className="input-field col s12">
                 <input
                   value={this.state.email}
@@ -150,7 +153,7 @@ export default class ForgotPasswordForm extends React.Component {
                 <br />
                 <br />
                 <a
-                  className="modal-trigger modal-close left-align"
+                  className="modal-trigger modal-close"
                   href="#login"
                 >LOG IN
                 </a>
