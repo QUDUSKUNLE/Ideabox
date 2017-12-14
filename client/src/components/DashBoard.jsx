@@ -177,10 +177,10 @@ export default class DashBoard extends React.Component {
             <Idea
               publicIdea={this.state.publicIdeas}
             />
-            <Pagination
+            {this.state.publicIdeas.length > 0 && <Pagination
               pageInfo={this.state.pageInfo}
               clickHandler={this.handlePageClick}
-            />
+            />}
           </div>
         </main>
       </div>
