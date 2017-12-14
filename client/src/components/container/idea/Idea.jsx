@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import formatLink from '../../../helper/formatLink';
 
 /**
  * @function Idea
@@ -93,16 +94,22 @@ export default class Idea extends React.Component {
                           >comment
                           </i>
                         </Link>
-                        <i
-                          role="button"
-                          tabIndex="0"
-                          className="material-icons black-text edit tooltipped"
-                          data-position="top"
-                          data-delay="50"
-                          data-tooltip="Share"
+                        <a
+                          href={`https://twitter.com/intent/tweet?text=${formatLink(idea.title)}.%20You%20should%20read%20this%20&url=${window.location.origin}/dashboard/${idea._id}`}
+                          rel="noopener noreferrer"
+                          target="_blank"
                         >
-                          share
-                        </i>
+                          <i
+                            role="button"
+                            tabIndex="0"
+                            className="material-icons black-text edit tooltipped"
+                            data-position="top"
+                            data-delay="50"
+                            data-tooltip="share on twitter"
+                          >
+                            share
+                          </i>
+                        </a>
                       </div>
                     </div>
                   </div>
