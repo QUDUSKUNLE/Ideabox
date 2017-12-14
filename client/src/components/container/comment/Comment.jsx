@@ -1,8 +1,12 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
+/**
+ * @function Comment
+ * @description the Comment component.
+ * @returns {string} The HTML markup for the Comment component
+ */
 const Comment = ({ fetchComment }) => {
   if (fetchComment[0] !== undefined) {
     return fetchComment.map(comment =>

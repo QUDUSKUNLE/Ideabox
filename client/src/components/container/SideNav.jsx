@@ -108,14 +108,14 @@ export default class SideNav extends React.Component {
             </ul>
           </li>
           <li>
-            <Link to="/myideas">
+            <Link to="/myideas" className="white-text">
               <i className="material-icons">folder</i>My Ideas
             </Link>
           </li>
           <li>
             <a
               href="#create_idea"
-              className="modal-trigger"
+              className="modal-trigger white-text"
             ><i className="material-icons">create</i>Create new idea
             </a>
           </li>
@@ -149,7 +149,7 @@ export default class SideNav extends React.Component {
               <li>
                 <a
                   href="#"
-                  className="collapsible-header"
+                  className="collapsible-header white-text"
                 >Filter By Category
                 <i className="material-icons right">arrow_drop_down</i>
                 </a>

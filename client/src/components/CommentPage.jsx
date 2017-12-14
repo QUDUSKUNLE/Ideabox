@@ -133,14 +133,14 @@ export default class CommentPage extends React.Component {
             </ul>
           </li>
           <li>
-            <Link to="/dashboard">
+            <Link to="/dashboard" className="white-text">
               <i className="material-icons">
                 home
               </i>Home
             </Link>
           </li>
           <li>
-            <Link to="/myideas">
+            <Link to="/myideas" className="white-text">
               <i className="material-icons">
                 folder
               </i>My Ideas

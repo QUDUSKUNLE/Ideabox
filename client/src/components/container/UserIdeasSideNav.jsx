@@ -65,7 +65,7 @@ class UserIdeasSideNav extends React.Component {
             </ul>
           </li>
           <li>
-            <Link to="/dashboard">
+            <Link to="/dashboard" className="white-text">
               <i className="material-icons">home</i>Home
             </Link>
           </li>
