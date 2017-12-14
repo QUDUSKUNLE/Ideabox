@@ -4,6 +4,7 @@ import authenticateRoute from '../authentication/authenticateRoute';
 import CommentPage from '../CommentPage';
 import DashBoard from '../DashBoard';
 import LandingPage from '../LandingPage';
+import NotFound from '../NotFound';
 import MyIdeas from '../MyIdeas';
 import UpdatePasswordPage from '../UpdatePasswordPage';
 
@@ -38,6 +39,7 @@ export default () =>
           path="/dashboard/:ideaId"
           component={authenticateRoute(CommentPage)}
         />
+        <Route render={() => <NotFound />} />
       </Switch>
     </Router>
   );
