@@ -37,7 +37,7 @@ export default (email, name, hash, headers) => {
                   background:#fff;
                   font:14px sans-serif;
                   color:#686f7a;
-                  border:2px solid #42a5f5;
+                  border:2px solid #141E26;
                   margin-bottom:10px">
                 <div 
                   style="
@@ -69,7 +69,7 @@ export default (email, name, hash, headers) => {
                       font-size:15px;color:#ffffff;
                       padding:10px 15px;
                       text-decoration:none;
-                      background-color:#42a5f5;
+                      background-color:#141E26;
                       border-radius:3px" 
                       target="_blank">
                       Reset Password
@@ -89,7 +89,7 @@ export default (email, name, hash, headers) => {
                       Best regards, <br>
                       IdeaBox Team.<br>
                     <a href="https://ideaboxng.herokuapp.com"
-                      style="color: #42a5f5">https://ideaboxng.herokuapp.com
+                      style="color: #141E26">https://ideaboxng.herokuapp.com
                     </a>
                   </p>
                 </div>

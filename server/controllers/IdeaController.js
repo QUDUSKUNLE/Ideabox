@@ -99,7 +99,7 @@ class IdeaController {
         description: capitalize(req.body.description.trim()),
         access: capitalize(req.body.access.trim()),
         category: capitalize(req.body.category.trim()),
-        status: 'Edited'
+        status: true
       },
       { new: true }
     ).exec((err, updatedIdea) => {
@@ -296,7 +296,7 @@ class IdeaController {
   }
 
   /**
-   * Routes: POST: /api/v1/users/ideas/search?offset=A?limit=B
+   * Routes: POST: /api/v1/users/ideas/search?search=search&offset=A&limit=B
    * @description This search for ideas base on category
    * @param {any} req user request object
    * @param {any} res server response

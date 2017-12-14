@@ -104,7 +104,6 @@ footer {
 i.removable {
     cursor: pointer;
     float: right;
-    // line-height: 32px;
     font-size: 16px;
 }
 
@@ -200,3 +199,23 @@ $break-large: 1200px;
 .category {
     font-size: 12px
 }
+
+$mde-preview-font-size: 14px !default;
+$mde-button-color: #767676 !default;
+$mde-border-color: rgba(0,
+0,
+0,
+.15) !default; // this defaults to the Bootstrap 4 default border color
+$mde-textarea-min-height: 200px !default;
+$mde-textarea-padding: 0.5rem !default;
+$mde-textarea-border-radius: .25rem !default;
+$mde-preview-margin-top: 8px !default;
+$mde-preview-horizontal-padding: 10px !default;
+$mde-preview-vertical-padding: 10px !default;
+$mde-help-color: rgba(0,
+0,
+0,
+.15) !default;
+// .tooltipped {
+//     font-size: 10px !important;
+// }

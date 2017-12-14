@@ -72,26 +72,6 @@ class UserIdeasSideNav extends React.Component {
           <li>
             <div className="divider" />
           </li>
-          <li>
-            <div className="nav-wrapper">
-              <form>
-                <div className="input-field">
-                  <input
-                    id="search"
-                    type="search"
-                    required
-                    placeholder="Search"
-                  />
-                  <label
-                    className="label-icon"
-                    htmlFor="search"
-                  >
-                    <i className="material-icons">search</i>
-                  </label>
-                </div>
-              </form>
-            </div>
-          </li>
           <li className="no-padding">
             <ul className="collapsible collapsible-accordion">
               <li>

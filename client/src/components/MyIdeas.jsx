@@ -119,7 +119,9 @@ export default class MyIdeas extends React.Component {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        AppActions.deleteIdea(ideaId);
+        AppActions.deleteIdea(ideaId).catch((error) => {
+          if (error.response) { return true; }
+        });
         swal(
           'Deleted!',
           'Idea deleted successfully.',
@@ -165,7 +167,6 @@ export default class MyIdeas extends React.Component {
    * @return {void}
    */
   handleDeleteResponse() {
-    console.log(AppStore.deleteIdea());
     AppActions.myIdeas(this.state.ideaLimit);
   }
 
