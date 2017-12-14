@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import showdown from 'showdown';
 import formatLink from '../../../helper/formatLink';
 
 /**
@@ -40,6 +41,7 @@ export default class Idea extends React.Component {
   * @returns {object} CommentPage component
   */
   render() {
+    const converter = new showdown.Converter();
     const displayIdea = () => {
       if (this.state.publicIdea.length === 0) {
         return (
@@ -77,7 +79,7 @@ export default class Idea extends React.Component {
                         <i className="material-icons right">close
                         </i>
                       </span>
-                      <p>{idea.description}.</p>
+                      <p>{converter.makeHtml(idea.description)}.</p>
                       <p className="author">Author:{' '}
                         <span>
                           {idea.author.name}
