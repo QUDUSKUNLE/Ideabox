@@ -1,7 +1,9 @@
 import React from 'react';
+import ReactMde, { ReactMdeCommands } from 'react-mde';
 import AppActions from '../../../actions/AppActions';
 import AppConstants from '../../../contants/AppConstants';
 import AppStore from '../../../store/AppStore';
+import 'react-mde/lib/styles/css/react-mde-all.css';
 
 /**
  * @description - renders CreateIdea Component
@@ -19,7 +21,10 @@ export default class CreateIdea extends React.Component {
     super(props);
     this.state = {
       category: '',
-      ideaLimit: 6
+      title: '',
+      access: '',
+      ideaLimit: 6,
+      reactMdeValue: { text: '', selection: null }
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleCreateIdea = this.handleCreateIdea.bind(this);
@@ -55,6 +60,10 @@ export default class CreateIdea extends React.Component {
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+
+  handleValueChange = (value) => {
+    this.setState({ reactMdeValue: value });
+  }
   /**
    * @method handleResponse
    * @description class method that handles createIdea
@@ -74,7 +83,13 @@ export default class CreateIdea extends React.Component {
   */
   handleCreateIdea(createNewIdea) {
     createNewIdea.preventDefault();
-    AppActions.createIdea(this.state)
+    const newIdea = {
+      title: this.state.title,
+      description: this.state.reactMdeValue.text,
+      category: this.state.category,
+      access: this.state.access
+    }
+    AppActions.createIdea(newIdea)
       .catch((error) => {
         if (error.response) {
           Materialize.toast(error.response.data.error, 2000, 'rounded red');
@@ -99,10 +114,6 @@ export default class CreateIdea extends React.Component {
               onSubmit={this.handleCreateIdea}
             >
               <div className="input-field black-text col s12">
-                <i
-                  className="material-icons prefix"
-                >subtitles
-                </i>
                 <input
                   id="title"
                   name="title"
@@ -115,19 +126,17 @@ export default class CreateIdea extends React.Component {
                 <label htmlFor="title">Title</label>
               </div>
               <div className="input-field black-text col s12">
-                <i
-                  className="material-icons prefix"
-                >description
-                </i>
-                <textarea
-                  name="description"
-                  onChange={this.handleChange}
-                  id="description"
-                  className="materialize-textarea"
-                  data-length="500"
-                  required
-                />
-                <label htmlFor="description">Description</label>
+                <div className="">
+                  <ReactMde
+                    textAreaProps={{
+                      id: 'ta1',
+                      name: 'ta1',
+                    }}
+                    value={this.state.reactMdeValue}
+                    onChange={this.handleValueChange}
+                    commands={ReactMdeCommands.getDefaultCommands()}
+                  />
+                </div>
               </div>
               <div className="col s12">
                 <label>Category</label>
