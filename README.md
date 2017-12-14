@@ -84,4 +84,4 @@ For every pull request raised, kindly adhere to this best practises <a href="htt
 
  ## License
  
-This software is licensed under the MIT License. See the <a href="https://github.com/QUDUSKUNLE/Ideabox/blob/develop/LICENSE">LICENSE</a> file in the top distribution directory for the full license text.
+This software is licensed under the MIT License. See the <a href="https://github.com/QUDUSKUNLE/Ideabox/blob/develop/LICENCE">LICENSE</a> file in the top distribution directory for the full license text.
