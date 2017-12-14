@@ -38,7 +38,3 @@ export default class UpdatePasswordPage extends React.Component {
   }
 }
 
-// UpdatePasswordPage.propTypes = {
-//   history: PropTypes.object.isRequired
-// };
-// export default HomePage;

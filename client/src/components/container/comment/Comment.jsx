@@ -21,7 +21,7 @@ const Comment = ({ fetchComment }) => {
         </div>
       ));
   }
-  return true;
+  return <span />;
 };
 
 Comment.propTypes = {

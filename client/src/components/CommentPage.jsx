@@ -87,7 +87,6 @@ export default class CommentPage extends React.Component {
     });
   }
 
-
   /**
   * @method handleLogOut
   * @description class method that handles log out event
@@ -113,7 +112,9 @@ export default class CommentPage extends React.Component {
                   href="#"
                   className="collapsible-header white-text"
                 >{this.state.username}
-                  <i className="material-icons right">arrow_drop_down</i>
+                  <i className="material-icons right">
+                    arrow_drop_down
+                  </i>
                 </a>
                 <div className="collapsible-body">
                   <ul>
@@ -133,12 +134,16 @@ export default class CommentPage extends React.Component {
           </li>
           <li>
             <Link to="/dashboard">
-              <i className="material-icons">home</i>Home
+              <i className="material-icons">
+                home
+              </i>Home
             </Link>
           </li>
           <li>
             <Link to="/myideas">
-              <i className="material-icons">folder</i>My Ideas
+              <i className="material-icons">
+                folder
+              </i>My Ideas
             </Link>
           </li>
         </ul>
@@ -146,7 +151,9 @@ export default class CommentPage extends React.Component {
           href="#"
           data-activates="slide-out"
           className="button-collapse icon_menu"
-        ><i className="medium material-icons black-text">menu</i>
+        ><i className="medium material-icons black-text">
+          menu
+         </i>
         </a>
         <main>
           <MainIdea
