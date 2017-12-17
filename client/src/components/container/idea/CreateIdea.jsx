@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactMde, { ReactMdeCommands } from 'react-mde';
+import 'react-mde/lib/styles/css/react-mde-all.css';
 import AppActions from '../../../actions/AppActions';
 import AppConstants from '../../../contants/AppConstants';
 import AppStore from '../../../store/AppStore';
-import 'react-mde/lib/styles/css/react-mde-all.css';
 
 /**
  * @description - renders CreateIdea Component
@@ -28,6 +28,8 @@ export default class CreateIdea extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleCreateIdea = this.handleCreateIdea.bind(this);
+    this.handleResponse = this.handleResponse.bind(this);
+    this.handleValueChange = this.handleValueChange.bind(this);
   }
 
   /**
@@ -61,9 +63,16 @@ export default class CreateIdea extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleValueChange = (value) => {
+  /**
+  * @method handleValueChange
+  * @description class method that binds markdown input fields to reactMdeValue
+  * @return {void}
+  * @param {event} value
+  */
+  handleValueChange(value) {
     this.setState({ reactMdeValue: value });
   }
+
   /**
    * @method handleResponse
    * @description class method that handles createIdea
@@ -72,6 +81,12 @@ export default class CreateIdea extends React.Component {
   handleResponse() {
     Materialize.toast(AppStore.createIdea().message, 2000, 'rounded green');
     AppActions.getPublicIdeas(this.state.ideaLimit);
+    this.setState({
+      category: '',
+      title: '',
+      access: '',
+      reactMdeValue: { text: '', selection: null }
+    });
     $('#create_idea').modal('close');
   }
 
@@ -88,7 +103,7 @@ export default class CreateIdea extends React.Component {
       description: this.state.reactMdeValue.text,
       category: this.state.category,
       access: this.state.access
-    }
+    };
     AppActions.createIdea(newIdea)
       .catch((error) => {
         if (error.response) {
@@ -126,7 +141,7 @@ export default class CreateIdea extends React.Component {
                 <label htmlFor="title">Title</label>
               </div>
               <div className="input-field black-text col s12">
-                <div className="">
+                <div>
                   <ReactMde
                     textAreaProps={{
                       id: 'ta1',

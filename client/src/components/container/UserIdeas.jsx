@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compiler } from 'markdown-to-jsx';
 
 /**
  * @function UserIdeas
@@ -16,9 +17,7 @@ export default class UserIdeas extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      myIdeas: []
-    };
+    this.state = { myIdeas: [] };
   }
 
   /**
@@ -26,7 +25,7 @@ export default class UserIdeas extends React.Component {
   * @description This listening if props changes
   * @param {object} nextProps
   * @return {void}
-  * @memberof MainIdea
+  * @memberof UserIdeas
   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.myIdeas[0] !== undefined) {
@@ -35,7 +34,6 @@ export default class UserIdeas extends React.Component {
       });
     }
   }
-
 
   /**
   * @description - render method, React lifecycle method
@@ -56,11 +54,11 @@ export default class UserIdeas extends React.Component {
                     <i className="material-icons right">more_vert
                     </i>
                   </span>
-                  <p>
+                  <div>
                     <a href="#">
-                      {idea.description}
+                      {compiler(idea.description)}
                     </a>
-                  </p>
+                  </div>
                 </div>
                 <div className="card-reveal black-text">
                   <span
@@ -69,7 +67,7 @@ export default class UserIdeas extends React.Component {
                     <i className="material-icons right">close
                     </i>
                   </span>
-                  <p>{idea.description}.</p>
+                  <div>{compiler(idea.description)}</div>
                 </div>
                 <div className="card-action">
                   <span
@@ -114,4 +112,3 @@ UserIdeas.propTypes = {
   handleEdit: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired
 };
-
