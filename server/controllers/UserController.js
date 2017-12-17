@@ -195,7 +195,7 @@ class UserController {
   static updatePassword(req, res) {
     if ((!req.body.newPassword) || (!req.body.confirmPassword)) {
       return res.status(400).send({
-        error: 'NewPassword or confirmPassword must not be empty',
+        error: 'New password or confirm password must not be empty',
         success: false
       });
     }
@@ -223,10 +223,24 @@ class UserController {
                 error: err.message
               });
             }
-            res.status(200).send({
-              success: true,
-              message: 'Password has been updated',
-              updatedUser
+            User.findByIdAndUpdate(
+              { _id: updatedUser._id },
+              {
+                $set: { hash: '' },
+              },
+              { new: true }
+            ).exec((error, hashUpdate) => {
+              if (hashUpdate) {
+                return res.status(200).send({
+                  success: true,
+                  message: 'Password has been updated',
+                  hashUpdate
+                });
+              }
+              return res.status(503).send({
+                success: false,
+                error: error.message
+              });
             });
           });
         } else {
@@ -273,7 +287,7 @@ class UserController {
               username: user.username,
               email: user.email
             },
-            message: 'Profile Updated successfully',
+            message: 'Profile updated successfully',
             success: true
           });
         }
