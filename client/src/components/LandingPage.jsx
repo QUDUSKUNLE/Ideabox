@@ -83,4 +83,3 @@ export default class HomePage extends React.Component {
 HomePage.propTypes = {
   history: PropTypes.object.isRequired
 };
-// export default HomePage;

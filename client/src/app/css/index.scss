@@ -131,6 +131,10 @@ ul.pagination li {
     height: 100px;
 }
 
+a.allpublic {
+    padding: 0 30px !important;
+}
+
 $break-small: 320px;
 $break-medium: 640px;
 $break-large: 1200px;
@@ -216,6 +220,3 @@ $mde-help-color: rgba(0,
 0,
 0,
 .15) !default;
-// .tooltipped {
-//     font-size: 10px !important;
-// }

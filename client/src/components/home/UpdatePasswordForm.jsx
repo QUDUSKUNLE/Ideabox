@@ -25,6 +25,7 @@ export default class UpdatePasswordForm extends React.Component {
     };
     this.handleChangeEvent = this.handleChangeEvent.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleUpdateResponse = this.handleUpdateResponse.bind(this);
   }
 
   /**
@@ -63,8 +64,8 @@ export default class UpdatePasswordForm extends React.Component {
   /**
   * @method handleUpdate
   * @description class method that makes an action call to sign up a user
-  * @return {void}
   * @param {event} event
+  * @return {void}
   */
   handleUpdate(event) {
     event.preventDefault();
@@ -85,6 +86,8 @@ export default class UpdatePasswordForm extends React.Component {
    */
   handleUpdateResponse() {
     Materialize.toast(AppStore.updatePassword().message, 2000, 'rounded green');
+    this.setState({ newPassword: '', confirmPassword: '' });
+    this.props.hash.history.push('/');
   }
 
   /**
@@ -109,7 +112,6 @@ export default class UpdatePasswordForm extends React.Component {
                 onChange={this.handleChangeEvent}
                 name="newPassword"
                 type="password"
-                id="newPassword"
                 className="validate header"
                 required
               />
@@ -125,7 +127,6 @@ export default class UpdatePasswordForm extends React.Component {
                 value={this.state.confirmPassword}
                 onChange={this.handleChangeEvent}
                 name="confirmPassword"
-                id="confirmPassword"
                 type="password"
                 className="validate header"
                 required
@@ -161,5 +162,6 @@ export default class UpdatePasswordForm extends React.Component {
 }
 
 UpdatePasswordForm.propTypes = {
-  hash: PropTypes.object.isRequired
+  hash: PropTypes.object.isRequired,
+  // history: PropTypes.object.isRequired
 };

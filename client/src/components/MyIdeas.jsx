@@ -166,9 +166,7 @@ export default class MyIdeas extends React.Component {
    * @description class method that handles idea page
    * @return {void}
    */
-  handleDeleteResponse() {
-    AppActions.myIdeas(this.state.ideaLimit);
-  }
+  handleDeleteResponse() { AppActions.myIdeas(this.state.ideaLimit); }
 
   /**
    * @method handleLogOut
@@ -211,7 +209,7 @@ export default class MyIdeas extends React.Component {
     );
   }
 }
+
 MyIdeas.propTypes = {
   history: PropTypes.object.isRequired
 };
-

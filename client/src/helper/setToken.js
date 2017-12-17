@@ -1,8 +1,8 @@
 import axios from 'axios';
 /**
  * @description: This helps to set token to header
- * @param {Object} token request object
- * @return {Object} response contains validation status
+ * @param {string} token request object
+ * @return {string} response contains validation status
  */
 export default (token) => {
   if (token) {
@@ -11,4 +11,3 @@ export default (token) => {
     delete axios.defaults.headers.common['x-access-token'];
   }
 };
-

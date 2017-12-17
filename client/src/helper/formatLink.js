@@ -1,6 +1,6 @@
 /**
- * @description: This helps to format title for socail sharing
- * @param {object} title idea title
+ * @description: This helps to format title for social sharing
+ * @param {string} title idea title
  * @return {string} formatted Title
  */
 export default (title) => {

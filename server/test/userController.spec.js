@@ -299,7 +299,7 @@ describe('User Controller Test', () => {
           res.should.have.status(400);
           assert.equal(false, res.body.success);
           res.body.should.have.property('error')
-            .equals('NewPassword or confirmPassword must not be empty');
+            .equals('New password or confirm password must not be empty');
           done();
         });
     });
@@ -326,7 +326,6 @@ describe('User Controller Test', () => {
   // Test for update profile route
   describe('User Update profile route', () => {
     let validToken = '';
-    let id = '';
     before((done) => {
       chai.request(server)
         .post('/api/v1/users/signin')
@@ -334,7 +333,6 @@ describe('User Controller Test', () => {
         .end((err, res) => {
           if (err) return done(err);
           validToken = res.body.token;
-          id = res.body.userDetails.userId;
           done();
         });
     });
@@ -373,7 +371,7 @@ describe('User Controller Test', () => {
             assert.equal(user.username, res.body.user.username);
             assert.equal(user.email, res.body.user.email);
             res.body.should.have.property('message')
-              .equals('Profile Updated successfully');
+              .equals('Profile updated successfully');
             done();
           });
       }

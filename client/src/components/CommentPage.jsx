@@ -41,14 +41,10 @@ export default class CommentPage extends React.Component {
     AppActions.fetchComment(this.props.match.params.ideaId);
     AppStore.on(AppConstants.FETCH_IDEA, this.handleFetchIdea);
     AppStore.on(AppConstants.FETCH_COMMENT, this.handleFetchComment);
-    $('.collapsible').collapsible({
-      accordion: false
-    });
-    $('.button-collapse').sideNav({
-      closeOnClick: false,
-      draggable: true
-    });
+    $('.collapsible').collapsible({ accordion: false });
+    $('.button-collapse').sideNav({ closeOnClick: false, draggable: true });
     $('.modal').modal();
+    $('.tooltipped').tooltip('remove');
   }
 
   /**
@@ -70,11 +66,7 @@ export default class CommentPage extends React.Component {
    * @description class method that handles fetch Idea response
    * @return {void}
    */
-  handleFetchIdea() {
-    this.setState({
-      idea: AppStore.fetchIdea().idea
-    });
-  }
+  handleFetchIdea() { this.setState({ idea: AppStore.fetchIdea().idea }); }
 
   /**
    * @method handleFetchComment
@@ -170,4 +162,3 @@ CommentPage.propTypes = {
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
-

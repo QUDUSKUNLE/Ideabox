@@ -34,6 +34,7 @@ export default class DashBoard extends React.Component {
     this.handlePublicIdeas = this.handlePublicIdeas.bind(this);
     this.handleCategoryResponse = this.handleCategoryResponse.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
+    this.handlePublicRevert = this.handlePublicRevert.bind(this);
     this.handleClickCategory = this.handleClickCategory.bind(this);
     this.handleSearchResponse = this.handleSearchResponse.bind(this);
   }
@@ -109,6 +110,16 @@ export default class DashBoard extends React.Component {
   }
 
   /**
+   * @method handlePublicRevert
+   * @description class method that handles public Revert response
+   * @return {void}
+   */
+  handlePublicRevert() {
+    this.setState({ categoryIsClicked: false });
+    AppActions.getPublicIdeas(this.state.ideaLimit);
+  }
+
+  /**
    * @method handleResponse
    * @description class method that handles log out action
    * @return {void}
@@ -169,6 +180,7 @@ export default class DashBoard extends React.Component {
         <SideNav
           handleClickCategory={this.handleClickCategory}
           ideaLimit={this.state.ideaLimit}
+          handlePublicRevert={this.handlePublicRevert}
           logOut={this.handleLogOut}
         />
         <main>

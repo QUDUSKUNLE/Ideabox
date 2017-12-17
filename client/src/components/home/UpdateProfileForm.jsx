@@ -21,6 +21,7 @@ export default class UpdateProfileForm extends React.Component {
     this.state = { username: '', email: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdateProfile = this.handleUpdateProfile.bind(this);
+    this.handleUpdateResponse = this.handleUpdateResponse.bind(this);
   }
 
   /**
@@ -33,6 +34,7 @@ export default class UpdateProfileForm extends React.Component {
     $('.modal').modal();
     AppStore.on(AppConstants.UPDATE_PROFILE, this.handleUpdateResponse);
   }
+
   /**
   * @method componentWillReceiveProps
   * @description This listening to event in the AppStore
@@ -45,6 +47,19 @@ export default class UpdateProfileForm extends React.Component {
       username: nextProps.userDetails.username,
       email: nextProps.userDetails.email
     });
+  }
+
+  /**
+  * @method componentWillUnmount
+  * @description Removes listener from AppStore
+  * @return {void}
+  * @memberof UpdateProfileForm
+  */
+  componentWillUnmount() {
+    AppStore.removeListener(
+      AppConstants.UPDATE_PROFILE,
+      this.handleUpdateResponse
+    );
   }
 
   /**
@@ -79,8 +94,10 @@ export default class UpdateProfileForm extends React.Component {
       2000,
       'rounded green'
     );
+    this.setState({ username: '', email: '' });
     $('#update_profile').modal('close');
   }
+
   /**
   * @description - render method, React lifecycle method
   * @returns {object} UpdateProfileForm component

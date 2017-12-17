@@ -10,7 +10,7 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
-import Router from './routes/index';
+import route from './routes/index';
 
 mongoose.Promise = global.Promise;
 dotenv.config();
@@ -21,7 +21,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
-app.use('/api/v1/users', Router);
+app.use('/api/v1/users', route);
 
 if (process.env.NODE_ENV !== 'production') {
   if (process.env.NODE_ENV === 'test') {
