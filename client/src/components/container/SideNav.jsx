@@ -120,6 +120,15 @@ export default class SideNav extends React.Component {
             </a>
           </li>
           <li>
+            <a
+              role="button"
+              tabIndex="0"
+              className="collapsible-header allpublic white-text"
+              onClick={this.props.handlePublicRevert}
+            ><i className="material-icons">create</i>Public Ideas
+            </a>
+          </li>
+          <li>
             <div className="divider" />
           </li>
           <li>
@@ -241,5 +250,6 @@ export default class SideNav extends React.Component {
 }
 SideNav.propTypes = {
   logOut: PropTypes.func.isRequired,
-  handleClickCategory: PropTypes.func.isRequired
+  handleClickCategory: PropTypes.func.isRequired,
+  handlePublicRevert: PropTypes.func.isRequired
 };
