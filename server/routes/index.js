@@ -9,12 +9,12 @@ import verifyToken from '../middlewares/verifyToken';
 /**
  * Creates express Router
  */
-const Router = express.Router();
+const route = express.Router();
 
 /**
  * Route for signup users
  */
-Router.post(
+route.post(
   '/signup',
   validateRequest,
   UserController.signUp
@@ -23,7 +23,7 @@ Router.post(
 /**
  * Route for signin users
  */
-Router.post(
+route.post(
   '/signin',
   validateRequest,
   UserController.signIn
@@ -32,7 +32,7 @@ Router.post(
 /**
  * Route for users to request for password reset
  */
-Router.post(
+route.post(
   '/passwords',
   validateRequest,
   UserController.resetPassword
@@ -41,7 +41,7 @@ Router.post(
 /**
  * Route for users to update password
  */
-Router.put(
+route.put(
   '/passwords/:hash',
   validateRequest,
   UserController.updatePassword
@@ -50,7 +50,7 @@ Router.put(
 /**
  * Route for users to update profile
  */
-Router.put(
+route.put(
   '/profiles',
   verifyToken,
   UserController.updateProfile
@@ -59,7 +59,7 @@ Router.put(
 /**
  * Create ideas endpoint
  */
-Router.post(
+route.post(
   '/ideas',
   verifyToken,
   validateRequest,
@@ -70,7 +70,7 @@ Router.post(
  * Edit idea endpoint
  * Edit idead by its id
  */
-Router.put(
+route.put(
   '/ideas/:ideaId',
   verifyToken,
   validateRequest,
@@ -81,7 +81,7 @@ Router.put(
  * Route to Delete ideas
  * Delete idea by id
  */
-Router.delete(
+route.delete(
   '/ideas/:ideaId',
   verifyToken,
   IdeaController.deleteIdea
@@ -90,7 +90,7 @@ Router.delete(
 /**
  * Fetch all public ideas endpoint
  */
-Router.get(
+route.get(
   '/ideas/public',
   verifyToken,
   IdeaController.publicIdea
@@ -99,7 +99,7 @@ Router.get(
 /**
  * Route to Filter ideas by category
  */
-Router.get(
+route.get(
   '/ideas',
   verifyToken,
   IdeaController.filterIdeas
@@ -108,7 +108,7 @@ Router.get(
 /**
  * Route to search for ideas
  */
-Router.get(
+route.get(
   '/ideas/search',
   verifyToken,
   IdeaController.searchIdeas
@@ -118,7 +118,7 @@ Router.get(
  * Route to fetch an idea
  * Fetch Idea by Id
  */
-Router.get(
+route.get(
   '/ideas/:ideaId',
   verifyToken,
   IdeaController.fetchIdea
@@ -130,7 +130,7 @@ Router.get(
  * Fetch by user Id
  * user Id is gotten from verifyToken
  */
-Router.get(
+route.get(
   '/ideas/user/ideas',
   verifyToken,
   IdeaController.userIdeas
@@ -139,7 +139,7 @@ Router.get(
 /**
  * Route to write a comment
  */
-Router.post(
+route.post(
   '/comments/:ideaId',
   verifyToken,
   validateRequest,
@@ -149,7 +149,7 @@ Router.post(
 /**
  * Route to fetch comments of a particular idea
  */
-Router.get(
+route.get(
   '/comments/:ideaId',
   verifyToken,
   CommentController.fetchComment
@@ -158,7 +158,7 @@ Router.get(
 /**
  * Route to edit a comment
  */
-Router.put(
+route.put(
   '/comments/:commentId',
   verifyToken,
   validateRequest,
@@ -168,10 +168,10 @@ Router.put(
 /**
  * Route to delete a comment
  */
-Router.delete(
+route.delete(
   '/comments/:commentId',
   verifyToken,
   CommentController.deleteComment
 );
 
-export default Router;
+export default route;
