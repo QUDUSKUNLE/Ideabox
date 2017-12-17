@@ -6,7 +6,6 @@ import AppStore from '../../store/AppStore';
 import AppConstants from '../../contants/AppConstants';
 import customAlert from '../customAlert';
 
-
 /**
  * @description - renders LogInForm Component
  * @class LogInForm
@@ -78,7 +77,7 @@ export default class LogInForm extends React.Component {
   * @method handleLogIn
   * @description class method that makes an action call to sign up a user
   * @return {void}
-  * @param {logInEvent} logInEvent
+  * @param {object} logInEvent
   */
   handleLogIn(logInEvent) {
     logInEvent.preventDefault();
@@ -132,7 +131,6 @@ export default class LogInForm extends React.Component {
                     value={this.state.email}
                     onChange={this.onChange}
                     name="email"
-                    id="email"
                     type="email"
                     className="validate header"
                     required
@@ -149,7 +147,6 @@ export default class LogInForm extends React.Component {
                     value={this.state.password}
                     onChange={this.onChange}
                     name="password"
-                    id="password"
                     type="password"
                     className="validate header"
                     required
@@ -187,6 +184,7 @@ export default class LogInForm extends React.Component {
     );
   }
 }
+
 LogInForm.propTypes = {
   history: PropTypes.object.isRequired
 };

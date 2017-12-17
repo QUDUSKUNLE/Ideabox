@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compiler } from 'markdown-to-jsx';
 import AppActions from '../../../actions/AppActions';
 import AppConstants from '../../../contants/AppConstants';
 import AppStore from '../../../store/AppStore';
@@ -43,9 +44,7 @@ export default class MainIdea extends React.Component {
   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.fetchComment[0] !== undefined) {
-      this.setState({
-        fetchComment: nextProps.fetchComment
-      });
+      this.setState({ fetchComment: nextProps.fetchComment });
     }
   }
 
@@ -95,7 +94,6 @@ export default class MainIdea extends React.Component {
     AppActions.fetchComment(AppStore.createComment().createdComment.idea.id);
   }
 
-
   /**
   * @description - render method, React lifecycle method
   * @returns {Object} MainIdea component
@@ -111,7 +109,9 @@ export default class MainIdea extends React.Component {
               </i>{this.props.idea.title}
             </div>
             <div className="collapsible-body white-text comment_header">
-              <span>{this.props.idea.description}</span>
+              {this.props.idea.description === undefined
+                ? <span>{this.props.idea.description}</span>
+                : <span>{compiler(this.props.idea.description)}</span>}
             </div>
           </li>
           <li>
@@ -156,9 +156,7 @@ export default class MainIdea extends React.Component {
     );
   }
 }
-
 MainIdea.propTypes = {
   idea: PropTypes.object.isRequired,
   fetchComment: PropTypes.array.isRequired
 };
-

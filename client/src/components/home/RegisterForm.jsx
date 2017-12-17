@@ -63,6 +63,7 @@ export default class RegisterForm extends React.Component {
       show: false
     });
   }
+
   /**
    * @method handleResponse
    * @description class method that handles register Response
@@ -73,6 +74,7 @@ export default class RegisterForm extends React.Component {
     $('#register').modal('close');
     this.props.history.push('/dashboard');
   }
+
   /**
   * @method handleRegister
   * @description class method that makes an action call to sign up a user
@@ -127,7 +129,6 @@ export default class RegisterForm extends React.Component {
                   onChange={this.onChange}
                   name="username"
                   type="text"
-                  id="username"
                   className="validate header"
                   required
                 />
@@ -141,7 +142,6 @@ export default class RegisterForm extends React.Component {
                   value={this.state.email}
                   onChange={this.onChange}
                   name="email"
-                  id="email"
                   type="email"
                   className="validate header"
                   required
@@ -156,7 +156,6 @@ export default class RegisterForm extends React.Component {
                   value={this.state.password}
                   onChange={this.onChange}
                   name="password"
-                  id="password"
                   type="password"
                   className="validate header"
                   required

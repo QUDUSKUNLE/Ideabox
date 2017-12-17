@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 
+/**
+ * @function Pagination
+ * @description the UpdateProfileModal component.
+ * @param {object} props
+ * @returns {string} The HTML markup for the UpdateProfileModal component
+ */
 const Pagination = props =>
   (
     <div className="pagination center" id="foot">

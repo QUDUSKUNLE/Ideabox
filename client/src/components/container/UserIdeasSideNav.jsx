@@ -16,9 +16,7 @@ class UserIdeasSideNav extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      // username: JSON.parse(localStorage.getItem('username')),
-    };
+    this.state = {};
   }
 
   /**
@@ -33,7 +31,7 @@ class UserIdeasSideNav extends React.Component {
 
   /**
   * @description - render method, React lifecycle method
-  * @returns {object} UserIdeas component
+  * @returns {object} UserIdeasSideNav component
   */
   render() {
     return (

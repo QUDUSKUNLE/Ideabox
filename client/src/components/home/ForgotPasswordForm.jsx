@@ -133,7 +133,6 @@ export default class ForgotPasswordForm extends React.Component {
                   value={this.state.email}
                   onChange={this.onChange}
                   name="email"
-                  id="email"
                   type="email"
                   className="validate header"
                   required

@@ -1,4 +1,3 @@
-
 /**
  * @description: This helps to set localStorage
  * @param {Object} response server response
@@ -18,4 +17,3 @@ export default (response) => {
     localStorage.setItem('isAuthenticated', JSON.stringify(true));
   }
 };
-
