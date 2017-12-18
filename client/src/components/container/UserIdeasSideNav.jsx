@@ -77,26 +77,6 @@ class UserIdeasSideNav extends React.Component {
           <li>
             <div className="divider" />
           </li>
-          <li className="no-padding">
-            <ul className="collapsible collapsible-accordion">
-              <li>
-                <a
-                  href="#"
-                  className="collapsible-header"
-                >Categories
-                <i className="material-icons right">
-                  arrow_drop_down
-                </i>
-                </a>
-                <div className="collapsible-body">
-                  <ul>
-                    <li><a href="#">Public</a></li>
-                    <li><a href="#">Private</a></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </li>
         </ul>
         <a
           href="#"

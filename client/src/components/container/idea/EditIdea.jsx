@@ -170,7 +170,7 @@ export default class EditIdea extends React.Component {
                 <button
                   className="btn deep-purple darken-4 margin-top s6"
                   type="submit"
-                >SAVE CHANGES
+                >SAVE
                 </button>
               </div>
             </form>
