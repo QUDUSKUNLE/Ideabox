@@ -28,13 +28,13 @@ export default {
       offset: 0,
       limit: 5
     },
-    newIdea1: {
+    agricIdea: {
       title: 'Agricultural Mechanization',
       description: 'In Nigeria',
       category: 'Agriculture',
       access: 'public'
     },
-    newIdea2: {
+    schoolIdea: {
       title: '',
       description: 'In Nigeria',
       category: 'Agriculture',
@@ -46,7 +46,7 @@ export default {
       category: 'Agriculture',
       access: 'public'
     },
-    newIdea3: {
+    politicsIdea: {
       title: 'The Nigerian Constitution',
       description: '',
       category: 'Agriculture',
