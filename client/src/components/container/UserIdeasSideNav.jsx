@@ -37,6 +37,13 @@ class UserIdeasSideNav extends React.Component {
     return (
       <div>
         <ul id="slide-out" className="side-nav fixed">
+          <li>
+            <div className="user-view logo1">
+              <div className="logo">
+                <h4 className="center-align">IdeaBox</h4>
+              </div>
+            </div>
+          </li>
           <li className="no-padding">
             <ul className="collapsible collapsible-accordion">
               <li>
@@ -69,26 +76,6 @@ class UserIdeasSideNav extends React.Component {
           </li>
           <li>
             <div className="divider" />
-          </li>
-          <li className="no-padding">
-            <ul className="collapsible collapsible-accordion">
-              <li>
-                <a
-                  href="#"
-                  className="collapsible-header"
-                >Categories
-                <i className="material-icons right">
-                  arrow_drop_down
-                </i>
-                </a>
-                <div className="collapsible-body">
-                  <ul>
-                    <li><a href="#">Public</a></li>
-                    <li><a href="#">Private</a></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
           </li>
         </ul>
         <a

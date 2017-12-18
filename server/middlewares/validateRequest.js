@@ -69,9 +69,9 @@ const validateRequestBody = (request) => {
             .notEmpty();
           request.check(
             'title',
-            'Title must not be more than 50 characters'
+            'Title must not be more than 1000 characters'
           )
-            .isLength({ max: 50 });
+            .isLength({ max: 1000 });
           request.check(
             'title',
             'Title should contain only alphabets'
@@ -87,11 +87,7 @@ const validateRequestBody = (request) => {
           )
             .trim()
             .notEmpty();
-          request.check(
-            'description',
-            'Description must not be more than 500 characters'
-          )
-            .isLength({ max: 500 });
+
           request.check(
             'description',
             'Description should contain only alphabets'
