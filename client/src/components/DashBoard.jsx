@@ -176,7 +176,7 @@ export default class DashBoard extends React.Component {
   */
   render() {
     return (
-      <div>
+      <div id="dasboard_page">
         <SideNav
           handleClickCategory={this.handleClickCategory}
           ideaLimit={this.state.ideaLimit}

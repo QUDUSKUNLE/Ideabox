@@ -113,6 +113,7 @@ export default class RegisterForm extends React.Component {
             >Register
             </h5>
             <form
+              id="register_form"
               className="col s12"
               onSubmit={this.handleRegister}
             >
@@ -129,7 +130,8 @@ export default class RegisterForm extends React.Component {
                   onChange={this.onChange}
                   name="username"
                   type="text"
-                  className="validate header"
+                  id="reg_username"
+                  className="validate header username"
                   required
                 />
                 <label
@@ -143,6 +145,7 @@ export default class RegisterForm extends React.Component {
                   onChange={this.onChange}
                   name="email"
                   type="email"
+                  id="reg_email"
                   className="validate header"
                   required
                 />
@@ -157,6 +160,7 @@ export default class RegisterForm extends React.Component {
                   onChange={this.onChange}
                   name="password"
                   type="password"
+                  id="reg_password"
                   className="validate header"
                   required
                 />
