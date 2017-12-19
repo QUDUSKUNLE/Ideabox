@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NotFound/> should render correctly 1`] = `
+ShallowWrapper {
+  "complexSelector": ComplexSelector {
+    "buildPredicate": [Function],
+    "childrenOfNode": [Function],
+    "findWhereUnwrapped": [Function],
+  },
+  "length": 1,
+  "node": <div
+    className="container"
+  >
+    <div
+      className="logo"
+    >
+      <h4>
+        IdeaBox
+      </h4>
+    </div>
+    <div
+      className="col s12 flex-center"
+    >
+      <div
+        className="center-align"
+      >
+        <div
+          className="center-align centralize"
+        >
+          <h3
+            className="white-text"
+          >
+            You\`re lost.
+            <Link
+              replace={false}
+              to="/"
+            >
+              Home
+            </Link>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "nodes": Array [
+    <div
+      className="container"
+    >
+      <div
+        className="logo"
+      >
+        <h4>
+          IdeaBox
+        </h4>
+      </div>
+      <div
+        className="col s12 flex-center"
+      >
+        <div
+          className="center-align"
+        >
+          <div
+            className="center-align centralize"
+          >
+            <h3
+              className="white-text"
+            >
+              You\`re lost.
+              <Link
+                replace={false}
+                to="/"
+              >
+                Home
+              </Link>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>,
+  ],
+  "options": Object {},
+  "renderer": ReactShallowRenderer {
+    "_context": Object {},
+    "_element": <NotFound />,
+    "_forcedUpdate": false,
+    "_instance": null,
+    "_newState": null,
+    "_rendered": <div
+      className="container"
+    >
+      <div
+        className="logo"
+      >
+        <h4>
+          IdeaBox
+        </h4>
+      </div>
+      <div
+        className="col s12 flex-center"
+      >
+        <div
+          className="center-align"
+        >
+          <div
+            className="center-align centralize"
+          >
+            <h3
+              className="white-text"
+            >
+              You\`re lost.
+              <Link
+                replace={false}
+                to="/"
+              >
+                Home
+              </Link>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>,
+    "_rendering": false,
+    "_updater": Updater {
+      "_callbacks": Array [],
+      "_renderer": [Circular],
+    },
+    "getRenderOutput": [Function],
+    "render": [Function],
+  },
+  "root": [Circular],
+  "unrendered": <NotFound />,
+}
+`;
