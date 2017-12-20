@@ -3,7 +3,7 @@
  *
  * @class LocalStorageMock
  */
-class LocalStorageMock {
+export default class LocalStorageMock {
   /**
    * @description creates a new instance of this class
    * @constructor

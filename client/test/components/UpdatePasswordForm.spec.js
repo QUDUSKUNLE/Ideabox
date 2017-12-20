@@ -3,25 +3,32 @@ import PropTypes from 'prop-types';
 import sinon from 'sinon';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import ForgotPasswordForm from '../../src/components/home/ForgotPasswordForm';
+import UpdatePasswordForm from '../../src/components/home/UpdatePasswordForm';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('ForgotPasswordForm ', () => {
-  const handleResetPassword = sinon.spy();
-  sinon.spy(ForgotPasswordForm.prototype, 'onChange');
-  sinon.spy(ForgotPasswordForm.prototype, 'componentDidMount');
-  const spy = sinon.spy(ForgotPasswordForm.prototype, 'componentWillUnmount');
+describe('<UpdatePasswordForm/>', () => {
+  const handleUpdate = sinon.spy();
+  sinon.spy(UpdatePasswordForm.prototype, 'handleChangeEvent');
+  sinon.spy(UpdatePasswordForm.prototype, 'componentDidMount');
+  const spy = sinon.spy(UpdatePasswordForm.prototype, 'componentWillUnmount');
   const props = {
-    email: '',
-    forgotPasswordError: '',
-    forgotPasswordSuccess: '',
-    show: false,
-    success: false,
-    handleResetPassword
+    newPassword: '',
+    confirmPassword: '',
+    handleUpdate,
+    hash: {
+      history: {
+        push: jest.fn()
+      },
+      match: {
+        params: {
+          hash: '123457jkdsjdsk'
+        }
+      }
+    }
   };
   const wrapper = mount(
-    <ForgotPasswordForm {...props} />,
+    <UpdatePasswordForm {...props} />,
     {
       childContextTypes: { router: PropTypes.object },
       context: {
@@ -32,7 +39,7 @@ describe('ForgotPasswordForm ', () => {
               replace: () => null,
               createHref: () => null,
               path: '/',
-              component: '[function UserSignUp]',
+              component: '[function UpdatePasswordForm]',
               location: {
                 pathname: '/',
                 search: '',
@@ -52,28 +59,28 @@ describe('ForgotPasswordForm ', () => {
   );
 
   it('component should be defined', () => {
-    expect(ForgotPasswordForm).toBeDefined();
+    expect(UpdatePasswordForm).toBeDefined();
   });
 
   it('component should call componentDidMount', () => {
-    expect(ForgotPasswordForm.prototype.componentDidMount.calledOnce)
+    expect(UpdatePasswordForm.prototype.componentDidMount.calledOnce)
       .toEqual(true);
-    ForgotPasswordForm.prototype.componentDidMount.restore();
+    UpdatePasswordForm.prototype.componentDidMount.restore();
   });
 
-  it(`component should called handleResetPassword method when submit 
+  it(`component should called handleLogIn method when submit
     button is clicked`, () => {
       const event = {
         preventDefault: jest.fn()
       };
-      const spySubmit = jest.spyOn(wrapper.instance(), 'handleResetPassword');
-      wrapper.instance().handleResetPassword(event);
+      const spySubmit = jest.spyOn(wrapper.instance(), 'handleUpdate');
+      wrapper.instance().handleUpdate(event);
       expect(spySubmit).toHaveBeenCalled();
     });
 
   it('onChange method should be called while typing in the input field', () => {
     const event = { target: { name: 'name', value: 'value' } };
-    wrapper.instance().onChange(event);
+    wrapper.instance().handleChangeEvent(event);
     expect(wrapper.state().name).toEqual('value');
   });
 

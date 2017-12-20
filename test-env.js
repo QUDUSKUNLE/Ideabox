@@ -1,6 +1,8 @@
 global.$ = () => ({
+  collapsible: () => null,
   tabs: () => null,
   attr: () => null,
+  Materialize: () => null,
   sideNav: () => null,
   modal: () => null,
   parallax: () => null,
@@ -8,3 +10,4 @@ global.$ = () => ({
   hide: () => null,
   tooltip: () => null
 });
+

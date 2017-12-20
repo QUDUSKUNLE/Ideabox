@@ -31,7 +31,8 @@
             "jsx"
         ],
         "globals": {
-            "$": true
+            "$": true,
+            "Materialize": true
         },
         "unmockedModulePathPatterns": [
             "react"
@@ -39,7 +40,8 @@
         "collectCoverage": true,
         "setupFiles": [
             "<rootDir>/client/mock/LocalStorageMock",
-            "<rootDir>/test-env.js"
+            "<rootDir>/test-env.js",
+            "<rootDir>/setupTest.js"
         ],
         "testPathIgnorePatterns": [
             "/node_modules/",
@@ -56,8 +58,8 @@
         "chai": "^4.1.2",
         "chai-http": "^3.0.0",
         "coveralls": "^3.0.0",
-        "enzyme": "^2.9.1",
         "enzyme-adapter-react-15": "^1.0.5",
+        "enzyme-adapter-react-16": "^1.1.1",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-plugin-import": "^2.8.0",
         "eslint-plugin-jsx-a11y": "^6.0.2",
@@ -91,6 +93,8 @@
         "css-loader": "^0.28.7",
         "dotenv": "^4.0.0",
         "dotenv-webpack": "^1.5.4",
+        "enzyme": "^3.2.0",
+        "enzyme-to-json": "^3.3.0",
         "express": "^4.16.2",
         "express-validator": "^4.3.0",
         "extract-text-webpack-plugin": "^3.0.2",
@@ -113,6 +117,7 @@
         "nodemailer": "^4.4.0",
         "nodemon": "^1.12.1",
         "prop-types": "^15.6.0",
+        "raf": "^3.4.0",
         "react": "^16.0.0",
         "react-mde": "^2.3.2",
         "react-paginate": "^5.0.0",

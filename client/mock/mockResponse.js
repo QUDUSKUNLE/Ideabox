@@ -3,7 +3,7 @@ export default {
     data: {
       message: 'Sign up successful',
       success: true,
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6eyJ1c2VyIjp7Il9pZCI6IjVhMzI1NDQ4MTYyZGMzMDAyYzk1NjcyYyIsInVzZXJuYW1lIjoiT2xhd2FsZSIsInBhc3N3b3JkIjoiJDJhJDEwJHQ1LlI5ZnJXR1FOMXZYMXdOUGR6N095VXlmczBlZkxCeXZJSE9kRmpldHNGLlkxaEZJaHNlIiwiZW1haWwiOiJzaG9sYUBnbWFpbC5jb20iLCJfX3YiOjAsInVwZGF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgyWiIsImNyZWF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgxWiJ9fSwiaWF0IjoxNTEzMjQ3ODg3LCJleHAiOjE1MTMzMzQyODd9.3SZX6RAWqky4Nuj7qtzh-fg7vMxIBggnS0E4tmmgfWk',
+      token: 'R6RUMTA6MzY6NTQyODd9.3SZX6RAWqky4Nuj7qtzh-fg7vMxIBggnS0E4tmmgfWk',
       userDetails: {
         email: 'quduskunle@gmail.com',
         username: 'Qudus Kunle',
@@ -15,7 +15,7 @@ export default {
     data: {
       message: 'Sign in successful',
       success: true,
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6eyJ1c2VyIjp7Il9pZCI6IjVhMzI1NDQ4MTYyZGMzMDAyYzk1NjcyYyIsInVzZXJuYW1lIjoiT2xhd2FsZSIsInBhc3N3b3JkIjoiJDJhJDEwJHQ1LlI5ZnJXR1FOMXZYMXdOUGR6N095VXlmczBlZkxCeXZJSE9kRmpldHNGLlkxaEZJaHNlIiwiZW1haWwiOiJzaG9sYUBnbWFpbC5jb20iLCJfX3YiOjAsInVwZGF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgyWiIsImNyZWF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgxWiJ9fSwiaWF0IjoxNTEzMjQ3ODg3LCJleHAiOjE1MTMzMzQyODd9.3SZX6RAWqky4Nuj7qtzh-fg7vMxIBggnS0E4tmmgfWk',
+      token: 'R6RUMTA6MzY6NTQyODd9.3SZX6RAWqky4Nuj7qtzh-fg7vMxIBggnS0E4tmmgfWk',
       userDetails: {
         email: 'quduskunle@gmail.com',
         username: 'Qudus Kunle',
@@ -209,13 +209,7 @@ export default {
             'Technology'
           ]
         }
-      ],
-      pageInfo: {
-        page: 1,
-        pageCount: 1,
-        pageSize: 5,
-        count: 5
-      }
+      ]
     }
   },
   createComment: {
@@ -287,7 +281,7 @@ export default {
     data: {
       message: 'Sign up successful',
       success: true,
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6eyJ1c2VyIjp7Il9pZCI6IjVhMzI1NDQ4MTYyZGMzMDAyYzk1NjcyYyIsInVzZXJuYW1lIjoiT2xhd2FsZSIsInBhc3N3b3JkIjoiJDJhJDEwJHQ1LlI5ZnJXR1FOMXZYMXdOUGR6N095VXlmczBlZkxCeXZJSE9kRmpldHNGLlkxaEZJaHNlIiwiZW1haWwiOiJzaG9sYUBnbWFpbC5jb20iLCJfX3YiOjAsInVwZGF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgyWiIsImNyZWF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgxWiJ9fSwiaWF0IjoxNTEzMjQ3ODg3LCJleHAiOjE1MTMzMzQyODd9.3SZX6RAWqky4Nuj7qtzh-fg7vMxIBggnS0E4tmmgfWk',
+      token: 'R6RUMTA6MzY6NTQyODd9.3SZX6RAWqky4Nuj7qtzh-fg7vMxIBggnS0E4tmmgfWk',
       userDetails: {
         email: 'quduskunle@gmail.com',
         username: 'Qudus Kunle',
@@ -299,7 +293,7 @@ export default {
     data: {
       message: 'Sign in successful',
       success: true,
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6eyJ1c2VyIjp7Il9pZCI6IjVhMzI1NDQ4MTYyZGMzMDAyYzk1NjcyYyIsInVzZXJuYW1lIjoiT2xhd2FsZSIsInBhc3N3b3JkIjoiJDJhJDEwJHQ1LlI5ZnJXR1FOMXZYMXdOUGR6N095VXlmczBlZkxCeXZJSE9kRmpldHNGLlkxaEZJaHNlIiwiZW1haWwiOiJzaG9sYUBnbWFpbC5jb20iLCJfX3YiOjAsInVwZGF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgyWiIsImNyZWF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgxWiJ9fSwiaWF0IjoxNTEzMjQ3ODg3LCJleHAiOjE1MTMzMzQyODd9.3SZX6RAWqky4Nuj7qtzh-fg7vMxIBggnS0E4tmmgfWk',
+      token: 'R6RUMTA6MzY6NTQyODd9.3SZX6RAWqky4Nuj7qtzh-fg7vMxIBggnS0E4tmmgfWk',
       userDetails: {
         email: 'quduskunle@gmail.com',
         username: 'Qudus Kunle',
@@ -331,7 +325,7 @@ export default {
         {
           _id: '5a2237e61f7c9a0bad4e3206',
           title: 'Ok, morning here',
-          description: 'This is to demonstrate how to bake cake for the young ones',
+          description: 'This is to demonstrate how to bake cake for the young',
           __v: 0,
           createdAt: '2017-12-02T05:19:34.811Z',
           updatedAt: '2017-12-02T05:19:34.811Z',
