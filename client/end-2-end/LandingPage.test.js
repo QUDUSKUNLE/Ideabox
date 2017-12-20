@@ -1,3 +1,4 @@
+import faker from 'faker';
 module.exports = new (function () {
   const testCase = this;
   testCase['Shows the landing page'] = function (client) {
@@ -62,9 +63,9 @@ module.exports = new (function () {
       .pause(1000)
       .waitForElementVisible('.input-field .username', 1500)
       .waitForElementVisible('.username', 3500)
-      .setValue('#reg_username', 'myName')
+      .setValue('#reg_username', faker.name.findName())
       .pause(2000)
-      .setValue('#reg_email', 'ben@gmail.com')
+      .setValue('#reg_email', faker.internet.email())
       .pause(3000)
       .setValue('#reg_password', 'abc1234567')
       .pause(3000)
@@ -76,99 +77,4 @@ module.exports = new (function () {
       .expect.element('#dasboard_page').to.be.visible;
     client.end();
   };
-  // testCase['SignUp page should have heading text SIGN UP'] = function (client) {
-  //   client
-  //     .url('http://localhost:8000/login')
-  //     .waitForElementVisible('.container-fluid', 1500)
-  //     .waitForElementVisible('.signUp h4', 1500)
-  //     .expect.element('.signUp h4').text.to.equal('SIGN UP');
-  //   client.end();
-  // };
-  // testCase['SignUp page should successfully signUp a new user'] = function (client) {
-  //   client
-  //     .url('http://localhost:8000/login')
-  //     .waitForElementVisible('.container-fluid', 1500)
-  //     .waitForElementVisible('.signUp h4', 1500)
-  //     .waitForElementVisible('.row', 1500)
-  //     .waitForElementVisible('.input-field', 1500)
-  //     .waitForElementVisible('.name', 3500)
-  //     .setValue('.name', 'Guy Richards')
-  //     .pause(2000)
-  //     .setValue('.user-name', 'Richie2')
-  //     .pause(3000)
-  //     .setValue('.email', 'Richie1@testing.com')
-  //     .pause(3000)
-  //     .setValue('.password', 'abc123')
-  //     .pause(3000)
-  //     .setValue('.confirm-password', 'abc123')
-  //     .pause(3000)
-  //     .waitForElementVisible('.btn-large', 1500)
-  //     .pause(2000)
-  //     .click('.btn-large')
-  //     .pause(5000)
-  //     .waitForElementVisible('.wrapper', 2500)
-  //     .expect.element('.wrapper').to.be.visible;
-  //   client.end();
-  // };
-  // testCase['SignIn page should successfully signIn registered user'] = function (client) {
-  //   client
-  //     .url('http://localhost:8000/login')
-  //     .waitForElementVisible('.container-fluid', 1500)
-  //     .waitForElementVisible('.row', 1500)
-  //     .waitForElementVisible('.message', 1500)
-  //     .waitForElementVisible('.toggler2', 1500)
-  //     .pause(2000)
-  //     .click('.toggler2')
-  //     .pause(3000)
-  //     .waitForElementVisible('.input-field', 1500)
-  //     .waitForElementVisible('.email', 1500)
-  //     .pause(3000)
-  //     .setValue('.email', 'Richie1@testing.com')
-  //     .pause(3000)
-  //     .setValue('.password', 'abc123')
-  //     .pause(3000)
-  //     .waitForElementVisible('.btn-large', 1500)
-  //     .pause(2000)
-  //     .click('.btn-large')
-  //     .pause(5000)
-  //     .waitForElementVisible('.wrapper', 2500)
-  //     .expect.element('.wrapper').to.be.visible;
-  //   client.end();
-  // };
-  // testCase['SignIn page should successfully signIn registered user'] = function (client) {
-  //   client
-  //     .url('http://localhost:8000/login')
-  //     .waitForElementVisible('.container-fluid', 1500)
-  //     .waitForElementVisible('.row', 1500)
-  //     .waitForElementVisible('.message', 1500)
-  //     .waitForElementVisible('.toggler2', 1500)
-  //     .pause(2000)
-  //     .click('.toggler2')
-  //     .pause(3000)
-  //     .waitForElementVisible('.input-field', 1500)
-  //     .waitForElementVisible('.email', 1500)
-  //     .pause(3000)
-  //     .setValue('.email', 'Richie1@testing.com')
-  //     .pause(3000)
-  //     .setValue('.password', 'abc123')
-  //     .pause(3000)
-  //     .waitForElementVisible('.btn-large', 1500)
-  //     .pause(2000)
-  //     .click('.btn-large')
-  //     .pause(5000)
-  //     .waitForElementVisible('.wrapper', 2500)
-  //     .expect.element('.wrapper').to.be.visible;
-  //   client.end();
-  // };
 })();
-
-
-// module.exports = {
-//   'shows the landing page': function (client) {
-//     client
-//       .url('http://localhost:8000/')
-//       .waitForElementVisible('.container', 1500)
-//       .expect.element('.container').to.be.present;
-//     client.end();
-//   },
-// };
