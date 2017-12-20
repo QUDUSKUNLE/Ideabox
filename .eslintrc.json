@@ -14,7 +14,9 @@
         "$": true,
         "localStorage": true,
         "Materialize": true,
-        "should": true
+        "should": true,
+        "jest": true,
+        "expect": true
     },
     "rules": {
         "one-var-declaration-per-line": 0,
@@ -44,6 +46,8 @@
         "import/no-unresolved": [2, {
             "caseSensitive": false
         }],
+        "prefer-destructuring": ["error", { "object": true, "array": false }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "jsx-a11y/label-has-for": 0,
         "react/no-unused-state": 0,
         "jsx-a11y/click-events-have-key-events": 0,

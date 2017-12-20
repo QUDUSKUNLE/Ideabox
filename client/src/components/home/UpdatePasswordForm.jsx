@@ -162,6 +162,5 @@ export default class UpdatePasswordForm extends React.Component {
 }
 
 UpdatePasswordForm.propTypes = {
-  hash: PropTypes.object.isRequired,
-  // history: PropTypes.object.isRequired
+  hash: PropTypes.object.isRequired
 };

@@ -4,4 +4,4 @@ example.js
 server/utils/sendEmail.js
 README.md
 client/end-2-end/**
-nightwatch.conf.js
+client/mock/**.js
