@@ -3,4 +3,5 @@ node_modules
 example.js
 server/utils/sendEmail.js
 README.md
+client/end-2-end/**
 client/mock/**.js

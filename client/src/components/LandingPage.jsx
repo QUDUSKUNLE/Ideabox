@@ -61,12 +61,14 @@ export default class HomePage extends React.Component {
               <div className="container">
                 <a
                   href="##"
+                  id="open_reg"
                   onClick={this.openRegister}
                   className="btn deep-purple darken-4 margin-top s6"
                 >Register
                 </a>
                 <button
                   data-target="login"
+                  id="open_log"
                   className="btn modal-trigger deep-purple darken-4 margin-top s6"
                 >LOG IN
                 </button>

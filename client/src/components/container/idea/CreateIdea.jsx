@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactMde, { ReactMdeCommands } from 'react-mde';
-// import 'react-mde/lib/styles/css/react-mde-all.css';
 import AppActions from '../../../actions/AppActions';
 import AppConstants from '../../../contants/AppConstants';
 import AppStore from '../../../store/AppStore';

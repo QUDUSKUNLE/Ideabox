@@ -32,7 +32,7 @@ IdeaBox allows users to do the following.
 # Technology Stack
 
 - Front-end: React/Flux, SCSS, Webpack
-- Back-end: Node/Express and Mongoose
+- Back-end: Node, Express and Mongoose
 
 
 # Get Started
@@ -53,12 +53,13 @@ IdeaBox allows users to do the following.
    + Go to ```http://localhost:3000/```
 
 ## Test
- - This app uses Mocha, Chai-Http for `server test`.
+ - This app uses Mocha, Chai-Http for `server test` and `jest` for `client test`
    - Run npm i mocha -g to install Mocha globally and npm i nyc -g to install nyc globally before running npm test to run `server` tests
 
 + ```git clone https://github.com/QUDUSKUNLE/Ideabox```
 
-+ and run ```npm test``` for ```server test```
++ run ```npm test``` for ```server test```
++ run `jest` for `client test`
 
 ## Limitations
 + Users cannot edit and delete comment

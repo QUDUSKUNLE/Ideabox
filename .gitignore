@@ -6,3 +6,4 @@ coverage
 .nyc_output
 server/middlewares/validatePath.js
 htm.html
+reports
