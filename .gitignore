@@ -2,10 +2,8 @@ node_modules
 package-lock.json
 example.js
 .env
-./server/config/*
-./server/controllers/*
-./server/helpers/*
-./server/middlewares/*
-./server/models/*
-./server/utils/*
-./client/*
+coverage
+.nyc_output
+server/middlewares/validatePath.js
+htm.html
+reports

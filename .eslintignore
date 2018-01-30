@@ -1,0 +1,7 @@
+node_modules
+.env-sample
+example.js
+server/utils/sendEmail.js
+README.md
+client/end-2-end/**
+client/mock/**.js

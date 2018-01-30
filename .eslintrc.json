@@ -4,20 +4,38 @@
     "env": {
         "node": true,
         "es6": true,
-        "mocha": true
+        "mocha": true,
+        "browser": true
+    },
+    "globals": {
+        "window": true,
+        "document": true,
+        "this": true,
+        "$": true,
+        "localStorage": true,
+        "Materialize": true,
+        "should": true,
+        "jest": true,
+        "expect": true
     },
     "rules": {
-        "one-var": 0,
         "one-var-declaration-per-line": 0,
         "new-cap": 0,
         "consistent-return": 0,
+        "jsx-a11y/anchor-is-valid": 0,
         "func-names": 0,
         "prefer-arrow-callback": 0,
         "no-param-reassign": 0,
+        "guard-for-in": 0,
+        "class-methods-use-this": 0,
+        "no-restricted-syntax": 0,
         "no-prototype-builtins": "error",
         "comma-dangle": 0,
+        "global-require": 0,
         "max-len": [1, 80, 2],
         "curly": ["error", "multi-line"],
+        "no-underscore-dangle": 0,
+        "react/forbid-prop-types": 0,
         "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
         "valid-jsdoc": ["error", {
             "requireReturn": true,
@@ -28,6 +46,11 @@
         "import/no-unresolved": [2, {
             "caseSensitive": false
         }],
+        "prefer-destructuring": ["error", { "object": true, "array": false }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "jsx-a11y/label-has-for": 0,
+        "react/no-unused-state": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
         "require-jsdoc": ["error", {
             "require": {
                 "FunctionDeclaration": true,

@@ -1,37 +1,58 @@
 // Import dependencies
-import express from 'express';
-import mongoose from 'mongoose';
-import expressValidator from 'express-validator';
-import morgan from 'morgan';
-import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
+import express from 'express';
+import dotenv from 'dotenv';
+import expressValidator from 'express-validator';
+import path from 'path';
+import mongoose from 'mongoose';
+import morgan from 'morgan';
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
-import dbConfig from './config/dbConfig';
-import Router from './routes/index';
+import route from './routes/index';
 
+mongoose.Promise = global.Promise;
 dotenv.config();
-
-if (process.env.NODE_ENV !== 'production') {
-  mongoose.connect('mongodb://127.0.0.1:27017/ideabox');
-} else {
-  mongoose.connect(dbConfig.urlProduction);
-}
 const port = parseInt(process.env.PORT, 10) || 3000;
-
 const app = express();
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
-app.use(Router);
-app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to the beginning of nothingness.',
-}));
+app.use('/api/v1/users', route);
 
+if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV === 'test') {
+    mongoose.connect(process.env.MONGODB_URL);
+  } else {
+    // Development configuration
+    mongoose.connect(process.env.MONGODB_URL_DEV);
+    const config = require('../webpack.dev');
+    // *** webpack compiler ***
+    const compiler = webpack(config);
 
-app.listen(port, (err) => {
-  if (err) {
-    return (err, 'but stuff works');
+    // *** webpack middleware
+    app.use(webpackDevMiddleware(compiler, {
+      noInfo: true,
+      publicPath: config.output.publicPath
+    }));
+    app.use(webpackHotMiddleware(compiler));
+    app.use(express.static(path.join(__dirname, '../client/build')));
+    app.get('*', (req, res) => {
+      res.sendFile(`${process.cwd()}/client/build/index.html`);
+    });
   }
-});
+} else {
+  // Production configuration
+  mongoose.connect(process.env.MONGODB_URL_PRO);
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  app.get('*', (req, res) =>
+    res.sendFile(`${process.cwd()}/client/build/index.html`));
+}
+
+
+app.listen(port);
+
+module.exports = app;

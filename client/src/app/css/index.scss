@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+html,
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    background-color: #141d26;
+    color: #fafafa
+}
+
+.btn {
+    margin: 0 1vh;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+#login {
+    width: 60vh;
+    border-radius: 2%;
+}
+
+.margin-top {
+    margin-top: 1rem;
+    width: 125px;
+}
+
+#register {
+    width: 60vh;
+    border-radius: 2%;
+}
+
+.display {
+    min-height: 35px;
+    width: 100%;
+    color: white;
+    border-radius: 3px;
+    text-align: center;
+    padding-top: 7px;
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.header {
+    color: black;
+}
+
+.link {
+    float: right;
+}
+
+header,
+main,
+footer {
+    padding-left: 300px;
+}
+
+@media only screen and (max-width: 992px) {
+    header,
+    main,
+    footer {
+        padding-left: 0;
+    }
+}
+
+.idea {
+    margin: 0 10px;
+}
+
+.status {
+    padding-left: 20px;
+}
+
+.icon_menu {
+    padding: 40px 0 0 20px;
+}
+
+.create_idea {
+    margin-top: 20px;
+}
+
+#slide-out {
+    background: #253546 !important;
+}
+
+.view {
+    margin-left: 100px;
+}
+
+.myidea {
+    height: 200px;
+}
+
+.delete_tag {
+    margin-left: 130px;
+    cursor: pointer;
+}
+
+i.removable {
+    cursor: pointer;
+    float: right;
+    font-size: 16px;
+}
+
+i.edit {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+ul.pagination li {
+    cursor: pointer;
+}
+
+#sidenav-overlay {
+    z-index: 0;
+    background: none;
+}
+
+.comment {
+    height: 350px;
+    background-color: white;
+    overflow: scroll;
+}
+
+.comment_header {
+    height: 100px;
+}
+
+a.allpublic {
+    padding: 0 30px !important;
+}
+
+$break-small: 320px;
+$break-medium: 640px;
+$break-large: 1200px;
+.commentForm {
+    position: fixed !important;
+    top: 70vh;
+}
+
+@media screen and (max-width: $break-small) {
+    .commentForm {
+        position: fixed !important;
+        top: 90vh;
+    }
+    #comment {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: $break-medium) {
+    .commentForm {
+        position: fixed !important;
+        top: 75vh;
+    }
+    #comment {
+        width: 80vw;
+    }
+}
+
+@media screen and (min-width: $break-large) {
+    .commentForm {
+        position: fixed !important;
+        top: 65vh;
+    }
+    #comment {
+        width: 50vw;
+    }
+}
+
+.modal .modal-content {
+    padding-right: 40px;
+}
+
+.row .ideacard {
+    margin-bottom: 0;
+}
+
+#forgotpassword {
+    width: 60vh;
+    border-radius: 2%;
+}
+
+div.user-view .logo1 {
+    margin-bottom: 30px;
+}
+
+#update_password {
+    width: 60vh;
+    background-color: white;
+    padding: 24px;
+    border-radius: 2%;
+    margin: auto;
+    margin-top: 10%;
+}
+
+.author {
+    font-size: 12px;
+    color: #737373;
+}
+
+.category {
+    font-size: 12px
+}
+
+$mde-preview-font-size: 14px !default;
+$mde-button-color: #767676 !default;
+$mde-border-color: rgba(0,
+0,
+0,
+.15) !default; // this defaults to the Bootstrap 4 default border color
+$mde-textarea-min-height: 200px !default;
+$mde-textarea-padding: 0.5rem !default;
+$mde-textarea-border-radius: .25rem !default;
+$mde-preview-margin-top: 8px !default;
+$mde-preview-horizontal-padding: 10px !default;
+$mde-preview-vertical-padding: 10px !default;
+$mde-help-color: rgba(0,
+0,
+0,
+.15) !default;

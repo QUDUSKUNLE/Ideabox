@@ -1,24 +1,23 @@
 const path = require('path');
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-const ExtractTextPluginConfig = new ExtractTextPlugin('main.css');
 
 const config = {
   entry: [
-    path.join(__dirname, 'client/src/index.js'),
-    path.join(__dirname, 'client/app/css/style.scss'),
+    path.join(__dirname, 'client/src/app/index.jsx'),
+    path.join(__dirname, 'client/src/app/css/index.scss'),
     'webpack/hot/dev-server',
     'webpack-hot-middleware/client'
   ],
   devtool: 'inline-source-map',
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'build'),
     publicPath: '/',
     filename: 'bundle.js',
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: 'client/build',
     inline: true,
     hot: true,
     historyApiFallback: true
@@ -44,15 +43,6 @@ const config = {
           presets: ['es2015', 'react', 'stage-2']
         }
       },
-
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          loader: 'css-loader?importLoaders=1'
-        })
-      },
-
       {
         test: /\.scss$/,
         exclude: /node_modules/,
@@ -61,19 +51,28 @@ const config = {
           use: ['css-loader', 'sass-loader']
         })
       },
-
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader']
+      },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
           'url-loader?limit=10000',
           'img-loader'
         ]
-      }
+      },
+      {
+        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loaders: 'file-loader?name=fonts/[name].[ext]'
+      },
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(['build']),
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    ExtractTextPluginConfig
+    new ExtractTextPlugin('bundle.css')
   ],
 
   resolve: {

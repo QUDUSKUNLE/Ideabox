@@ -1,0 +1,643 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Idea Box</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;javascript&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#register" class="toc-h2 toc-link" data-title="Register">Register</a>
+                  </li>
+                  <li>
+                    <a href="#log-in" class="toc-h2 toc-link" data-title="Log in">Log in</a>
+                  </li>
+                  <li>
+                    <a href="#update-profile" class="toc-h2 toc-link" data-title="Update Profile">Update Profile</a>
+                  </li>
+                  <li>
+                    <a href="#reset-password" class="toc-h2 toc-link" data-title="Reset Password">Reset Password</a>
+                  </li>
+                  <li>
+                    <a href="#update-password" class="toc-h2 toc-link" data-title="Update password">Update password</a>
+                  </li>
+                  <li>
+                    <a href="#create-an-idea" class="toc-h2 toc-link" data-title="Create an Idea">Create an Idea</a>
+                  </li>
+                  <li>
+                    <a href="#public-ideas" class="toc-h2 toc-link" data-title="Public ideas">Public ideas</a>
+                  </li>
+                  <li>
+                    <a href="#fetch-idea" class="toc-h2 toc-link" data-title="Fetch Idea">Fetch Idea</a>
+                  </li>
+                  <li>
+                    <a href="#delete-an-idea" class="toc-h2 toc-link" data-title="Delete an idea">Delete an idea</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration. It has the following features:</p>
+
+<ul>
+<li>Create an account</li>
+<li>Log in a registered user</li>
+<li>Reset Password</li>
+<li>Edit user profile</li>
+<li>Create Ideas</li>
+<li>Edit Ideas</li>
+<li>Delete Ideas</li>
+<li>Comment on Ideas</li>
+<li>Reset password email</li>
+<li>Search for Ideas</li>
+<li>Filter ideas by category</li>
+</ul>
+<h1 id='authentication'>Authentication</h1><h2 id='register'>Register</h2>
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>
+<span class="p">{</span>
+  <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"kolawole"</span><span class="p">,</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"kolawole@gmail.com"</span><span class="p">,</span>
+  <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"kolawole12334"</span>
+<span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Sample Response:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Sign up successful"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6eyJ1c2VyIjp7Il9pZCI6IjVhMzI1NDQ4MTYyZGMzMDAyYzk1NjcyYyIsInVzZXJuYW1lIjoiT2xhd2FsZSIsInBhc3N3b3JkIjoiJDJhJDEwJHQ1LlI5ZnJXR1FOMXZYMXdOUGR6N095VXlmczBlZkxCeXZJSE9kRmpldHNGLlkxaEZJaHNlIiwiZW1haWwiOiJzaG9sYUBnbWFpbC5jb20iLCJfX3YiOjAsInVwZGF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgyWiIsImNyZWF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgxWiJ9fSwiaWF0IjoxNTEzMjQ3ODg3LCJleHAiOjE1MTMzMzQyODd9.3SZX6RAWqky4Nuj7qtzh-fg7vMxIBggnS0E4tmmgfWk"</span><span class="p">,</span>
+  <span class="s2">"userDetails"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"kolawole@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"kolawole"</span><span class="p">,</span>
+    <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"kolawole12334"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><code>POST /api/v1/users/signup</code></p>
+
+<p>This endpoint registers a new user</p>
+
+<p><code>onSuccess - Status Code [201]</code></p>
+
+<p><code>onError - Status Code [400, 409, 500]</code></p>
+<h2 id='log-in'>Log in</h2>
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>
+<span class="p">{</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"funso@andela.com"</span><span class="p">,</span>
+  <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"Welcome3000#"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Sample Response:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Sign in successful"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6eyJ1c2VyIjp7Il9pZCI6IjVhMzI1NDQ4MTYyZGMzMDAyYzk1NjcyYyIsInVzZXJuYW1lIjoiT2xhd2FsZSIsInBhc3N3b3JkIjoiJDJhJDEwJHQ1LlI5ZnJXR1FOMXZYMXdOUGR6N095VXlmczBlZkxCeXZJSE9kRmpldHNGLlkxaEZJaHNlIiwiZW1haWwiOiJzaG9sYUBnbWFpbC5jb20iLCJfX3YiOjAsInVwZGF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgyWiIsImNyZWF0ZWRBdCI6IjIwMTctMTItMTRUMTA6MzY6NTYuNjgxWiJ9fSwiaWF0IjoxNTEzMjQ3ODg3LCJleHAiOjE1MTMzMzQyODd9.3SZX6RAWqky4Nuj7qtzh-fg7vMxIBggnS0E4tmmgfWk"</span><span class="p">,</span>
+  <span class="s2">"userDetails"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"funso@andela.com"</span><span class="p">,</span>
+    <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"Qudus Kunle"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST /api/v1/users/signin</code></p>
+
+<p>This endpoint verifies if a user is registered and then logs the user if verified or throws the appropriate error if not verified. You can login with email and password</p>
+
+<p><code>onSuccess - Status Code [200]</code></p>
+
+<p><code>onError - Status Code [400, 401, 404, 500]</code></p>
+<h2 id='update-profile'>Update Profile</h2>
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>
+<span class="p">{</span>
+  <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"funsho"</span><span class="p">,</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"funso@andela.com"</span><span class="p">,</span>
+<span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Sample Response:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Profile updated successfully"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"funsho"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"funso@andela.com"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>PUT - /api/v1/users/profiles</code></p>
+
+<p>This endpoint updates a user profile</p>
+
+<p><code>onSuccess - Status Code [200]</code></p>
+
+<p><code>onError - Status Code [400, 401, 404, 500]</code></p>
+<h2 id='reset-password'>Reset Password</h2>
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>
+<span class="p">{</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"kolawole@andela.com"</span><span class="p">,</span>
+<span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Sample Response:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Reset password email sent successfully"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre><h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST - /api/v1/users/passwords</code></p>
+
+<p>This endpoint generates a hash token and sends a reset link to the user via email</p>
+
+<p><code>onSuccess - Status Code [200]</code></p>
+
+<p><code>onError - Status Code [400, 404, 500]</code></p>
+<h2 id='update-password'>Update password</h2>
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>
+<span class="p">{</span>
+  <span class="s2">"newPassword"</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">,</span>
+  <span class="s2">"confirmPassword"</span><span class="p">:</span> <span class="s2">"12345678"</span>
+<span class="p">}</span>
+
+</code></pre>
+<blockquote>
+<p>Sample Response:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Password has been updated"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre><h3 id='http-request-5'>HTTP Request</h3>
+<p><code>PUT /api/v1/users/passwords/:hash</code></p>
+
+<p>Upon reception of an email to reset password, this method receives the new password entered by the user and replaces the user&#39;s old password with the new one</p>
+
+<p><code>onSuccess - Status Code [200]</code></p>
+
+<p><code>onError - Status Code [400, 404, 500, 503]</code></p>
+<h2 id='create-an-idea'>Create an Idea</h2><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"title"</span><span class="p">:</span> <span class="s1">'In the Light of Truth'</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s1">'The Grail Message'</span><span class="p">,</span>
+  <span class="s2">"category"</span><span class="p">:</span> <span class="s1">'AbdruShin'</span><span class="p">,</span>
+  <span class="s2">"access"</span><span class="p">:</span> <span class="s1">'public'</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Sample Response:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s1">'Your Idea has been created successfully'</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"createdIdea"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s1">'In the Light of Truth'</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s1">'The Grail Message'</span><span class="p">,</span>
+      <span class="s2">"category"</span><span class="p">:</span> <span class="s1">'AbdruShin'</span><span class="p">,</span>
+      <span class="s2">"access"</span><span class="p">:</span> <span class="s1">'public'</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre><h3 id='http-request-6'>HTTP Request</h3>
+<p><code>POST /api/v1/users/idea</code></p>
+
+<p>This endpoint creates a new idea.</p>
+
+<p><code>onSuccess - Status Code [201]</code></p>
+
+<p><code>onError - Status Code [400, 401, 409, 500]</code></p>
+<h2 id='public-ideas'>Public ideas</h2>
+<blockquote>
+<p>Sample Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"ideas"</span><span class="p">:</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a2237e61f7c9a0bad4e3206"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ok, morning here"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is to demonstrate how to bake cake for the young ones"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-02T05:19:34.811Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-02T05:19:34.811Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a2085505d1e9a42bece8858"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quduskunle"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Public"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Cosmetics"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a25599874dea07c3fffcdcb"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Abdrushin"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Book of Grail"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-04T14:20:08.632Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-04T14:20:08.632Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a25589374dea07c3fffcdca"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quduskunle"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Public"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Religion"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="err">pageInfo</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">page</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="err">pageCount</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="err">pageSize</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+      </span><span class="err">count</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-7'>HTTP Request</h3>
+<p><code>GET /api/v1/users/ideas/public</code></p>
+
+<p>This endpoint fetch all public ideas.</p>
+
+<p><code>onSuccess - Status Code [201]</code></p>
+
+<p><code>onError - Status Code [400, 401, 409, 500]</code></p>
+<h2 id='fetch-idea'>Fetch Idea</h2>
+<blockquote>
+<p>sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">ideas</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="err">_id</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a3238758e67dc4644a9d4ce"</span><span class="p">,</span><span class="w">
+      </span><span class="err">title</span><span class="p">:</span><span class="w"> </span><span class="s2">"New Idea"</span><span class="p">,</span><span class="w">
+      </span><span class="err">description</span><span class="p">:</span><span class="w"> </span><span class="s2">"**Yes Nes Idea**"</span><span class="p">,</span><span class="w">
+      </span><span class="err">__v</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="err">createdAt</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-14T08:38:13.674Z"</span><span class="p">,</span><span class="w">
+      </span><span class="err">updatedAt</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-14T08:38:13.674Z"</span><span class="p">,</span><span class="w">
+      </span><span class="err">author</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">id</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a284ddbedc9b460093101af"</span><span class="p">,</span><span class="w">
+        </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joke Adunni"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">status</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="err">access</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Public"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="err">category</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Technology"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-8'>HTTP Request</h3>
+<p><code>GET /api/v1/users/ideas/&lt;ID&gt;</code></p>
+
+<p>This endpoint retrieves a specific idea.</p>
+
+<p><code>onSuccess - Status Code [200]</code></p>
+
+<p><code>onError - Status Code [400, 404, 500]</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the idea to fetch</td>
+</tr>
+</tbody></table>
+<h2 id='delete-an-idea'>Delete an idea</h2>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">success</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="err">message</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idea deleted successfully"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-9'>HTTP Request</h3>
+<p><code>DELETE api/v1/users/ideas/&lt;ID&gt;</code></p>
+
+<p>This endpoint deletes an idea.</p>
+
+<p><code>onSuccess - Status Code [200]</code></p>
+
+<p><code>onError - Status Code [400, 404, 500]</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the idea to delete</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<!-- <aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside> -->
+
+<p>The Ideabox API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request sucks.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your token is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified request could not be found.</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Gone -- There is a conflict creating the request.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
