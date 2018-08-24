@@ -1,12 +1,10 @@
 import bcrypt from 'bcrypt';
 import capitalize from 'capitalize';
 import crypto from 'crypto';
-import dotenv from 'dotenv';
 import createToken from '../utils/createToken';
 import sendMail from '../utils/sendEmail';
 import User from '../models/User';
 
-dotenv.config();
 
 /**
  * @class UserController
@@ -21,7 +19,7 @@ class UserController {
    */
   static signUp(req, res) {
     if ((!req.body.username) || (!req.body.email) || (!req.body.password)) {
-      res.status(400).send({
+      res.status(400).json({
         error: 'Either email, password or username must not be empty',
         success: false
       });
@@ -32,48 +30,35 @@ class UserController {
         .exec()
         .then((email) => {
           if (email) {
-            res.status(409).send({
+            res.status(409).json({
               error: 'Email is already registered',
               success: false
             });
           } else {
-            User.findOne({
-              username: capitalize(req.body.username)
-            })
-              .exec()
-              .then((username) => {
-                if (username) {
-                  res.status(409).send({
-                    error: 'Username already exist',
-                    success: false
-                  });
-                } else {
-                  const user = new User({
-                    username: capitalize(req.body.username),
-                    password: req.body.password,
-                    email: req.body.email
-                  });
-                  user.save((err, newUser) => {
-                    if (err) {
-                      return res.status(500).send({
-                        success: false,
-                        message: err
-                      });
-                    }
-                    const userDetails = {
-                      username: newUser.username,
-                      email: newUser.email,
-                      userId: newUser._id
-                    };
-                    return res.status(201).send({
-                      message: 'Sign up successful',
-                      success: true,
-                      token: createToken(newUser),
-                      userDetails
-                    });
-                  });
-                }
+            const user = new User({
+              username: capitalize(req.body.username.trim()),
+              password: req.body.password.trim(),
+              email: req.body.email.trim()
+            });
+            user.save((err, newUser) => {
+              if (err) {
+                return res.status(500).json({
+                  success: false,
+                  message: err
+                });
+              }
+              const userDetails = {
+                username: newUser.username.trim(),
+                email: newUser.email.trim(),
+                userId: newUser._id
+              };
+              return res.status(201).json({
+                message: 'Sign up successful',
+                success: true,
+                token: createToken(newUser),
+                userDetails
               });
+            });
           }
         });
     }
@@ -87,7 +72,7 @@ class UserController {
    */
   static signIn(req, res) {
     if ((!req.body.email) || (!req.body.password)) {
-      res.status(400).send({
+      res.status(400).json({
         error: 'Email or password must not be empty',
         success: false
       });
@@ -97,30 +82,30 @@ class UserController {
       })
         .exec((err, response) => {
           if (err) {
-            return res.status(500).send({
+            return res.status(500).json({
               success: false,
               error: 'internal server error'
             });
           }
           if (!response) {
-            return res.status(404).send({
+            return res.status(404).json({
               success: false,
               error: 'User does not exist'
             });
           }
           // compare passwords
           if (!bcrypt.compareSync(req.body.password, response.password)) {
-            return res.status(401).send({
+            return res.status(401).json({
               success: false,
               error: 'Email or password is invalid'
             });
           }
           const userDetails = {
-            username: response.username,
-            email: response.email,
+            username: response.username.trim(),
+            email: response.email.trim(),
             userId: response._id
           };
-          return res.status(200).send({
+          return res.status(200).json({
             message: 'Sign in successful',
             success: true,
             token: createToken(response),
@@ -139,7 +124,7 @@ class UserController {
    */
   static resetPassword(req, res) {
     if (!req.body.email) {
-      return res.status(400).send({
+      return res.status(400).json({
         success: false,
         error: 'Email must not be empty'
       });
@@ -151,13 +136,13 @@ class UserController {
     })
       .exec((err, response) => {
         if (err) {
-          return res.status(500).send({
+          return res.status(500).json({
             success: false,
             error: 'internal server error'
           });
         }
         if (!response) {
-          return res.status(404).send({
+          return res.status(404).json({
             success: false,
             error: 'User does not exist'
           });
@@ -166,7 +151,7 @@ class UserController {
         response.expiryTime = date;
         response.save((error, updatedUser) => {
           if (error) {
-            return res.status(400).send({
+            return res.status(400).json({
               success: false,
               message: error
             });
@@ -177,12 +162,12 @@ class UserController {
             updatedUser.username,
             hash, req.headers.host
           );
-          return res.status(200).send({
+          return res.status(200).json({
             success: true,
             message: 'Reset password email sent successfully'
           });
         });
-      }).catch(error => res.status(500).send({ message: error.message }));
+      }).catch(error => res.status(500).json({ message: error.message }));
   }
 
   /**
@@ -194,7 +179,7 @@ class UserController {
    */
   static updatePassword(req, res) {
     if ((!req.body.newPassword) || (!req.body.confirmPassword)) {
-      return res.status(400).send({
+      return res.status(400).json({
         error: 'New password or confirm password must not be empty',
         success: false
       });
@@ -202,7 +187,7 @@ class UserController {
     User.findOne({ hash: req.params.hash })
       .then((user) => {
         if (!user) {
-          return res.status(404).send({
+          return res.status(404).json({
             success: false,
             error: 'User does not exist'
           });
@@ -210,7 +195,7 @@ class UserController {
         if (req.body.newPassword === req.body.confirmPassword) {
           const currentTime = Date.now();
           if (currentTime > user.expiryTime) {
-            return res.status(410).send({
+            return res.status(410).json({
               success: false,
               error: 'Expired link'
             });
@@ -218,7 +203,7 @@ class UserController {
           user.password = req.body.newPassword;
           user.save((err, updatedUser) => {
             if (err) {
-              return res.status(503).send({
+              return res.status(503).json({
                 success: false,
                 error: err.message
               });
@@ -231,26 +216,26 @@ class UserController {
               { new: true }
             ).exec((error, hashUpdate) => {
               if (hashUpdate) {
-                return res.status(200).send({
+                return res.status(200).json({
                   success: true,
                   message: 'Password has been updated',
                   hashUpdate
                 });
               }
-              return res.status(503).send({
+              return res.status(503).json({
                 success: false,
                 error: error.message
               });
             });
           });
         } else {
-          return res.status(400).send({
+          return res.status(400).json({
             success: false,
             error: 'Please confirm password'
           });
         }
       })
-      .catch(error => res.status(500).send({
+      .catch(error => res.status(500).json({
         success: false,
         error: error.message
       }));
@@ -265,7 +250,7 @@ class UserController {
   static updateProfile(req, res) {
     const { username, email } = req.body;
     if ((!req.body.username) || (!req.body.email)) {
-      return res.status(400).send({
+      return res.status(400).json({
         error: 'Email or username must not be empty',
         success: false
       });
@@ -282,7 +267,7 @@ class UserController {
     )
       .exec((error, user) => {
         if (user) {
-          return res.status(200).send({
+          return res.status(200).json({
             user: {
               username: user.username,
               email: user.email
@@ -291,12 +276,12 @@ class UserController {
             success: true
           });
         }
-        return res.status(404).send({
+        return res.status(404).json({
           success: false,
           error: 'User not Found'
         });
       })
-      .catch(() => res.status(500).send({ error: 'Internal server error' }));
+      .catch(() => res.status(500).json({ error: 'Internal server error' }));
   }
 }
 

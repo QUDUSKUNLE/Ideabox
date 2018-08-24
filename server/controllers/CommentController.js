@@ -1,8 +1,6 @@
 import capitalize from 'capitalize';
-import dotenv from 'dotenv';
 import Comment from '../models/Comment';
 
-dotenv.config();
 
 /**
  * @class CommentController
@@ -18,7 +16,7 @@ class CommentController {
    */
   static writeComment(req, res) {
     if (!req.body.comment) {
-      return res.status(400).send({
+      return res.status(400).json({
         error: 'Comment must not be empty',
         success: false
       });
@@ -36,13 +34,13 @@ class CommentController {
     });
     comment.save((err, createdComment) => {
       if (err) {
-        return res.status(500).send({
+        return res.status(500).json({
           success: false,
           error: 'Internal server error'
         });
       }
       // return new comment
-      return res.status(201).send({
+      return res.status(201).json({
         success: true,
         message: 'Success',
         createdComment
@@ -59,7 +57,7 @@ class CommentController {
    */
   static editComment(req, res) {
     if ((!req.body.comment)) {
-      return res.status(400).send({
+      return res.status(400).json({
         error: 'Comment must not be empty',
         success: false
       });
@@ -75,17 +73,17 @@ class CommentController {
     )
       .exec((error, comment) => {
         if (comment) {
-          return res.status(200).send({
+          return res.status(200).json({
             message: 'Success',
             success: true
           });
         }
-        return res.status(404).send({
+        return res.status(404).json({
           success: false,
           error: 'Comment not Found'
         });
       })
-      .catch(() => res.status(500).send({ error: 'Internal server error' }));
+      .catch(() => res.status(500).json({ error: 'Internal server error' }));
   }
 
   /**
@@ -100,10 +98,10 @@ class CommentController {
     Comment.find({})
       .where({ 'idea.id': ideaId })
       .exec()
-      .then(comments => res.status(200).send({
+      .then(comments => res.status(200).json({
         comments
       }))
-      .catch(error => res.status(500).send({
+      .catch(error => res.status(500).json({
         error: error.message
       }));
   }
@@ -120,7 +118,7 @@ class CommentController {
     // Find byId and delete
     Comment.findByIdAndRemove(commentId, (err) => {
       if (err) {
-        res.send(err);
+        res.json(err);
       }
       res.json({ message: 'Success', success: true });
     });
