@@ -1,7 +1,5 @@
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 
-dotenv.config();
 const jwtSecret = process.env.SECRET_TOKEN;
 
 /**
@@ -21,7 +19,7 @@ export default (req, res, next) => {
       if (error.message === 'jwt expired') {
         return res.status(401).json({ error: 'Token has expired' });
       }
-      return res.status(401).send(error);
+      return res.status(401).json(error);
     }
     req.decoded = decoded;
     next();

@@ -16,7 +16,7 @@ class IdeaController {
   static createIdea(req, res) {
     if ((!req.body.title) || (!req.body.description) || (!req.body.category) ||
       (!req.body.access)) {
-      return res.status(400).send({
+      return res.status(400).json({
         success: false,
         error: 'Either Title, description, category or access must not be empty'
       });
@@ -25,7 +25,7 @@ class IdeaController {
     (capitalize(req.body.access) === 'Private')) &&
       ((capitalize(req.body.access) === 'Public') ||
       (capitalize(req.body.access) !== 'Private'))) {
-      return res.status(400).send({
+      return res.status(400).json({
         success: false,
         error: 'Access must be public or private'
       });
@@ -34,7 +34,7 @@ class IdeaController {
     Idea.findOne({ title: capitalize(req.body.title) })
       .exec((err, existingTitle) => {
         if (existingTitle) {
-          return res.status(409).send({
+          return res.status(409).json({
             success: false,
             error: 'existingTitle',
             message: 'Idea title must be unique'
@@ -53,13 +53,13 @@ class IdeaController {
         });
         newIdea.save((err, createdIdea) => {
           if (err) {
-            return res.status(500).send({
+            return res.status(500).json({
               success: false,
               error: 'Internal server error'
             });
           }
           // return new Idea
-          return res.status(201).send({
+          return res.status(201).json({
             success: true,
             message: 'Your Idea has been created successfully',
             createdIdea
@@ -78,7 +78,7 @@ class IdeaController {
   static editIdea(req, res) {
     if ((!req.body.title) || (!req.body.description) || (!req.body.category) ||
       (!req.body.access)) {
-      return res.status(400).send({
+      return res.status(400).json({
         success: false,
         error: 'Either title, description, category or access must not be empty'
       });
@@ -87,7 +87,7 @@ class IdeaController {
       (capitalize(req.body.access) === 'Private')) &&
       ((capitalize(req.body.access) === 'Public') ||
         (capitalize(req.body.access) !== 'Private'))) {
-      return res.status(400).send({
+      return res.status(400).json({
         success: false,
         error: 'Access must be public or private'
       });
@@ -104,7 +104,7 @@ class IdeaController {
       { new: true }
     ).exec((err, updatedIdea) => {
       if (updatedIdea) {
-        return res.status(200).send({
+        return res.status(200).json({
           success: true,
           message: 'Idea updated successfully',
           status: 'edited',
@@ -117,11 +117,11 @@ class IdeaController {
           }
         });
       }
-      res.status(404).send({
+      res.status(404).json({
         error: 'Idea not Found',
         success: false
       });
-    }).catch(() => res.status(500).send({ error: 'Internal server error' }));
+    }).catch(() => res.status(500).json({ error: 'Internal server error' }));
   }
 
   /**
@@ -138,21 +138,21 @@ class IdeaController {
         if (idea) {
           Idea.remove({
             _id: req.params.ideaId
-          }).then(() => res.status(202).send({
+          }).then(() => res.status(202).json({
             success: true,
             message: 'Idea deleted successfully'
-          })).catch(error => res.status(500).send({
+          })).catch(error => res.status(500).json({
             success: false,
             error: error.message
           }));
         }
         if (!idea) {
-          res.status(404).send({
+          res.status(404).json({
             success: false,
             error: 'Idea does not exist'
           });
         }
-      }).catch(error => res.status(401).send({
+      }).catch(error => res.status(401).json({
         success: false,
         message: 'Unathorized, invalid idea identity',
         error: error.message
@@ -180,7 +180,7 @@ class IdeaController {
         .skip(offset)
         .limit(limit)
         .exec()
-        .then(ideas => res.status(200).send({
+        .then(ideas => res.status(200).json({
           ideas,
           pageInfo: pagination(count, limit, offset)
         }));
@@ -210,7 +210,7 @@ class IdeaController {
         .skip(offset)
         .limit(limit)
         .exec()
-        .then(ideas => res.status(200).send({
+        .then(ideas => res.status(200).json({
           ideas,
           pageInfo: pagination(count, limit, offset)
         }));
@@ -228,7 +228,7 @@ class IdeaController {
    */
   static fetchIdea(req, res) {
     if (!req.params.ideaId) {
-      return res.status(400).send({
+      return res.status(400).json({
         success: false,
         error: 'Search query must be defined'
       });
@@ -239,19 +239,19 @@ class IdeaController {
       .exec()
       .then((idea) => {
         if (idea) {
-          return res.status(200).send({
+          return res.status(200).json({
             success: true,
             idea
           });
         }
         if (!idea) {
-          return res.status(404).send({
+          return res.status(404).json({
             success: false,
             error: 'Idea does not exist'
           });
         }
       }).catch(error =>
-        res.status(401).send({
+        res.status(401).json({
           success: false,
           message: 'Unathorized, invalid idea identity',
           error: error.message
@@ -269,7 +269,7 @@ class IdeaController {
    */
   static filterIdeas(req, res) {
     if (!req.query.category || (req.query.category.trim() === '')) {
-      return res.status(400).send({
+      return res.status(400).json({
         success: false,
         error: 'Filter query must not be empty'
       });
@@ -288,7 +288,7 @@ class IdeaController {
         .skip(offset)
         .limit(limit)
         .exec()
-        .then(ideas => res.status(200).send({
+        .then(ideas => res.status(200).json({
           ideas,
           pageInfo: pagination(count, limit, offset)
         }));
@@ -305,7 +305,7 @@ class IdeaController {
    */
   static searchIdeas(req, res) {
     if (!req.query.search) {
-      res.status(400).send({
+      res.status(400).json({
         success: false,
         error: 'Search keywords is not provided'
       });
@@ -325,7 +325,7 @@ class IdeaController {
         .skip(offset)
         .limit(limit)
         .exec()
-        .then(ideas => res.status(200).send({
+        .then(ideas => res.status(200).json({
           ideas,
           pageInfo: pagination(count, limit, offset),
         }));

@@ -158,7 +158,7 @@ const validateRequest = (req, res, next) => {
   const errors = validateRequestBody(req);
   if (errors) {
     const message = errors[0].msg;
-    res.status(400).send({ error: message, success: false });
+    res.status(400).json({ error: message, success: false });
   } else {
     next();
   }

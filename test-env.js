@@ -10,4 +10,3 @@ global.$ = () => ({
   hide: () => null,
   tooltip: () => null
 });
-

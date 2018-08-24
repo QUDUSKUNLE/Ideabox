@@ -97,19 +97,6 @@ describe('User Controller Test', () => {
           done();
         });
     });
-    it('should return status 409 if username already exist', (done) => {
-      chai.request(server)
-        .post('/api/v1/users/signup')
-        .type('form')
-        .send(user.existingUserName)
-        .end((err, res) => {
-          res.should.have.status(409);
-          assert.equal(false, res.body.success);
-          res.body.should.have.property('error')
-            .equals('Username already exist');
-          done();
-        });
-    });
     it(
       'should return status 400 if username charcter is less than 2',
       (done) => {
@@ -379,23 +366,23 @@ describe('User Controller Test', () => {
 
     it(`should return status code 401 when user try to update profile
     with invalid token`, (done) => {
-        const invalid = validToken.slice(0, -1);
-        chai.request(server)
-          .put('/api/v1/users/profiles')
-          .set('x-access-token', invalid)
-          .type('application/json')
-          .send({
-            email: user.email,
-            username: user.username
-          })
-          .end((err, res) => {
-            res.should.have.status(401);
-            res.body.should.have.property('name')
-              .equals('JsonWebTokenError');
-            res.body.should.have.property('message')
-              .equals('invalid signature');
-            done();
-          });
-      });
+      const invalid = validToken.slice(0, -1);
+      chai.request(server)
+        .put('/api/v1/users/profiles')
+        .set('x-access-token', invalid)
+        .type('application/json')
+        .send({
+          email: user.email,
+          username: user.username
+        })
+        .end((err, res) => {
+          res.should.have.status(401);
+          res.body.should.have.property('name')
+            .equals('JsonWebTokenError');
+          res.body.should.have.property('message')
+            .equals('invalid signature');
+          done();
+        });
+    });
   });
 });
