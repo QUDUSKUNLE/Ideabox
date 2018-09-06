@@ -1,7 +1,4 @@
-import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
-
-dotenv.config();
 
 const emailAccount = process.env.SECRET_EMAIL;
 const emailPassword = process.env.SECRET_PASSWORD;
@@ -18,10 +15,7 @@ export default (email, name, hash, headers) => {
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     // secure:true for port 465, secure:false for port 587
-    auth: {
-      user: emailAccount,
-      pass: emailPassword
-    }
+    auth: { user: emailAccount, pass: emailPassword }
   });
 
   // setup email data with unicode symbols

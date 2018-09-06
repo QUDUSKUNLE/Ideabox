@@ -7,6 +7,8 @@ import path from 'path';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 import webpack from 'webpack';
+import helmet from 'helmet';
+import passport from 'passport';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
@@ -27,13 +29,13 @@ if (process.env.NODE_ENV !== 'production') {
   if (process.env.NODE_ENV === 'test') {
     mongoose.connect(
       process.env.MONGODB_URL,
-      { useMongoClient: true }
+      { useNewUrlParser: true }
     );
   } else {
     // Development configuration
     mongoose.connect(
       process.env.MONGODB_URL_DEV,
-      { useMongoClient: true }
+      { useNewUrlParser: true }
     );
 
     const config = require('../webpack.dev');
@@ -47,6 +49,10 @@ if (process.env.NODE_ENV !== 'production') {
       publicPath: config.output.publicPath
     }));
     app.use(webpackHotMiddleware(compiler));
+
+    app.use(helmet());
+    app.use(passport.initialize());
+    app.use(passport.session());
     app.use(express.static(path.join(__dirname, '../client/build')));
     app.get('*', (req, res) => {
       res.sendFile(`${process.cwd()}/client/build/index.html`);
@@ -56,7 +62,7 @@ if (process.env.NODE_ENV !== 'production') {
   // Production configuration
   mongoose.connect(
     process.env.MONGODB_URL_PRO,
-    { useMongoClient: true }
+    { useNewUrlParser: true }
   );
 
   app.use(express.static(path.join(__dirname, '../client/build')));

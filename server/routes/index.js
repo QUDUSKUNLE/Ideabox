@@ -4,7 +4,7 @@ import IdeaController from '../controllers/IdeaController';
 import UserController from '../controllers/UserController';
 import validateRequest from '../middlewares/validateRequest';
 import verifyToken from '../middlewares/verifyToken';
-
+import authLocal from '../middlewares/passportAuth';
 
 /**
  * Creates express Router
@@ -26,6 +26,7 @@ route.post(
 route.post(
   '/signin',
   validateRequest,
+  authLocal,
   UserController.signIn
 );
 

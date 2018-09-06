@@ -65,7 +65,7 @@ class UserController {
   }
 
   /**
-   * * Routes: POST: /api/v1/users/signin
+   * Routes: POST: /api/v1/users/signin
    * @param {any} req user request object
    * @param {any} res server response
    * @return {void} json server response

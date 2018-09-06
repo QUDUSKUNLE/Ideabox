@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import passportLocalMongoose from 'passport-local-mongoose';
 import bcrypt from 'bcrypt';
 
 const SALT_WORK_FACTOR = 10;
@@ -36,5 +37,7 @@ userSchema.methods.comparePassword = (candidatePassword, cb) => {
   });
 };
 
-const User = mongoose.model('users', userSchema);
+userSchema.plugin(passportLocalMongoose);
+
+const User = mongoose.model('User', userSchema);
 export default User;
